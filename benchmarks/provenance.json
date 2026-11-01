@@ -1,0 +1,300 @@
+{
+  "as_of": "2026-11-01",
+  "private_artifacts_included": false,
+  "evaluation_identifiers": {
+    "plateau_repair": {
+      "training_seeds": [
+        1811,
+        1877
+      ],
+      "generator_root": 1000013269457,
+      "development_bank_root": 1000113269457,
+      "final_bank_root": 1000213269457,
+      "final_bank_sha256": "09180e46e387c3d25c3ec612e89136138a1a1eebcd9ed4a85e2f30c02ce8ff48"
+    },
+    "fresh_experience": {
+      "training_seeds": [
+        1811,
+        1877
+      ],
+      "evaluation_seed": 98776425,
+      "fresh_stream_root": 718009441
+    },
+    "matched_transformer": {
+      "training_seeds": [
+        1301,
+        1337
+      ],
+      "evaluation_seed": 220347173
+    },
+    "beijing_future_PM25": {
+      "bootstrap_unit": "station",
+      "fixed_periods": [
+        "2013-04",
+        "2014-08",
+        "2015-12",
+        "2016-04"
+      ]
+    }
+  },
+  "source_note": "Artifact paths below are relative provenance identifiers in the private research archive, not downloadable public files. Hashes bind this export to that evidence. Private code, logs, raw datasets and checkpoints are withheld.",
+  "sources": [
+    {
+      "id": "S01",
+      "artifact": "runs/pretraining_plateau_repair_20261101/analysis_final/family_D_K.csv",
+      "sha256": "b97e9c21d84e6686acc969eee68e00d4368d3fa92ed38f497d1bea9ec426e81d"
+    },
+    {
+      "id": "S02",
+      "artifact": "runs/pretraining_plateau_repair_20261101/analysis_final/selected_effects.json",
+      "sha256": "582c7c57dc2c88817a6536cd062b7dada459f15c707252ddf5a03924a7432cb1"
+    },
+    {
+      "id": "S03",
+      "artifact": "runs/pretraining_plateau_repair_20261101/analysis_development/selected_effects.json",
+      "sha256": "e2774b8ecd0f9ceb1cb2167316cd15bf24c9475daefcd1b29676d9debaabcc54"
+    },
+    {
+      "id": "S04",
+      "artifact": "runs/pretraining_plateau_repair_20261101/task_ablations/effects.csv",
+      "sha256": "16415101860d979dc27bfe008c893441582f42cd0a322ebc88b6dec28e3c3b79"
+    },
+    {
+      "id": "S05",
+      "artifact": "runs/pretraining_plateau_repair_20261101/analysis_final/CC_controlled_cases.csv",
+      "sha256": "e033fa98345a585999d91210cf28d9c0b0c685e56a85865688bb2b9bdd26c2d7"
+    },
+    {
+      "id": "S06",
+      "artifact": "runs/standard_1m_tabfm_20261031/paired_effects.csv",
+      "sha256": "d3f586ee6ebaca50c3eea040d65838c8ac38992ac7b0b02ab68495efb2809bdb"
+    },
+    {
+      "id": "S07",
+      "artifact": "runs/fresh_experience_20261101/paired_effects.csv",
+      "sha256": "fbc0d143dd7b694ca5c175776ac485ed4a7100d9e45e94797332f6121a7a9af7"
+    },
+    {
+      "id": "S08",
+      "artifact": "runs/real_world_transfer_20261031/accuracy.csv",
+      "sha256": "dab72bf662d4472cc6773b9fe16e122c7124f5a3a0077fcfc111974ca101822d"
+    },
+    {
+      "id": "S09",
+      "artifact": "runs/real_world_transfer_20261031/paired_comparisons.csv",
+      "sha256": "b634484b1e89e21ffc2dec7786cfa2bfffca2b78dd377563b364aba1f4846c34"
+    },
+    {
+      "id": "S10",
+      "artifact": "runs/pretraining_plateau_repair_20261101/analysis_final/track_curves.csv",
+      "sha256": "c09be0fb54cf3d4f6e21c9ea5c6c0db21fe964f3238a8a4c62ee1e5a06ae549f"
+    },
+    {
+      "id": "S11",
+      "artifact": "runs/pretraining_plateau_repair_20261101/analysis_development/track_curves.csv",
+      "sha256": "d79b54d9654078fc72b29544c609113b22f32ab1d6e9fe0aed1ff08235560157"
+    },
+    {
+      "id": "S12",
+      "artifact": "runs/pretraining_plateau_repair_20261101/analysis_final/all_model_K.csv",
+      "sha256": "69e562569470fc5f8e2e64b8eaf82f8d4e805c9b8e1b0c914937545ae8bd774d"
+    },
+    {
+      "id": "S13",
+      "artifact": "runs/fresh_experience_20261101/learning_curves.csv",
+      "sha256": "bec2bb8c02f0a7060ed96ab78654b2e48d39c01431ed2bc59d3740f0e49ad613"
+    },
+    {
+      "id": "S14",
+      "artifact": "runs/real_world_transfer_20261031/resource_summary_storage_corrected.csv",
+      "sha256": "0a049935ad470e1fc442e2ddce9b89e6e8a3467dadf8fbf002a488fe246689ce"
+    },
+    {
+      "id": "S15",
+      "artifact": "runs/standard_1m_tabfm_20261031/summary_scores.csv",
+      "sha256": "b54e737370b3bdd3193c3fceca5c9fe5bde675025394e141a590f6ec6124b6d0"
+    },
+    {
+      "id": "S16",
+      "artifact": "runs/standard_1m_tabfm_20261031/inference_resources.csv",
+      "sha256": "4ff93be475843eac7e5788bec076316fc4aa7d4e6fd56a65fa216162e2d42ddb"
+    },
+    {
+      "id": "S17",
+      "artifact": "runs/pretraining_plateau_repair_20261101/audit.json",
+      "sha256": "d83c66639c5354eb38c68da27c2d55ab86caaf95e77ab4e8f83f77d12c5e8ebe"
+    },
+    {
+      "id": "S18",
+      "artifact": "runs/standard_1m_tabfm_20261031/artifact_verification.json",
+      "sha256": "4ec501a9225624e7550cdedd48e997b44d11516b3776d83fbce11f0bf47e8dfe"
+    },
+    {
+      "id": "S19",
+      "artifact": "runs/real_world_transfer_20261031/audit.json",
+      "sha256": "b328be9bbb7906e524c522070129c6ae6dbb72e604f3bd382d0f05657f360396"
+    },
+    {
+      "id": "S20",
+      "artifact": "reports/TINYMIND_PRETRAINING_PLATEAU_REPAIR.md",
+      "sha256": "a4fc45aabcc7a03f7eb3385ae1cf463f77b182f65b3dbc27726dca20e5d39d2d"
+    },
+    {
+      "id": "S21",
+      "artifact": "reports/TINYMIND_FRESH_EXPERIENCE.md",
+      "sha256": "aef7889e596793d3ebd49db199c7dded0e6065866353e81d73a496e376c08e24"
+    },
+    {
+      "id": "S22",
+      "artifact": "reports/TINYMIND_PRETRAINING_SCALING.md",
+      "sha256": "d8c25d9562a09110326fd1c9434a98bdd7a6dedd946d49f93992c8d3a7ac07b6"
+    },
+    {
+      "id": "S23",
+      "artifact": "reports/TINYMIND_LEARNING_PLATEAU.md",
+      "sha256": "5a8a2a4e08fa7b9fdd2d0936408ecadfaf6acccf0f35804c14c47172d1ef4db8"
+    },
+    {
+      "id": "S24",
+      "artifact": "reports/TINYMIND_ROOT_CAUSE_DEBUGGING.md",
+      "sha256": "4225077b5caaa17236c8feb135df34842a3ce851aab51ee209da85f4fb18d3bd"
+    },
+    {
+      "id": "S25",
+      "artifact": "reports/TINYMIND_LEARNED_MECHANISMS_BENCHMARK.md",
+      "sha256": "ec02d2320bb78cd29ad3fad03dcb41fd2560e2dd10d455710788de37422a4faf"
+    },
+    {
+      "id": "S26",
+      "artifact": "reports/STANDARD_1M_TABFM_ARCHITECTURE_BENCHMARK.md",
+      "sha256": "2b3f5bb2cec745495d4e60db589c0e902142449db62430c0eb36fccb51069d34"
+    },
+    {
+      "id": "S27",
+      "artifact": "reports/TINYMIND_REAL_WORLD_TRANSFER.md",
+      "sha256": "f9b585bd31fd0335c8db4971b29e248c35c81c3effbbd4b146436f25cfd0fe2e"
+    },
+    {
+      "id": "S28",
+      "artifact": "runs/pretraining_plateau_repair_20261101/protocol_lock.json",
+      "sha256": "653cf7574637c3992c7a67282cd472a966b192e9f4fd639287aa8609f466b460"
+    },
+    {
+      "id": "S29",
+      "artifact": "runs/pretraining_plateau_repair_20261101/selection_lock.json",
+      "sha256": "9907e1fced848d5c1fcc3252140e860622d8a76b0c50e8ba8ffa11002696b55b"
+    },
+    {
+      "id": "S30",
+      "artifact": "runs/pretraining_plateau_repair_20261101/scientific_decision.json",
+      "sha256": "1a5ce47a2c5c23cf0ae8500cb88e835e0565e9447de08d33b65d84485ad15eb2"
+    },
+    {
+      "id": "S31",
+      "artifact": "experiments/original_variable_editor.py",
+      "sha256": "fdb6911ee7034507bac12c06d072c026ec93a1f3996c21e0faa2c416acee3991"
+    },
+    {
+      "id": "S32",
+      "artifact": "experiments/surprise_feature_edit.py",
+      "sha256": "2eb07bf5155a9a3d85576b28249229e592447b5b76534f5a5bc5c45af536da79"
+    },
+    {
+      "id": "S33",
+      "artifact": "experiments/tablup_column_context.py",
+      "sha256": "9620cd154a7ad02e646fdf596280ba9f0d5239714db096ec9a5a973ab6be6e6b"
+    },
+    {
+      "id": "S34",
+      "artifact": "runs/standard_1m_tabfm_20261031/architecture.json",
+      "sha256": "beace5345d86a236118c300584b631e30f4a0a5535620de6f535be4e746230fc"
+    },
+    {
+      "id": "S35",
+      "artifact": "runs/fresh_experience_20261101/protocol_lock.json",
+      "sha256": "ea3d1903230ff7f29e45690c8c92ac5f1bb60b0415637a9c87021a18dd29020e"
+    },
+    {
+      "id": "S36",
+      "artifact": "runs/pretraining_plateau_repair_20261101/prepare.py",
+      "sha256": "ba3c7e713fcb712d1104c1fbabe724c61fbd0fcdb26efa366f53684f5cb8103a"
+    }
+  ],
+  "exports": [
+    {
+      "file": "benchmarks/public-results.csv",
+      "sha256": "2ae4d3c7f638c751f085bf5e65d48ff074e28fdd242503b87a107028fc4c5d5d",
+      "data_rows": 431
+    },
+    {
+      "file": "benchmarks/source-data/beijing-accuracy.csv",
+      "sha256": "1ff45cb82d353b4ff42561a48e7a8689559163b7f52bf119868e606a564116b5",
+      "data_rows": 55
+    },
+    {
+      "file": "benchmarks/source-data/beijing-efficiency.csv",
+      "sha256": "da2b095b4647f99bb82abf74a958fbc7d7b267d2f8e9aa3cd5a6c3dc01fba8a1",
+      "data_rows": 275
+    },
+    {
+      "file": "benchmarks/source-data/fresh-experience-curves.csv",
+      "sha256": "64bbd087886bcdc33f216f53e244c09924177d769ca42e46683e6fa5b78ebd04",
+      "data_rows": 995
+    },
+    {
+      "file": "benchmarks/source-data/plateau-K-curves.csv",
+      "sha256": "6cec81fafc44eb37817cfeabccb0a92a1f1aeb19ffffa8e4c062f2adeb39ccfe",
+      "data_rows": 2795
+    },
+    {
+      "file": "benchmarks/source-data/plateau-curves.csv",
+      "sha256": "4429b3ee90b4812f501fb0fe9b48d1a2ba27f27166b5479ad9e0dfe2567b03b4",
+      "data_rows": 522
+    },
+    {
+      "file": "benchmarks/source-data/plateau-development-curves.csv",
+      "sha256": "a1ca5a5ad95301339a0d3dc027e0718a77be3afaf0a19e06d691818c1daa4c91",
+      "data_rows": 900
+    },
+    {
+      "file": "benchmarks/source-data/transformer-accuracy.csv",
+      "sha256": "f92649709af7ae6c87f86a2d979ea45672205a27632b766ce2a302eaf22834f5",
+      "data_rows": 120
+    },
+    {
+      "file": "benchmarks/source-data/transformer-efficiency.csv",
+      "sha256": "94ce915be25591ca1c3adaaec73acfd26eef0d60df3375b7a6e16c51e68c83b4",
+      "data_rows": 6
+    }
+  ],
+  "audit_summary": {
+    "plateau": {
+      "status": "PASS",
+      "saved_neural_score_rows_recomputed": 643040,
+      "saved_classical_score_rows_recomputed": 23560,
+      "maximum_NMSE_absolute_error": 2.1316282072803006e-14,
+      "protected_files_unchanged": 149,
+      "validated_default_promoted": false,
+      "query_labels_in_adaptation": false,
+      "source_id": "S17"
+    },
+    "transformer": {
+      "source_id": "S18",
+      "reviewed": true
+    },
+    "beijing": {
+      "pass": true,
+      "all_saved_scores_recomputed": 2640,
+      "all_query_targets_exactly_match_locked_bank": true,
+      "all_methods_same_tasks_support_query": true,
+      "chronological_support_outcomes_precede_query_inputs": true,
+      "no_training_or_real_data_checkpoint_selection": true,
+      "source_id": "S19"
+    }
+  },
+  "extraction": {
+    "public-results.csv": "Both final/development selected effects; all frozen interventions; full D4 controlled-family panel; same-seed Transformer aggregate family panels; all-K fresh-vs-fixed endpoints; all Beijing K64 paired comparisons.",
+    "source-data": "Explicitly whitelisted aggregate tables only. No row-level observations, predictions, raw labels, weights or executable model source.",
+    "intervals": "Intervals are preserved from audited whole-function/station bootstrap analyses. Aggregate-only exports cannot regenerate bootstrap samples."
+  }
+}

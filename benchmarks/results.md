@@ -1,0 +1,209 @@
+# Benchmark results and study cards
+
+Evidence cutoff: **1 November 2026**. Every comparison below has a result ID in [public-results.csv](public-results.csv), with full-precision values and an exact source locator. [Provenance](provenance.json) records source hashes and export rules. Tables round displayed errors to six decimals and reductions to two decimals. Positive reduction favors the named candidate; negative is a regression. No cross-study error comparison is treated as matched.
+
+## Latest original-lineage plateau repair
+
+**Status:** experimental candidates, no promotion; complete development gates failed.
+
+**Training:** two seeds 1811/1877, fresh original 4K parents restored with AdamW, 4K additional steps to 8K. Batch eight, ordinary normalized scalar query MSE, native LR 3e−5 and new Tiny components/current readers 3e−4. CC_D is a scaffolded task-law bundle; CC_G is clipping 1→5; CC_DG combines them.
+
+**Evaluation:** development-selected Tiny_Global and CC_G; independently generated final functions with choices/checkpoints locked first. Main D4/8/16/32 × K4/8/16/32/64; familiar final 512 functions, excluded 128, structural 64, unseen-D6/12/24 192. Generally 64 disjoint queries per synthetic function; controlled cases can have 128. Learner normalization uses supports only.
+
+**Metric:** per-function mean physical query squared error / that function's query-target variance, then average under locked family counts. **Intervals:** 5,000 paired whole-function bootstrap replicates, family/D stratified, preserving K curves; seeds separate, exploratory subgroups unadjusted. The primary endpoint is familiar all-K; K16/32/64 is secondary.
+
+### Tiny_Global versus the strongest declared matched reader
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0001 | 1811 | Tiny_Global / Tiny_Basis_current | familiar_allK | 0.682809 | 0.666817 | +2.34% [+1.99, +2.70] |
+| R0002 | 1811 | Tiny_Global / Tiny_Basis_current | familiar_laterK | 0.480355 | 0.455022 | +5.27% [+4.65, +5.93] |
+| R0003 | 1811 | Tiny_Global / Tiny_Basis_current | excluded | 0.895739 | 0.894178 | +0.17% [-0.35, +0.72] |
+| R0004 | 1811 | Tiny_Global / Tiny_Basis_current | structure | 1.120924 | 1.115177 | +0.51% [-0.26, +1.33] |
+| R0005 | 1811 | Tiny_Global / Tiny_Basis_current | unseen_D | 0.714392 | 0.701381 | +1.82% [+1.26, +2.37] |
+| R0037 | 1877 | Tiny_Global / Tiny_Basis_current | familiar_allK | 0.676726 | 0.662791 | +2.06% [+1.69, +2.45] |
+| R0038 | 1877 | Tiny_Global / Tiny_Basis_current | familiar_laterK | 0.473873 | 0.450167 | +5.00% [+4.38, +5.69] |
+| R0039 | 1877 | Tiny_Global / Tiny_Basis_current | excluded | 0.893749 | 0.896406 | -0.30% [-0.81, +0.25] |
+| R0040 | 1877 | Tiny_Global / Tiny_Basis_current | structure | 1.101671 | 1.093948 | +0.70% [+0.01, +1.44] |
+| R0041 | 1877 | Tiny_Global / Tiny_Basis_current | unseen_D | 0.705891 | 0.692430 | +1.91% [+1.37, +2.43] |
+
+Tiny_Basis_current is separately trained and retains native task-weight memory. Its capacity/operations match the Tiny_Basis history arm. It was the strongest declared reader control; Tiny_Global's own same-capacity reader is reported below. Excluded-program intervals cross zero in both seeds. Whole generating programs are held out, but their primitives can overlap training. These scores do not establish arbitrary unfamiliar rule construction.
+
+### Alternate references remain separate
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0010 | 1811 | Tiny_Global / Tiny_R | familiar_allK | 0.704523 | 0.666817 | +5.35% [+4.72, +5.98] |
+| R0011 | 1811 | Tiny_Global / Tiny_R | familiar_laterK | 0.514811 | 0.455022 | +11.61% [+10.73, +12.55] |
+| R0019 | 1811 | Tiny_Global / Tiny_Global_current | familiar_allK | 0.682720 | 0.666817 | +2.33% [+1.98, +2.69] |
+| R0020 | 1811 | Tiny_Global / Tiny_Global_current | familiar_laterK | 0.479653 | 0.455022 | +5.14% [+4.52, +5.79] |
+| R0046 | 1877 | Tiny_Global / Tiny_R | familiar_allK | 0.699238 | 0.662791 | +5.21% [+4.63, +5.80] |
+| R0047 | 1877 | Tiny_Global / Tiny_R | familiar_laterK | 0.510112 | 0.450167 | +11.75% [+10.97, +12.58] |
+| R0055 | 1877 | Tiny_Global / Tiny_Global_current | familiar_allK | 0.676993 | 0.662791 | +2.10% [+1.73, +2.49] |
+| R0056 | 1877 | Tiny_Global / Tiny_Global_current | familiar_laterK | 0.473077 | 0.450167 | +4.84% [+4.20, +5.56] |
+
+Tiny_Global_current has the same capacity and operations as Tiny_Global, but reads repetitions of the current pair. Tiny_R is the original continuation: its comparison bundles mathematical correction and mechanism changes. The larger Tiny_R-relative percentage is not the isolated historical retrieval effect.
+
+### CC broad repair result
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0073 | 1811 | CC_G / CC_R | familiar_allK | 0.642458 | 0.644745 | -0.36% [-0.57, -0.15] |
+| R0074 | 1811 | CC_G / CC_R | familiar_laterK | 0.453178 | 0.456307 | -0.69% [-0.87, -0.52] |
+| R0075 | 1811 | CC_G / CC_R | excluded | 0.854438 | 0.853536 | +0.11% [-0.24, +0.45] |
+| R0091 | 1877 | CC_G / CC_R | familiar_allK | 0.636010 | 0.639190 | -0.50% [-0.70, -0.30] |
+| R0092 | 1877 | CC_G / CC_R | familiar_laterK | 0.445021 | 0.447534 | -0.56% [-0.73, -0.40] |
+| R0093 | 1877 | CC_G / CC_R | excluded | 0.852695 | 0.857307 | -0.54% [-0.96, -0.17] |
+
+All CC_D/CC_G/CC_DG broad development gates failed. The public export preserves the selected candidates' complete development/final endpoint tables and the full D4 controlled-family panel. No 10K/12K continuation was run after gate failure.
+
+### Frozen causal evidence for Tiny_Global
+
+Same selected 8K weights, **development familiar functions only** (256 paired functions, D4/8/16/32, all K, independent queries). The named candidate is the intervention; therefore negative reduction means damage. Removing a trained component can disrupt co-adaptation, and corruption is a distribution shift. These results support dependence on evidence/history/hidden updates, not general invention or unique-cause identification.
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0223 | 1877 | Tiny_Global:shuffled_labels / Tiny_Global:normal | familiar | 0.698499 | 1.427476 | -104.36% [-111.88, -96.95] |
+| R0229 | 1877 | Tiny_Global:freeze_hidden / Tiny_Global:normal | familiar | 0.698499 | 0.817815 | -17.08% [-19.32, -14.89] |
+| R0235 | 1877 | Tiny_Global:reverse_order / Tiny_Global:normal | familiar | 0.698499 | 0.696420 | +0.30% [-0.70, +1.28] |
+| R0241 | 1877 | Tiny_Global:history_off / Tiny_Global:normal | familiar | 0.698499 | 0.716135 | -2.52% [-3.36, -1.70] |
+| R0247 | 1877 | Tiny_Global:history_current / Tiny_Global:normal | familiar | 0.698499 | 0.745615 | -6.75% [-7.64, -5.87] |
+| R0253 | 1877 | Tiny_Global:history_wrong_labels / Tiny_Global:normal | familiar | 0.698499 | 0.853848 | -22.24% [-24.53, -20.05] |
+| R0265 | 1811 | Tiny_Global:shuffled_labels / Tiny_Global:normal | familiar | 0.699197 | 1.445204 | -106.69% [-114.30, -99.11] |
+| R0271 | 1811 | Tiny_Global:freeze_hidden / Tiny_Global:normal | familiar | 0.699197 | 0.815385 | -16.62% [-18.76, -14.45] |
+| R0277 | 1811 | Tiny_Global:reverse_order / Tiny_Global:normal | familiar | 0.699197 | 0.697730 | +0.21% [-0.81, +1.22] |
+| R0283 | 1811 | Tiny_Global:history_off / Tiny_Global:normal | familiar | 0.699197 | 0.716785 | -2.52% [-3.29, -1.70] |
+| R0289 | 1811 | Tiny_Global:history_current / Tiny_Global:normal | familiar | 0.699197 | 0.749504 | -7.19% [-8.12, -6.28] |
+| R0295 | 1811 | Tiny_Global:history_wrong_labels / Tiny_Global:normal | familiar | 0.699197 | 0.859057 | -22.86% [-25.15, -20.59] |
+
+History-wrong-labels corrupts stored earlier pairings while retaining the correct current observation; history-off removes the new historical residual. Freeze-hidden removes hidden A/b writes. Reverse-order reverses both inputs and outcomes. Label permutation preserves marginals and breaks input/outcome correspondence. All per-K diagnostics are also included in the CSV.
+
+### Exploratory CC_D subgroup confirmation
+
+Final controlled cases, **D4/K32–64**, same CC_R supports/queries, 5,000 whole-function paired bootstrap draws; unadjusted subgroup intervals. The source table retains all controlled families and three CC arms. Fourier1 is a single-component Fourier law, while the composition family is a supplied structured combination.
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0301 | 1811 | CC_D / CC_R | Fourier1 | 0.494237 | 0.417649 | +15.50% [+11.26, +21.01] |
+| R0303 | 1811 | CC_D / CC_R | composition | 0.096383 | 0.098901 | -2.61% [-16.39, +16.69] |
+| R0325 | 1877 | CC_D / CC_R | Fourier1 | 0.471274 | 0.409854 | +13.03% [+7.36, +21.40] |
+| R0327 | 1877 | CC_D / CC_R | composition | 0.130416 | 0.143431 | -9.98% [-23.33, +9.42] |
+
+The simple Fourier result replicates in both seeds; the earlier development composition gains do not reliably confirm. These exploratory subsets cannot replace the broad primary endpoint.
+
+## Matched Transformer comparison
+
+**Status:** audited architecture-bundle comparison, seeds **1301/1337**, fixed 4K scratch endpoints. **Baseline:** same-seed ColumnContext S4 (988,689 parameters); candidate conventional axial Transformer (994,945). Data, function occurrences, feature tags, query roles, batch eight, all 4,000 steps and AdamW/LR settings match. Architecture/embedding/initializer and compute differ.
+
+**Bank:** generator seed **220347173**, 1,024 fresh familiar-prior functions, eight shards, D4/8/16/32, nested K4/8/16/32/64, 64 queries disjoint from 64 support rows. The primary nonlinear mean equally weights random-neural/Fourier, D and K and excludes source tasks. These are familiar-prior instances, not withheld-operation or real-world tests. **Intervals:** 10,000 family/D-stratified whole-function paired resamples, unadjusted subgroups, separate seeds.
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0358 | 1301 | Standard_1301 / Column_1301 | nonlinear | 0.905012 | 0.883907 | +2.33% [+1.35, +3.27] |
+| R0359 | 1301 | Standard_1301 / Column_1301 | nonlinear | 0.706465 | 0.710996 | -0.64% [-1.62, +0.28] |
+| R0370 | 1337 | Standard_1337 / Column_1337 | nonlinear | 0.915507 | 0.866672 | +5.33% [+4.35, +6.29] |
+| R0371 | 1337 | Standard_1337 / Column_1337 | nonlinear | 0.721294 | 0.674855 | +6.44% [+5.35, +7.52] |
+
+The Transformer wins nonlinear all-K in both seeds. Later-K superiority does not replicate across both. Tiny default11 and replay233 are historical references in this bank, with unmatched training histories; the accuracy source table includes them without asserting a matched mechanism advantage.
+
+### Efficiency in that same study
+
+Apple M4 CPU, float32, two threads; one bank pass with batch eight. Timings are amortized per function/support budget with all 64 queries charged. Forward MACs total the whole inference bank and omit some pointwise operators/backward. Maximum task cache spans the tested grid and excludes shared weights/runtime overhead. No latency quantiles or dollar claims follow.
+
+| Model | Parameters | Adapt ms/task | 64-query ms/task | Inference MAC (trillion) | Maximum cache (KiB) |
+| --- | --- | --- | --- | --- | --- |
+| Tiny_default11 | 1029764 | 1.517 | 0.018 | 0.249 | 9.33 |
+| Tiny_replay233 | 1029764 | 5.637 | 0.018 | 0.923 | 9.33 |
+| Column_1301 | 988689 | 0.722 | 1.363 | 0.893 | 161.00 |
+| Standard_1301 | 994945 | 3.321 | 7.707 | 6.680 | 4225.00 |
+| Column_1337 | 988689 | 0.878 | 1.688 | 0.893 | 161.00 |
+| Standard_1337 | 994945 | 3.904 | 9.025 | 6.680 | 4225.00 |
+
+Transformer/CC inference MAC ratio is **7.48×**, and maximum cache ratio **26.24×**. This efficiency advantage coexists with the Transformer's lower primary nonlinear error.
+
+## Original pretraining and fresh-experience control
+
+The controlled scaling study's eight scratch arms improve familiar 1K→4K error by 5.5–17.8%, then only 0.43–0.81% from 4K→8K. Those ranges belong to its bank; they do not describe another study's estimates.
+
+The fresh-experience study separately matches fixed-pool and fresh function-and-observation coverage from the same scratch initialization and occurrence schedule. Training seeds 1811/1877, evaluation seed **98776425**, fresh stream root **718009441**, 8K endpoints, constant LR3e−5 after 4K. The first 1K is source/D4–8/K16–64 focused, followed by mixed D4/8/16/32 × all K; curriculum changes confound a pure compute interpretation of 1K→4K.
+
+Its final bank uses familiar and excluded programs, structural and unseen-D tracks, plus SML2010 D22 and temperature D23 chronological draws. Query rows are independent of supports, with supports nested over all K. Per-function NMSE and 5,000 paired whole-function bootstrap draws are used. Classical and historical Transformer references are retained as references, rather than equally trained architecture controls.
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0374 | 1811 | Tiny_B_1811_8000 / Tiny_A_1811_8000 | familiar | 0.721117 | 0.717721 | +0.47% [+0.16, +0.79] |
+| R0380 | 1877 | Tiny_B_1877_8000 / Tiny_A_1877_8000 | familiar | 0.714437 | 0.711417 | +0.42% [+0.10, +0.73] |
+| R0386 | 1811 | CC_B_1811_8000 / CC_A_1811_8000 | familiar | 0.653293 | 0.655448 | -0.33% [-1.23, +0.57] |
+| R0392 | 1877 | CC_B_1877_8000 / CC_A_1877_8000 | familiar | 0.656426 | 0.651007 | +0.83% [+0.19, +1.45] |
+
+The fresh treatment combines new functions with new observations; it does not isolate either separately. CC's effects are seed-dependent, and the plateau remains. The complete aggregate learning curves are in [fresh-experience-curves.csv](source-data/fresh-experience-curves.csv). They include early improvement, unsuccessful 8K continuation and real-task negatives.
+
+## Real-world evaluation
+
+### Chronological Beijing 24-hour-ahead PM2.5
+
+**Dataset:** [UCI Beijing Multi-Site Air Quality](https://archive.ics.uci.edu/dataset/501/beijing+multi+site+air+quality+data), [DOI 10.24432/C5RK5G](https://doi.org/10.24432/C5RK5G), dataset license CC BY 4.0. No raw dataset is redistributed.
+
+**Design:** all twelve stations, four fixed periods (April 2013, August 2014, December 2015, April 2016), 48 windows, 768 unique future query labels. D16 current pollutant/weather/wind/calendar features. In each 128-hour window, support inputs 0–63 have outcomes at 24–87; query inputs 88–103 have outcomes 112–127. Every support outcome precedes every query input. Nested K4/8/16/32/64 adds evidence and recency together. Support-only imputation/scaling; no real labels train neural weights.
+
+**Metric:** equal-station/equal-episode physical MSE divided by common reporting query variance **8105.054147 (µg/m³)²**; RMSE/MAE retain physical units. This global normalization differs from synthetic per-function NMSE; their values must not be compared as equivalent tasks.
+
+**Models:** historical Tiny default11/replay233 (1,664/5,664 recorded inherited training steps, different curricula; replay uses extra passes for larger K), and CC/Transformer fixed 4K endpoints in seeds 1301/1337. Baselines are support mean, persistence, support-only linear/ridge CV and KNN5. **Intervals:** 10,000 whole-station resamples preserving periods/K; exploratory and geographically dependent.
+
+K64 results (all methods retained):
+
+| Method | NMSE | RMSE (µg/m³) | MAE (µg/m³) |
+| --- | --- | --- | --- |
+| TinyMind_default11 | 1.031620 | 91.440 | 78.274 |
+| TinyMind_replay233 | 0.983302 | 89.273 | 78.352 |
+| TinyMind_CC_1301 | 0.780720 | 79.547 | 70.017 |
+| Standard_1301 | 0.845423 | 82.778 | 71.672 |
+| TinyMind_CC_1337 | 0.830184 | 82.029 | 72.638 |
+| Standard_1337 | 0.845499 | 82.782 | 70.686 |
+| Support_mean | 1.096553 | 94.274 | 83.996 |
+| Persistence | 0.825067 | 81.775 | 65.017 |
+| Linear_calibration_CV | 1.140760 | 96.156 | 81.406 |
+| Ridge_CV | 1.293231 | 102.380 | 79.680 |
+| KNN_distance5 | 0.840694 | 82.546 | 68.708 |
+
+Selected paired comparisons; the CSV includes every saved K64 comparison:
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0407 | 1301 | TinyMind_CC_1301 / Support_mean | 24h_ahead_PM25 | 1.096553 | 0.780720 | +28.80% [+12.10, +41.20] |
+| R0408 | 1301 | TinyMind_CC_1301 / Persistence | 24h_ahead_PM25 | 0.825067 | 0.780720 | +5.37% [-38.57, +31.83] |
+| R0417 | 1337 | TinyMind_CC_1337 / Support_mean | 24h_ahead_PM25 | 1.096553 | 0.830184 | +24.29% [+5.01, +37.87] |
+| R0418 | 1337 | TinyMind_CC_1337 / Persistence | 24h_ahead_PM25 | 0.825067 | 0.830184 | -0.62% [-49.34, +29.13] |
+
+CC improves over support mean in both seeds, but superiority to persistence or same-seed Transformer is uncertain. Tiny default/replay lose to KNN. Persistence wins at K4/8/16/32 and is much cheaper. All tested simple baselines cost less in total across the measured Q1–4096 grid. Neither neural efficiency over another neural model nor evidence-count improvement establishes commercial superiority.
+
+The complete 55-row accuracy table is [beijing-accuracy.csv](source-data/beijing-accuracy.csv). [beijing-efficiency.csv](source-data/beijing-efficiency.csv) contains the 275-row measured workload table with corrected numerical payload accounting. Its timings are batch-one, CPU/two-thread means from a predeclared eight-station subset, including preprocessing; these are not the Transformer study's amortized times.
+
+### Four previously studied regression datasets in the plateau repair
+
+Final Tiny_Global versus strongest matched reader, K4/8/16/32/64, eight support draws per dataset. D12 Facebook pre/post publication, D5 Liver SGPT, D22 SML2010 same-time dining sensor, D23 next-day maximum temperature using issued forecasts. Query sets contain 128 / 113 / 128 / 128 rows respectively. Support-only preprocessing; no real labels train shared weights. Intervals are conditional on dataset/query sets and support draws, not independent dataset replication.
+
+| ID | Seed | Candidate / reference | Endpoint | Reference NMSE | Candidate NMSE | Reduction [95% CI] |
+| --- | --- | --- | --- | --- | --- | --- |
+| R0006 | 1811 | Tiny_Global / Tiny_Basis_current | real:Facebook_prepost | 1.208760 | 1.202068 | +0.55% [-1.37, +2.64] |
+| R0007 | 1811 | Tiny_Global / Tiny_Basis_current | real:Liver_SGPT | 0.916674 | 0.910809 | +0.64% [-3.27, +3.93] |
+| R0008 | 1811 | Tiny_Global / Tiny_Basis_current | real:SML2010_dining | 1.345822 | 1.286725 | +4.39% [+1.22, +8.30] |
+| R0009 | 1811 | Tiny_Global / Tiny_Basis_current | real:Temperature_next_max | 0.665165 | 0.650796 | +2.16% [-0.14, +4.12] |
+| R0042 | 1877 | Tiny_Global / Tiny_Basis_current | real:Facebook_prepost | 1.234013 | 1.172844 | +4.96% [-0.57, +11.04] |
+| R0043 | 1877 | Tiny_Global / Tiny_Basis_current | real:Liver_SGPT | 0.862390 | 0.882017 | -2.28% [-7.47, +1.38] |
+| R0044 | 1877 | Tiny_Global / Tiny_Basis_current | real:SML2010_dining | 1.437326 | 1.390698 | +3.24% [-0.63, +7.47] |
+| R0045 | 1877 | Tiny_Global / Tiny_Basis_current | real:Temperature_next_max | 0.668410 | 0.659278 | +1.37% [-0.45, +3.21] |
+
+CC_G's complete real endpoint results are also retained in the CSV. The task bank preserves within-task support/query disjointness, but development/final queries overlap by **34/128 Facebook, 35/113 Liver, 21/128 SML, 10/128 temperature** rows. In addition, 69 Facebook and 74 Liver final queries appeared as development supports. These are conditional draw confirmations, not untouched dataset-level or fully reserved row-level validation. The final/development banks were preserved rather than changed after seeing results.
+
+No new TabPFN/official TabArena inference was run in the plateau study. Earlier comparisons cannot be substituted into its matched result table. Personalization and agent adaptation have no validated application result in this export.
+
+## Files and reproducibility boundary
+
+- [public-results.csv](public-results.csv): all exported comparisons, including negatives and development results.
+- [source-data](source-data/): exact whitelisted aggregate input tables for figures and independent inspection.
+- [provenance.json](provenance.json): source artifact SHA256 hashes, public export hashes/row counts, private audit summary and extraction rules.
+- [Figure sources](../figures/README.md): exact selections and transformations used in each chart.
+- [Reproducibility](../reproducibility/README.md): public arithmetic/figure checks and explicitly withheld replication prerequisites.
+
+Confidence intervals are preserved from audited analyses. Public aggregates cannot regenerate bootstrap samples or independently replay model inference. No raw observations, labels, weights, optimizers, private model implementation or development logs are published.
