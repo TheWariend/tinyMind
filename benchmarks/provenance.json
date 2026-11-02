@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-01",
+  "as_of": "2026-11-02",
   "private_artifacts_included": false,
   "evaluation_identifiers": {
     "plateau_repair": {
@@ -35,6 +35,75 @@
         "2015-12",
         "2016-04"
       ]
+    },
+    "pretraining_64k": {
+      "fixed_optimizer_steps": 64000,
+      "parent_step": 32000,
+      "training_seed_by_architecture": {
+        "Tiny": 1877,
+        "CC": 1811
+      },
+      "parameter_counts": {
+        "Tiny": 1029764,
+        "CC": 988689
+      },
+      "checkpoint_sha256": {
+        "Tiny": "c7a54eac247ee8d1008aa83d83049adf89b312b8a444a84814d94f0e5c888c51",
+        "CC": "a21b31b09d7ccb4faafe7a13848ee10c0f60af1cfefb4f26c6e3db17373f8df7"
+      },
+      "validation_bank_root": 6000000000000,
+      "confirmation_bank_root": 7000000000000,
+      "bootstrap_seed": 913867,
+      "bootstrap_replicates": 2000,
+      "bootstrap_unit": "whole function stratified by D/family, nested K preserved",
+      "interval_scope": "exploratory, unadjusted; one selected parent per architecture",
+      "presentations_per_model": 2304000,
+      "exposure_note": "256000 through 32K (batch eight) plus 2048000 additional (batch 64); not unique mathematical functions",
+      "final_vs_validation_selected": "Published comparisons use fixed 64K; validation separately selected Tiny 62K and CC 64K"
+    },
+    "tabarena_lite_64k": {
+      "task": "regression",
+      "datasets_total": 13,
+      "datasets_common": 11,
+      "outer_split": {
+        "repeat": 0,
+        "fold": 0,
+        "sample": 0
+      },
+      "inner_validation": "8 folds x 1 set",
+      "configuration": "one fixed configuration per neural model; frozen shared weights; no HPO",
+      "features": "all original columns; D<=32; no feature truncation or projection",
+      "supports": "all official training rows; exact native-equation execution beyond original K64 admission guard",
+      "summary": "exp(mean(log(candidate RMSE / reference RMSE))); equal weight per common dataset",
+      "baselines": [
+        {
+          "method": "TabPFN-3.5",
+          "suite": "tabarena-2026-09-17-fix",
+          "default_config": "TabPFN-3.5_c1_default_BAG_L1",
+          "sha256": "54db5cc34f500f5a2714dd7a0b1dfa8fa0f0b64e4b912ace02e399b956bd51bc",
+          "validation_protocol": "8x1",
+          "compute": "gpu"
+        },
+        {
+          "method": "CatBoost",
+          "suite": "tabarena-2026-07-13",
+          "default_config": "CatBoost_c1_default_BAG_L1",
+          "sha256": "514288b99815b16e362790a7d6bfdf17d488ccce7c8c7b3c7b746c018090bd8a",
+          "validation_protocol": "8x1",
+          "compute": "cpu"
+        },
+        {
+          "method": "XGBoost",
+          "suite": "tabarena-2025-06-12",
+          "default_config": "XGBoost_c1_BAG_L1",
+          "sha256": "90ddfa303ac1a28fbd0eed1eb70fecc554d1b24a1da83fc7fb7715edc7ca1b34",
+          "validation_protocol": "8x1",
+          "compute": "cpu"
+        }
+      ],
+      "baseline_note": "Previously published fixed-configuration scores on aligned official splits, not new local reruns",
+      "official_leaderboard_rank": null,
+      "estimated_leaderboard_rank": null
     }
   },
   "source_note": "Artifact paths below are relative provenance identifiers in the private research archive, not downloadable public files. Hashes bind this export to that evidence. Private code, logs, raw datasets and checkpoints are withheld.",
@@ -218,14 +287,134 @@
       "id": "S36",
       "artifact": "runs/pretraining_plateau_repair_20261101/prepare.py",
       "sha256": "ba3c7e713fcb712d1104c1fbabe724c61fbd0fcdb26efa366f53684f5cb8103a"
+    },
+    {
+      "id": "S37",
+      "artifact": "runs/regression_64k_20261102/paired_endpoint_effects.csv",
+      "sha256": "2ad7c39db6e0a1e4deaee8468836e1d560d7ecc2557c5516e2ba7cfb0a7f1b8d"
+    },
+    {
+      "id": "S38",
+      "artifact": "runs/regression_64k_20261102/confirmation_curves.csv",
+      "sha256": "c3b2a5fab1f71c0097cb9f315ea7004a042303d72227f99b6d35a526e54c93ec"
+    },
+    {
+      "id": "S39",
+      "artifact": "runs/regression_64k_20261102/final_audit.json",
+      "sha256": "04eb71f7952b78edb5579b5d77b22e897d7f715cdccc34fce94dbabe55cbd0ce"
+    },
+    {
+      "id": "S40",
+      "artifact": "runs/regression_64k_20261102/FINAL_REPORT.md",
+      "sha256": "de89916e08d2b13713d643535a673ea5d50c76c905c8098094ee77ed0896abfc"
+    },
+    {
+      "id": "S41",
+      "artifact": "runs/regression_64k_20261102/protocol_lock.json",
+      "sha256": "32edc25af97f8f2d37942a5f0edf07cbd7556217ae607521676505a317f36337"
+    },
+    {
+      "id": "S42",
+      "artifact": "runs/regression_64k_20261102/bank_audit.json",
+      "sha256": "a0b4b42a37231d756b6255dcf77d4ab5cda354bbbd52666163f2aaf966896454"
+    },
+    {
+      "id": "S43",
+      "artifact": "runs/regression_64k_20261102/selection.json",
+      "sha256": "23106d609f7a0a07c60189fc272bcece969ef8f0650ecd7f5ec64b6ff97059be"
+    },
+    {
+      "id": "S44",
+      "artifact": "runs/regression_64k_20261102/checkpoint_selection.json",
+      "sha256": "b6924a3055f41dd34613b4138df71e97c8500a64ccb8f76bf70373df2a3fd7ef"
+    },
+    {
+      "id": "S45",
+      "artifact": "runs/regression_64k_20261102/completion_verification.json",
+      "sha256": "1ceed9ec3e14c71dc3bd4cd677143ae5d8c073af986f08d5073fa916071d6999"
+    },
+    {
+      "id": "S46",
+      "artifact": "runs/broader_pretraining_20261101/FINAL_REPORT.md",
+      "sha256": "4be8cfad93967219dea35218e65db079e029e982a6f04b9e88d54c077ce18784"
+    },
+    {
+      "id": "S47",
+      "artifact": "runs/broader_pretraining_20261101/learning_curves.csv",
+      "sha256": "6b0534321ccc507d59ed5755ff794ef123d3af2ee4ea2d374b39acf1185b73f1"
+    },
+    {
+      "id": "S48",
+      "artifact": "runs/tabarena_lite_cc_regression_64k_20261102/comparison_13_datasets.csv",
+      "sha256": "e52842f009866256ce4d9333c2167a34d04e2a28617e2867b117083f55afe64a"
+    },
+    {
+      "id": "S49",
+      "artifact": "runs/tabarena_lite_cc_regression_64k_20261102/relative_rmse_gaps.csv",
+      "sha256": "6d93f94278d4ae8d5333c8ac5edf8153e2f6c3b675482ecc350cfd78b96b940b"
+    },
+    {
+      "id": "S50",
+      "artifact": "runs/tabarena_lite_cc_regression_64k_20261102/verification.json",
+      "sha256": "cfc254dbb1e03b5afadca8ae91cd24885d5f86fed83beb06f8dcf951378d5868"
+    },
+    {
+      "id": "S51",
+      "artifact": "runs/tabarena_lite_cc_regression_64k_20261102/aggregate.json",
+      "sha256": "4b255398936d980821fbd24753f4880fe7762b6b9db2b67aac20c60da5b39207"
+    },
+    {
+      "id": "S52",
+      "artifact": "runs/tabarena_lite_cc_regression_64k_20261102/protocol_lock.json",
+      "sha256": "d1d9fddc9b86844651d2f974cc1cb056b5927068b4e44b64ac0a41b28373fd0a"
+    },
+    {
+      "id": "S53",
+      "artifact": "runs/tabarena_lite_cc_regression_64k_20261102/REPORT.md",
+      "sha256": "800ed574e77d35aaff3b17f750625dd3009f8ca8a47356776673122d6f464cc8"
+    },
+    {
+      "id": "S54",
+      "artifact": "runs/tabarena_lite_regression_64k_20261102/checkpoint.json",
+      "sha256": "e6baace2a711d0e5071633c82b2730544369843d8dc449d11e909e3c5bd01ce9"
+    },
+    {
+      "id": "S55",
+      "artifact": "runs/tabarena_lite_cc_regression_64k_20261102/checkpoint.json",
+      "sha256": "a7d1d0bfff28c82f63edc756033c92326059857f5316b6bd8f3778aa00f328d0"
+    },
+    {
+      "id": "S56",
+      "artifact": "runs/regression_64k_20261102/continuation_recommendation.json",
+      "sha256": "988d793fcd4617a81029eda5c924481c6392926d80de303f80fd9fcabfdeb79d"
+    },
+    {
+      "id": "S57",
+      "artifact": "runs/regression_64k_20261102/capability_audit.json",
+      "sha256": "1dc46406c81607426fc7c02169006ab32e235a1b2bc81c051aea47851921309f"
+    },
+    {
+      "id": "S58",
+      "artifact": "runs/regression_64k_20261102/evaluation/real/Tiny_32000/complete.json",
+      "sha256": "dfb07617869f2bdbfe238ebb5fb8240dfec84db9a2ca7c7228de50f9950822c9"
+    },
+    {
+      "id": "S59",
+      "artifact": "runs/regression_64k_20261102/evaluation/real/Tiny_64000/complete.json",
+      "sha256": "0489503a404f7ce02d12b567ed2dbd696d9853fcdb1ffc6b5509bea6f5cb5584"
+    },
+    {
+      "id": "S60",
+      "artifact": "runs/regression_64k_20261102/evaluation/real/CC_32000/complete.json",
+      "sha256": "0f65e03ed0447f113946aa8bc11e715608eb7b22d26b98c6e7db20e5165d474e"
+    },
+    {
+      "id": "S61",
+      "artifact": "runs/regression_64k_20261102/evaluation/real/CC_64000/complete.json",
+      "sha256": "32eb6b22c2bbbd3c83514417886f675e96d0243b22a4ad98c35c7d6dcb939bdb"
     }
   ],
   "exports": [
-    {
-      "file": "benchmarks/public-results.csv",
-      "sha256": "2ae4d3c7f638c751f085bf5e65d48ff074e28fdd242503b87a107028fc4c5d5d",
-      "data_rows": 431
-    },
     {
       "file": "benchmarks/source-data/beijing-accuracy.csv",
       "sha256": "1ff45cb82d353b4ff42561a48e7a8689559163b7f52bf119868e606a564116b5",
@@ -265,6 +454,41 @@
       "file": "benchmarks/source-data/transformer-efficiency.csv",
       "sha256": "94ce915be25591ca1c3adaaec73acfd26eef0d60df3375b7a6e16c51e68c83b4",
       "data_rows": 6
+    },
+    {
+      "file": "benchmarks/source-data/pretraining-64k-exposure.csv",
+      "sha256": "5628fbe867f9db2ebf522d0c470803b58a77df6446e3e6ab5d4478501a960cf6",
+      "data_rows": 2
+    },
+    {
+      "file": "benchmarks/source-data/pretraining-64k-effects.csv",
+      "sha256": "4d5c907a36727164c6192db517ed4984c0432f9aca7ae2676bbd08427600ae08",
+      "data_rows": 12
+    },
+    {
+      "file": "benchmarks/source-data/pretraining-64k-curves.csv",
+      "sha256": "d0d7cf4bba0f9508dd04ef5b1753fd5126ef6efe38c0e05c3900ecf7f7ff2503",
+      "data_rows": 348
+    },
+    {
+      "file": "benchmarks/source-data/pretraining-64k-real.csv",
+      "sha256": "3557e27ba4986793126ddba2560e238662e5172ba13296ae15f5ead3512101ec",
+      "data_rows": 8
+    },
+    {
+      "file": "benchmarks/source-data/tabarena-lite-64k.csv",
+      "sha256": "91c5e5f9a042d3b9422d9222a438b03fe1e8a530683e9f17f4fdf217f7ea0adb",
+      "data_rows": 13
+    },
+    {
+      "file": "benchmarks/source-data/tabarena-lite-64k-summary.csv",
+      "sha256": "4e262660befb2a9954756b7cdc1ea4bb967911de8b8434e5e07987e954f09fbd",
+      "data_rows": 5
+    },
+    {
+      "file": "benchmarks/public-results.csv",
+      "sha256": "da90acefa01366b2ee771f76bc315226612a0ae2e2eb7d5dcee247d8e02135b2",
+      "data_rows": 533
     }
   ],
   "audit_summary": {
@@ -290,11 +514,63 @@
       "chronological_support_outcomes_precede_query_inputs": true,
       "no_training_or_real_data_checkpoint_selection": true,
       "source_id": "S19"
+    },
+    "pretraining_64k": {
+      "pass": true,
+      "independently_recomputed_score_rows": 276800,
+      "maximum_nmse_discrepancy": 2.1316282072803006e-14,
+      "all_protected_artifacts_unchanged": true,
+      "all_optimizer_counters_correct": true,
+      "two_primary_runs_only": true,
+      "source_id": "S39",
+      "completion_verification_passed": true,
+      "bank_audit_passed": true,
+      "validated_default_promoted": false
+    },
+    "tabarena_lite_64k": {
+      "passed": true,
+      "datasets_accounted": 13,
+      "coverage": {
+        "TinyMind": {
+          "supported_evaluated": 11,
+          "unsupported": 2
+        },
+        "TinyMind-CC": {
+          "supported_evaluated": 11,
+          "unsupported": 2
+        },
+        "TabPFN-3.5": {
+          "supported_evaluated": 13,
+          "unsupported": 0
+        },
+        "CatBoost": {
+          "supported_evaluated": 13,
+          "unsupported": 0
+        },
+        "XGBoost": {
+          "supported_evaluated": 13,
+          "unsupported": 0
+        }
+      },
+      "saved_predictions_independently_recomputed": {
+        "TinyMind": 64120,
+        "TinyMind-CC": 64120
+      },
+      "all_checkpoint_and_optimizer_states_preserved": 68,
+      "test_labels_only_used_for_scoring": true,
+      "neural_optimization_steps": 0,
+      "architecture_changes": 0,
+      "training_prior_changes": 0,
+      "source_id": "S50",
+      "all_outer_splits_and_inner_folds_matched": true,
+      "all9_support_fingerprints_matched": true,
+      "native_execution_preflight_passed": true
     }
   },
   "extraction": {
-    "public-results.csv": "Both final/development selected effects; all frozen interventions; full D4 controlled-family panel; same-seed Transformer aggregate family panels; all-K fresh-vs-fixed endpoints; all Beijing K64 paired comparisons.",
+    "public-results.csv": "Both final/development selected effects; all frozen interventions; full D4 controlled-family panel; same-seed Transformer aggregate family panels; all-K fresh-vs-fixed endpoints; all Beijing K64 paired comparisons. Added 32K-to-64K confirmation contrasts, all-K real point contrasts, all 11 common TabArena-Lite RMSE contrasts and five ratio summaries; previous 431 comparisons preserved.",
     "source-data": "Explicitly whitelisted aggregate tables only. No row-level observations, predictions, raw labels, weights or executable model source.",
-    "intervals": "Intervals are preserved from audited whole-function/station bootstrap analyses. Aggregate-only exports cannot regenerate bootstrap samples."
-  }
+    "intervals": "Intervals are preserved from audited whole-function/station bootstrap analyses. Aggregate-only exports cannot regenerate bootstrap samples. New 64K synthetic intervals use 2000 whole-function resamples. Descriptive real/TabArena rows have bootstrap_replicates=0 and blank CI fields; no intervals invented."
+  },
+  "historical_evidence_note": "Sources S01-S36 and prior aggregate source tables retain their original 1 November export hashes and evidence scope. Later progress does not overwrite historical failed experiments."
 }

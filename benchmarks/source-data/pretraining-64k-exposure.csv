@@ -1,0 +1,3 @@
+architecture,parameters,seed,optimizer_steps,presentations_through_32000,additional_presentations,cumulative_presentations,source_id,parameter_source_id
+Tiny,1029764,1877,64000,256000,2048000,2304000,S39,S54
+CC,988689,1811,64000,256000,2048000,2304000,S39,S55

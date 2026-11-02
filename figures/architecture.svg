@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="820" viewBox="0 0 1500 820" role="img" aria-labelledby="title desc">
   <title id="title">Two TinyMind architectures and their task memory</title>
-  <desc id="desc">TinyMind learns task-local neural weight updates from observed pairs. Experimental Tiny_Global adds historical retrieval. ColumnContext builds compressed column slots and cached support rows for attention. Shared weights are frozen during evaluation; task memory changes.</desc>
+  <desc id="desc">TinyMind learns task-local neural weight updates from observed pairs. Historical experimental Tiny_Global adds retrieval. ColumnContext builds compressed column slots and cached support rows. Current 64K endpoints retain original architectures. Experimental full-support execution extends the original K64 admission guard, while the feature limit remains 32. Shared weights are frozen during evaluation; task memory changes.</desc>
   <defs>
     <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#52657b"/></marker>
     <style>
@@ -14,7 +14,7 @@
   </defs>
   <rect width="1500" height="820" fill="#ffffff"/>
   <text x="45" y="48" class="heading">Two routes to learning from experience</text>
-  <text x="45" y="83" class="sub">Numerical-regression prototypes • explanatory diagram • no public model implementation</text>
+  <text x="45" y="83" class="sub">Experimental numerical-regression prototypes • original architectures at 64K • historical variant shown separately</text>
   <rect x="40" y="120" width="695" height="605" rx="20" fill="#f6fafb" stroke="#d6e6e8"/>
   <rect x="765" y="120" width="695" height="605" rx="20" fill="#f8f6fb" stroke="#e1d9ec"/>
   <text x="65" y="157" class="heading">TinyMind</text>
@@ -45,12 +45,13 @@
   <text x="408" y="522" class="label">Confidence-weighted prediction</text>
   <text x="408" y="549" class="note">Small adapted query graph</text>
   <rect x="65" y="490" width="295" height="136" rx="12" fill="#ffffff" stroke="#087f8c" stroke-dasharray="6 4"/>
-  <text x="83" y="520" class="label">Tiny_Global: experimental</text>
+  <text x="83" y="520" class="label">Tiny_Global: historical</text>
   <text x="83" y="551" class="note">Learned historical retrieval</text>
-  <text x="83" y="579" class="note">≤64 observed input/outcome pairs</text>
+  <text x="83" y="579" class="note">Buffer: ≤64 observed pairs</text>
   <text x="83" y="607" class="note">1,032,973 shared parameters</text>
   <path d="M212 490 L212 421" class="arrow" stroke-dasharray="6 4"/>
   <text x="65" y="680" class="note">Compact native task weights; cheap repeated queries</text>
+  <text x="65" y="707" class="note">Current 64K endpoint uses the original TinyMind model</text>
 
   <rect x="790" y="190" width="645" height="68" rx="12" fill="#ffffff" stroke="#b7c7d8"/>
   <text x="810" y="219" class="label">Observed support pairs + support-only metadata</text>
@@ -66,13 +67,14 @@
   <text x="810" y="483" class="note">Four inducing slots per feature</text>
   <rect x="1120" y="420" width="315" height="85" rx="12" fill="#ece7f6" stroke="#7553a8"/>
   <text x="1140" y="453" class="label">Cached support-row context</text>
-  <text x="1140" y="483" class="note">Row storage grows with K≤64</text>
+  <text x="1140" y="483" class="note">Row storage grows with K</text>
   <path d="M950 505 L950 542" class="arrow"/>
   <path d="M1272 505 L1272 542" class="arrow"/>
   <rect x="790" y="545" width="645" height="81" rx="12" fill="#ffffff" stroke="#b7c7d8"/>
   <text x="810" y="577" class="label">Query x → context attention → scalar prediction</text>
   <text x="810" y="607" class="note">Four blocks attend to columns and cached rows; no query outcomes</text>
-  <text x="790" y="680" class="note">Faster measured cached adaptation; more query work than TinyMind</text>
+  <text x="790" y="680" class="note">Historical CPU study: faster cached adaptation; more query work</text>
+  <text x="790" y="707" class="note">Original K64 guard; experimental full-support execution, D≤32</text>
 
   <rect x="40" y="748" width="1420" height="50" rx="12" fill="#edf2f7"/>
   <text x="65" y="780" class="label">Shared weights: pretrained, then frozen</text>

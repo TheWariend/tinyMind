@@ -1,6 +1,6 @@
 # Architecture
 
-TinyMind and TinyMind-CC are separate research prototypes. Their common interface is a bounded numerical regression task with observed input/outcome pairs and independent query inputs. Shared neural weights are pretrained across functions and frozen during task adaptation. Current experiments primarily evaluate D4/8/16/32 features and K4/8/16/32/64 supports. Selected real interfaces accept intermediate dimensions up to 32.
+TinyMind and TinyMind-CC are separate research prototypes. Their common interface is a bounded numerical regression task with observed input/outcome pairs and independent query inputs. Shared neural weights are pretrained across functions and frozen during task adaptation. Synthetic confirmation primarily evaluates D4/8/16/32 features and K4/8/16/32/64 supports, with D6/12/24 held out. Real interfaces accept intermediate dimensions up to 32. The 2 November fixed 64K endpoints use the original architectures; later large-support execution is described separately below.
 
 ![Architecture overview](../figures/architecture.svg)
 
@@ -12,7 +12,7 @@ Shared evidence and credit networks observe the input, outcome, prediction error
 
 The native hidden-weight write follows the current augmented input direction. A separately controlled dimension-normalization correction changes its scale with D. This supplied mathematical correction must not be credited as a learned discovery. Tiny_C preserves the corrected native mechanism without historical retrieval.
 
-## Tiny_Global: learned historical retrieval
+## Historical Tiny_Global variant: learned historical retrieval
 
 **Tiny_Global has 1,032,973 shared parameters** and is experimental. It keeps up to 64 ordinary observed x/y pairs. At a new observation, it recomputes historical predictions under the current task state. Learned query/key attention retrieves past evidence for each hidden unit; learned signed credit combines individual-hypothesis errors with the scalar ensemble prediction/error and confidence. The additional hidden-weight write can combine historical input directions. Native corrected writes and output updates remain.
 
@@ -26,11 +26,21 @@ Final Tiny_Global familiar gains persist versus its **own** same-capacity Tiny_G
 
 ColumnContext has **988,689 shared parameters**. Target-conditioned scalar cell encoders form column representations. Four learned inducing slots per feature compress column information; feature interactions construct row representations. Four attention context blocks and a scalar head predict query outcomes.
 
-Task state contains the compressed column slots and cached support-row contexts. The row cache grows with K; the architecture is bounded to at most 64 supports and 32 features. It is not a constant-size weight editor. Query computation attends both the compressed column memory and cached rows.
+Task state contains the compressed column slots and cached support-row contexts. The row cache grows with K. The original API admits at most 64 supports and 32 features; 64 is a support admission guard, while 32 is a learned feature-shape limit. Query computation attends both the compressed column memory and cached rows. Larger-support experimental execution retains that growing row cache.
 
 Supplied features include x², sinusoidal encodings with learned frequencies, support-only metadata and random feature tags. Neither these transformations nor preprocessing should be interpreted as concepts autonomously invented from evidence. Neural weights remain fixed at evaluation.
 
 CC_D changes the training task-law difficulty/composition bundle; CC_G changes clipping from 1 to 5; CC_DG combines them. These interventions retain the same architecture, parameter count, learning rates and query-MSE objective. They did not restore broad learning.
+
+## Current 64K endpoints and larger-support execution
+
+The fixed 64K TinyMind / CC endpoints contain **1,029,764 / 988,689 parameters**, respectively. TinyMind seed 1877 and CC seed 1811 each have 64,000 cumulative optimizer steps and 2,304,000 cumulative synthetic task presentations. Changing training priors, batch size or conditioning did not add parameters or replace the native adaptation equations. Both architectures remain experimental.
+
+The original synthetic protocol remains K≤64. A separate capability audit tested CC beyond that support admission guard. The TabArena-Lite evaluator executed the same TinyMind/CC equations on all official training supports, leaving the original guarded APIs unchanged. For CC, cached linear projections and independent query tiling retain every support key in attention. This is an inference execution extension, with no support subsampling, architecture redesign or enlarged feature capacity.
+
+Within native K16/K64 cases, CC execution agreed with the original implementation to less than 10⁻⁶ maximum absolute prediction difference in the audited CPU/MPS preflight. Finite K96 and query-batch isolation checks passed. These checks support executor equivalence in the tested cases; they do not validate generalization to every large support size. TabArena supports extend well beyond the synthetic K64 training range, and D>32 remains unsupported.
+
+No shared neural optimization was performed in the TabArena evaluation. Native task-local updates/context construction still use observed training outcomes. Neither the fixed 64K checkpoint nor the larger-support executor is a deployment-certified default.
 
 ## Why maintain both?
 
@@ -48,6 +58,8 @@ The Transformer reference has **994,945 parameters**, four width-128 axial block
 | Tiny/CC fresh and fixed 8K endpoints, seeds 1811/1877 | Controlled pretraining-study endpoints; unpromoted |
 | Tiny_Basis, Tiny_Global, CC_D, CC_G, CC_DG | Experimental plateau-repair variants; all full development gates failed |
 | Tiny_H2 and CC_R2 | Earlier unsuccessful learned-mechanism hypotheses; no matched mechanism advantage demonstrated |
+| Original TinyMind 64K, seed 1877 / CC 64K, seed 1811 | Current fixed research endpoints; audited, experimental and unpromoted; no public weights |
+| Separate validation-selected Tiny 62K / CC 64K | Selection records retained; current published endpoint comparisons use fixed 64K for both |
 | New ongoing or unaudited variants | Excluded from this release's claims |
 
 “Validated finding” describes an audited observation. It does not mean an experimental checkpoint has passed promotion, deployment or independent replication. This repository releases no checkpoints or model runtime.

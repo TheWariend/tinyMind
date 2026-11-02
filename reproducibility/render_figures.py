@@ -34,11 +34,11 @@ def axes_style(ax):
     ax.set_axisbelow(True)
     ax.tick_params(length=0)
 
-def finish(fig, name, title, subtitle, source, preview_dir):
+def finish(fig, name, title, subtitle, source, preview_dir, left=.09):
     fig.suptitle(title, x=.065, y=.98, ha='left', fontsize=18, fontweight='bold')
     fig.text(.065, .895, subtitle, fontsize=10, color=MUTED)
     fig.text(.065, .025, source, fontsize=8, color=MUTED)
-    fig.subplots_adjust(top=.80, bottom=.20, left=.09, right=.97, wspace=.34, hspace=.60)
+    fig.subplots_adjust(top=.80, bottom=.20, left=left, right=.97, wspace=.34, hspace=.60)
     svg_path = ROOT / 'figures' / (name + '.svg')
     fig.savefig(svg_path,
                 metadata={'Date': None, 'Creator': 'TinyMind public aggregate renderer'})
@@ -68,7 +68,7 @@ def effects(preview_dir):
         ax.legend(title='Training seed',fontsize=9,frameon=False)
         axes_style(ax)
     finish(fig,'matched-effects','Familiar gains; broad transfer remains open',
-           'Independent final bank • 8K experimental endpoints • paired 95% intervals • higher reduction is better',
+           'Historical 1 November study • independent final bank • 8K endpoints • paired 95% intervals • higher is better',
            'Source: benchmarks/public-results.csv • plateau_repair / final • exact scope and controls in benchmarks/results.md',preview_dir)
 
 def original_training(preview_dir):
@@ -91,7 +91,7 @@ def original_training(preview_dir):
         ax.set_ylabel('Familiar query NMSE (lower is better)')
         ax.legend(title='Training seed',frameon=False);axes_style(ax)
     finish(fig,'original-pretraining','Early progress, then a 4K plateau',
-           'Original fresh-experience arms • each point averages K4/8/16/32/64 • early curriculum changes confound pure compute effects',
+           'Historical 4K–8K study • each point averages K4/8/16/32/64 • later original-architecture training progressed to 64K',
            'Source: source-data/fresh-experience-curves.csv • Tiny_B / CC_B • same study bank; no cross-bank curve joins',preview_dir)
 
 def plateau_training(preview_dir):
@@ -111,7 +111,7 @@ def plateau_training(preview_dir):
             ax.set_ylabel('Familiar query NMSE');ax.set_xlabel('Total steps (thousands)')
             ax.legend(frameon=False,fontsize=9);axes_style(ax)
     finish(fig,'plateau-repair','The original-lineage repair did not pass its gates',
-           'Same final bank • original vs selected candidate • axes zoomed independently • 10K/12K not run • no promotion',
+           'Historical 1 November repair • same final bank • independently zoomed axes • gated 10K/12K not run • no promotion',
            'Source: source-data/plateau-curves.csv • Tiny candidate includes mathematical correction; this is not an isolated history effect',preview_dir)
 
 def causal(preview_dir):
@@ -129,7 +129,7 @@ def causal(preview_dir):
     ax.set_ylabel('Increase in familiar query NMSE (%)');axes_style(ax)
     ax.legend(title='Training seed',frameon=False,loc='upper left')
     finish(fig,'causal-evidence','Historical evidence and hidden updates matter',
-           'Tiny_Global • frozen 8K weights • familiar development bank • paired 95% intervals • greater height means greater damage',
+           'Historical Tiny_Global • frozen 8K weights • familiar development bank • paired 95% intervals • greater means more damage',
            'Source: benchmarks/public-results.csv • plateau_causal • interventions can disrupt co-adaptation; they do not prove arbitrary rule invention',preview_dir)
 
 def efficiency(preview_dir):
@@ -149,7 +149,7 @@ def efficiency(preview_dir):
         ax.set_xticks([0,1],['ColumnContext','Transformer']);ax.set_ylabel(title)
         ax.set_ylim(0,ax.get_ylim()[1]*1.12);axes_style(ax)
     finish(fig,'efficiency','Compressed context saves compute and cache',
-           'Seeds 1301 / 1337 (solid / pale) • Apple M4 CPU, two threads • Transformer has better nonlinear all-K accuracy',
+           'Historical matched study • seeds 1301 / 1337 • Apple M4 CPU, two threads • Transformer wins nonlinear all-K accuracy',
            'Source: source-data/transformer-efficiency.csv • MACs cover the inference bank; timings amortized, cache excludes shared weights',preview_dir)
 
 def real_world(preview_dir):
@@ -175,7 +175,7 @@ def real_world(preview_dir):
     axs[1].set_xlabel('K64 NMSE (lower is better)');axs[1].set_xlim(0,1.2)
     axs[1].grid(axis='x',color='#e5ebf2');axs[1].set_axisbelow(True)
     finish(fig,'real-world','Real-world transfer is mixed',
-           'Beijing 24-hour-ahead PM2.5 • 12 stations, 48 periods/windows • selected methods shown; all 11 are in the public table',
+           'Historical Beijing 24-hour-ahead PM2.5 • 12 stations, 48 windows • selected methods; all 11 remain in the table',
            'Source: source-data/beijing-accuracy.csv • CC vs persistence is uncertain; more supports also add more recent evidence',preview_dir)
 
 def curriculum(preview_dir):
@@ -190,17 +190,93 @@ def curriculum(preview_dir):
     ax.set_xlim(-.45,1.45);ax.set_ylabel('Query NMSE reduction vs CC_R (%)');axes_style(ax)
     ax.legend(title='Training seed',frameon=False)
     finish(fig,'curriculum-subgroups','A narrow Fourier benefit; composition did not confirm',
-           'CC_D • final controlled cases • D4, K32/64 • exploratory 95% intervals, unadjusted • broad primary gates failed',
+           'Historical CC_D • final D4/K32–64 cases • exploratory unadjusted 95% intervals • broad primary gates failed',
            'Source: benchmarks/public-results.csv • plateau_CC_curriculum / CC_D • all D4 controlled families are exported',preview_dir)
+
+def current_effects(preview_dir):
+    data=read('pretraining-64k-effects.csv')
+    tracks=['familiar','novel_relationships','excluded_operations','unseen_structure',
+            'unseen_dimensions','expanded_robustness']
+    labels=['Familiar','Novel relationships','Excluded operations','Unseen structure',
+            'Unseen D6/12/24','Expanded robustness']
+    fig,axs=plt.subplots(1,2,figsize=(14.4,6.4))
+    for ax,arch,title,color,limits in zip(axs,['Tiny','CC'],
+            ['TinyMind • seed 1877','TinyMind-CC • seed 1811'],[TEAL,PURPLE],[(-2,4),(-22,11)]):
+        for i,track in enumerate(tracks):
+            r=next(r for r in data if r['architecture']==arch and r['track']==track)
+            value,lo,hi=[float(r[k]) for k in ['gain_percent','ci95_low','ci95_high']]
+            ax.errorbar(value,i,xerr=[[value-lo],[hi-value]],fmt='o',color=color,ms=6,capsize=4)
+            ax.annotate(f'{value:+.2f}%',(value,i),xytext=(0,10),textcoords='offset points',
+                        ha='center',fontsize=9,color=color)
+        ax.axvline(0,color=MUTED,lw=1)
+        ax.set_yticks(range(len(tracks)),labels);ax.invert_yaxis()
+        ax.set_ylim(5.6,-.7);ax.set_xlim(*limits)
+        ax.set_title(title,pad=14);ax.set_xlabel('32K→64K query NMSE reduction (%)')
+        ax.grid(axis='x',color='#e5ebf2');ax.set_axisbelow(True);ax.tick_params(length=0)
+    finish(fig,'pretraining-64k-effects','64K progress includes gains and regressions',
+           '2 November 2026 • fixed endpoints • one selected parent per model • 2,000-resample 95% intervals • separate x-axis scales',
+           'Source: source-data/pretraining-64k-effects.csv • whole functions, nested K4/8/16/32/64 • exploratory, unadjusted intervals',preview_dir,left=.13)
+
+def current_curves(preview_dir):
+    data=read('pretraining-64k-curves.csv')
+    fig,axs=plt.subplots(1,3,figsize=(14.4,5.4))
+    for ax,track,title in zip(axs,['familiar','unseen_structure','unseen_dimensions'],
+            ['Familiar','Unseen structure','Unseen D6/12/24']):
+        for arch,label,color in [('Tiny','TinyMind • 1877',TEAL),('CC','CC • 1811',PURPLE)]:
+            q=sorted([r for r in data if r['architecture']==arch and r['track']==track],key=lambda r:int(r['step']))
+            assert [int(r['step']) for r in q]==list(range(8000,64001,2000))
+            ax.plot([int(r['step'])/1000 for r in q],[float(r['nmse']) for r in q],
+                    color=color,lw=2,marker='o',ms=2.8,label=label)
+        ax.axvline(32,color=MUTED,lw=1,ls='--')
+        ax.axvspan(32,64,color='#edf2f7',zorder=0)
+        ax.set_xticks([8,16,32,48,64]);ax.set_xlim(7,65)
+        ax.set_title(title,pad=12);ax.set_xlabel('Cumulative optimizer steps (thousands)')
+        ax.set_ylabel('Query NMSE (lower is better)')
+        ax.legend(frameon=False,fontsize=9);axes_style(ax)
+    finish(fig,'pretraining-64k-curves','The earlier plateau was not a permanent ceiling',
+           'All saved checkpoints scored on one confirmation bank • dashed line: changed 32K→64K continuation bundle • axes zoomed',
+           'Source: source-data/pretraining-64k-curves.csv • K4/8/16/32/64 • no cross-bank joins or extrapolation; one trajectory per model',preview_dir)
+
+def tabarena(preview_dir):
+    data=[r for r in read('tabarena-lite-64k.csv') if r['TinyMind_status']==r['TinyMind-CC_status']=='ok']
+    summaries=read('tabarena-lite-64k-summary.csv')
+    labels=['QSAR fish','Concrete','Healthcare','Airfoil','Fiat 500','Wine','Miami housing',
+            'Houses','Food delivery','Protein','Diamonds']
+    assert len(data)==len(labels)==11
+    fig,axs=plt.subplots(1,2,figsize=(13.8,8.3),gridspec_kw={'width_ratios':[2.6,1]})
+    for model,label,color,shift in [('TinyMind','TinyMind',TEAL,-.18),('TinyMind-CC','TinyMind-CC',PURPLE,.18)]:
+        ratios=[float(r[model+'_RMSE'])/float(r['TabPFN-3.5_RMSE']) for r in data]
+        axs[0].barh([i+shift for i in range(len(data))],ratios,height=.32,color=color,label=label)
+        for i,ratio in enumerate(ratios):
+            axs[0].text(ratio+.05,i+shift,f'{ratio:.2f}',va='center',fontsize=8)
+        r=next(r for r in summaries if r['candidate']==model and r['reference']=='TabPFN-3.5')
+        value=float(r['geometric_mean_relative_RMSE'])
+        i=0 if model=='TinyMind' else 1
+        axs[1].bar(i,value,color=color,width=.58)
+        axs[1].text(i,value+.05,f'{value:.3f}×\n+{float(r["relative_RMSE_gap_percent"]):.2f}%',
+                    ha='center',va='bottom',fontsize=11,fontweight='bold',color=color)
+    axs[0].set_yticks(range(len(data)),labels);axs[0].invert_yaxis()
+    axs[0].set_xlim(0,5.7);axs[0].set_xlabel('Dataset RMSE / TabPFN 3.5 RMSE')
+    axs[0].set_title('11 common datasets • lower is better',pad=14)
+    axs[0].legend(frameon=False,ncol=2,fontsize=9,loc='lower right')
+    axs[0].axvline(1,color=MUTED,lw=1,ls='--');axs[0].grid(axis='x',color='#e5ebf2')
+    axs[1].set_xticks([0,1],['TinyMind','CC']);axs[1].set_ylim(0,2.3)
+    axs[1].set_ylabel('Geometric-mean RMSE ratio');axs[1].set_title('Equal dataset weight',pad=14)
+    axs[1].axhline(1,color=MUTED,lw=1,ls='--');axs[1].grid(axis='y',color='#e5ebf2')
+    for ax in axs: ax.set_axisbelow(True);ax.tick_params(length=0)
+    finish(fig,'tabarena-lite-64k','Synthetic progress has not closed the real-data gap',
+           'Fixed 64K • official Lite split 0/0/0, 8×1 protocol • 11/13 coverage; D1024 and D81 unsupported • no CI or official rank',
+           'Source: source-data/tabarena-lite-64k.csv and summary • published fixed TabPFN 3.5 reference • full features/supports',preview_dir)
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--preview-dir',type=Path,help='Optional PNG output for visual review')
     args=parser.parse_args()
     if args.preview_dir: args.preview_dir.mkdir(parents=True,exist_ok=True)
-    for renderer in [effects,original_training,plateau_training,causal,efficiency,real_world,curriculum]:
+    for renderer in [effects,original_training,plateau_training,causal,efficiency,real_world,curriculum,
+                     current_effects,current_curves,tabarena]:
         renderer(args.preview_dir)
-    print('Rendered 7 numerical figures from public aggregates.')
+    print('Rendered 10 numerical figures from public aggregates.')
 
 if __name__=='__main__':
     main()

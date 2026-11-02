@@ -6,7 +6,7 @@ TinyMind is a research project studying how a compact neural system can use obse
 
 **Current validated experiments predominantly concern numerical function learning and scalar regression.** The wider aim is learning from experience; language, agent learning, arbitrary relationship discovery and general intelligence are outside the demonstrated scope.
 
-This public repository shares audited aggregate results, methodology and figures. Model implementations, weights and private research assets remain private. Evidence cutoff: **1 November 2026**.
+This public repository shares audited aggregate results, methodology and figures. Model implementations, weights and private research assets remain private. Evidence cutoff: **2 November 2026**.
 
 [Architecture](docs/architecture.md) · [Research progress](docs/research-progress.md) · [Benchmarks](benchmarks/results.md) · [Methodology](docs/methodology.md) · [Limitations](docs/limitations.md) · [Reproducibility](reproducibility/README.md)
 
@@ -28,11 +28,49 @@ We separate **within-task adaptation** as observations arrive from **pretraining
 | Query behavior | Evaluate the small adapted hypotheses | Attend to compressed columns and cached rows |
 | Research role | Study evidence-dependent neural weight adaptation | Study efficient contextual learning and the accuracy cost of compression |
 
-Both exist because they test different ways of storing experience and spending computation. ColumnContext has faster cached adaptation in the measured settings; TinyMind has a much cheaper repeated query readout. ColumnContext's row cache still grows with the support count.
+Both exist because they test different ways of storing experience and spending computation. ColumnContext has faster cached adaptation in the historical matched CPU study; TinyMind has a much cheaper repeated query readout. ColumnContext's row cache still grows with the support count. Both architectures remain experimental.
 
-**Tiny_Global** is an experimental TinyMind variant with **1,032,973 parameters**. It adds learned historical retrieval and scalar ensemble-error feedback. It has demonstrated familiar-task benefits; it has **not** been promoted to the validated default. CC_D, CC_G and CC_DG are experimental training interventions on the unchanged ColumnContext architecture. See [checkpoint status](docs/architecture.md#checkpoint-status).
+**Tiny_Global** is a historical experimental TinyMind variant with **1,032,973 parameters**. It adds learned historical retrieval and scalar ensemble-error feedback. It has demonstrated familiar-task benefits; it has **not** been promoted to the validated default. CC_D, CC_G and CC_DG are experimental training interventions on the unchanged ColumnContext architecture. See [checkpoint status](docs/architecture.md#checkpoint-status).
 
-## What the evidence supports
+## Current evidence — completed 64K research endpoints
+
+Both original architectures completed **64,000 cumulative optimizer steps** and **2,304,000 cumulative synthetic task presentations per model**. TinyMind has **1,029,764 parameters**; TinyMind-CC has **988,689**. The 32K→64K continuation added 32,000 steps at batch 64, or 2,048,000 presentations, to 256,000 earlier presentations. Presentations are not a count of unique mathematical functions.
+
+![32K to 64K synthetic improvements and regressions](figures/pretraining-64k-effects.svg)
+
+| Fixed 32K→64K comparison | TinyMind | TinyMind-CC |
+| --- | ---: | ---: |
+| Familiar NMSE reduction | **2.25%** | **4.77%** |
+| Unseen-structure NMSE reduction | **−0.74%** (regression) | **6.66%** |
+| Unseen-dimensional NMSE reduction | 2.57% | 4.36% |
+| Expanded-robustness NMSE reduction | 0.31% (interval crosses zero) | −3.55% (interval crosses zero) |
+
+These are fixed endpoint comparisons on the same locked confirmation bank, with one validation-selected parent per architecture: TinyMind seed **1877**, CC seed **1811**. The familiar and structure intervals exclude zero; all six tracks and exploratory 95% whole-function intervals are retained in [the 64K study card](benchmarks/results.md#current-32k64k-pretraining). Changes to prior, batch size and numerical conditioning make this a continuation bundle, rather than an isolated compute or architecture effect.
+
+![Later pretraining learning curves on one confirmation bank](figures/pretraining-64k-curves.svg)
+
+The earlier **4K–8K plateau was not a permanent training ceiling**. Subsequent 8K→32K and 32K→64K experiments produced further improvements. This does not establish uniform generalization or guarantee future gains; TinyMind's unseen-structure regression remains part of the current evidence.
+
+### TabArena-Lite regression: coverage and remaining accuracy gap
+
+![Relative RMSE on the 11 common TabArena-Lite datasets](figures/tabarena-lite-64k.svg)
+
+| Current benchmark finding | Result |
+| --- | --- |
+| Coverage | **11/13 datasets for each model**; QSAR-TID-11 (D1024) and superconductivity (D81) exceed the unchanged 32-feature limit |
+| TinyMind versus CC | TinyMind wins **8/11**; CC wins **3/11**; no ties |
+| Geometric-mean relative RMSE gap versus TabPFN 3.5 | TinyMind **+69.63%**; CC **+84.66%** (positive gap is worse) |
+| Wins versus published TabPFN 3.5, CatBoost or XGBoost | **0/11 for either model against each baseline** |
+
+The comparison uses fixed 64K weights, official Lite regression splits (repeat 0/fold 0/sample 0), the 8×1 inner protocol and full original features/training supports. Baseline scores are published fixed-configuration results on aligned splits, rather than new local reruns. **No official TabArena rank or commercial superiority is established.** [All 13 dataset results and protocol limits](benchmarks/results.md#current-tabarena-lite-regression-at-64k).
+
+Real-world accuracy remains inconsistent despite the synthetic improvements. The 64K small-support study also has gains and regressions across Diabetes, Facebook, Liver and SML2010. These conditional results and the older Beijing findings are preserved in [the benchmark report](benchmarks/results.md).
+
+## Historical evidence — through 1 November 2026
+
+The following results retain their original checkpoints, banks and controls. They describe earlier studies, rather than the current 64K endpoints.
+
+### What the earlier evidence supports
 
 | Evidence category | Finding | Scope |
 | --- | --- | --- |
@@ -41,7 +79,7 @@ Both exist because they test different ways of storing experience and spending c
 | **Experimental finding** | Its familiar K16/32/64 reduction is **5.27% / 5.00%** | Same benchmark and controls; a secondary support-size endpoint |
 | **Frozen causal diagnostic** | Corrupting historical pairings, disabling new retrieval or freezing hidden updates worsens familiar predictions | Same experimental weights, development bank; intervention effects do not prove arbitrary rule invention |
 | **Validated comparison** | ColumnContext uses **7.48× less inference MAC work** and **26.24× less maximum task-cache storage** than the tested Transformer | Matched data/step recipe; measured CPU study; Transformer has better all-K nonlinear accuracy |
-| **Unsuccessful hypothesis** | Fresh experience, several learning-mechanism changes and the latest repairs did not overcome the broad 4K plateau | Bounded studies; no 10K/12K extension or checkpoint promotion |
+| **Unsuccessful hypothesis** | Fresh experience, several learning-mechanism changes and the 1 November repairs did not overcome the broad 4K plateau in those studies | Bounded 4K–8K studies; their gated 10K/12K extensions were not run; later original-architecture training progressed to 64K |
 
 ### Familiar gains, unresolved unfamiliar transfer
 
@@ -70,7 +108,7 @@ The conventional **994,945-parameter axial Transformer** reduces nonlinear all-K
 
 ![Original training improves early and plateaus after 4K](figures/original-pretraining.svg)
 
-Early pretraining improves held-out familiar prediction. Extending the original fresh-experience arms from 4K to 8K yields only **0.70% / 0.52%** familiar reductions for TinyMind and **−0.14% / 0.83%** for CC on that study's bank. The latest independent repair study also fails its full gates. [Progress and failed experiments](docs/research-progress.md) includes the complete chronology and [repair curves](figures/plateau-repair.svg).
+Early pretraining improves held-out familiar prediction. Extending the original fresh-experience arms from 4K to 8K yields only **0.70% / 0.52%** familiar reductions for TinyMind and **−0.14% / 0.83%** for CC on that study's bank. The historical 1 November repair study also fails its full gates; later original-architecture continuations made additional progress. [Progress and failed experiments](docs/research-progress.md) includes the complete chronology and [repair curves](figures/plateau-repair.svg).
 
 ### Real-world results are mixed
 
@@ -81,7 +119,7 @@ On a chronological, 24-hour-ahead PM2.5 test across twelve Beijing stations, CC'
 ## What remains unsolved
 
 - Reliable acquisition of genuinely unfamiliar relationships and reusable cross-task concepts.
-- Sustained pretraining progress beyond the observed plateau.
+- Consistent, sustained pretraining progress across synthetic tracks and real-world tasks.
 - Consistent accuracy across dimensions, support sizes, families and real datasets.
 - Retention without prediction drift, reliable uncertainty and deployment robustness.
 - Independent replication and broader application validation.
@@ -95,8 +133,10 @@ Our evidence does not identify a unique capacity, optimization or credit-assignm
 | **1. Architecture research** | Prototypes completed | Working TinyMind and ColumnContext numerical-regression systems |
 | **2. Learning mechanisms** | Partial evidence; ongoing | Evidence-dependent adaptation and useful historical retrieval; credit assignment and retention blockers remain |
 | **3. Generalization** | Open | Consistent improvement on genuinely unfamiliar relationships, beyond supplied primitives |
-| **4. Sustained pretraining** | Blocked by observed plateau | Demonstrate continued held-out progress before scaling training |
-| **5. Independent validation** | Planned | Wider benchmarks, external replication, reliability and deployment evaluation |
+| **4. Sustained pretraining** | Further progress demonstrated through 64K; next test planned | 64K→100K failure-driven regression training, separate development datasets and evaluations every 2K steps |
+| **5. Independent validation** | Initial Lite comparison completed; external replication open | Wider untouched benchmarks, reliability and deployment evaluation |
+
+The next research direction is **64K→100K failure-driven regression training**. Failures will guide a separate development suite, with 2K-step evaluations and predeclared safeguards. It is a planned experiment, with no 100K result yet. The known TabArena-Lite test outcomes are not a fresh development or untouched confirmation set. This documentation update launches no training and changes no model architecture.
 
 ## Inspect the evidence
 

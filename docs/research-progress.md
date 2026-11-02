@@ -1,22 +1,22 @@
 # Research progress
 
-Evidence cutoff: **1 November 2026**. These milestones preserve both positive observations and rejected hypotheses. A failed gate does not erase a small gain; a small gain does not establish the wider goal.
+Evidence cutoff: **2 November 2026**. These milestones preserve both positive observations and rejected hypotheses. A failed gate does not erase a small gain; a small gain does not establish the wider goal.
 
 ## Phase 1 — Architecture research: prototypes completed
 
-Working TinyMind weight-adaptation and ColumnContext attention prototypes are established in bounded numerical-regression experiments. TinyMind has cheap repeated predictions and compact task weights. ColumnContext compresses context and trades more query work/cache for faster adaptation. Validated TinyMind default11 remains unchanged; CC S4 is an unpromoted reference.
+Working TinyMind weight-adaptation and ColumnContext attention prototypes are established in bounded numerical-regression experiments. TinyMind has cheap repeated predictions and compact task weights. ColumnContext compresses context and trades more query work/cache for faster adaptation. Historical TinyMind default11 remains unchanged; CC S4 is an unpromoted reference. The current fixed 64K endpoints retain the original 1,029,764 / 988,689-parameter architectures and are also experimental.
 
 The 31 October matched Transformer study finds stronger all-K nonlinear accuracy for a conventional architecture, alongside substantial ColumnContext efficiency savings. This preserves an important control against attributing performance automatically to custom mechanisms.
 
 ## Phase 2 — Learning mechanisms: partial evidence, unresolved blockers
 
-Observed pairs matter to the systems' predictions. The latest Tiny_Global history/feedback variant has reproducible familiar-query gains beyond separately trained current readers. Its own capacity-matched control yields 2.33% / 2.10% reductions; the strongest declared controls yield 2.34% / 2.06%. Added historical retrieval, hidden updates and correct historical pairings matter in frozen development diagnostics.
+Observed pairs matter to the systems' predictions. The historical 1 November Tiny_Global history/feedback variant has reproducible familiar-query gains beyond separately trained current readers. Its own capacity-matched control yields 2.33% / 2.10% reductions; the strongest declared controls yield 2.34% / 2.06%. Added historical retrieval, hidden updates and correct historical pairings matter in frozen development diagnostics.
 
 ![Causal intervention effects](../figures/causal-evidence.svg)
 
 This is progress in evidence-dependent familiar learning. Reliable excluded-program benefits over the strongest matched controls, retention guarantees and cross-task concept reuse remain open.
 
-## Original pretraining and the 4K plateau
+## Historical original pretraining and the 4K–8K plateau
 
 The controlled scaling study trained eight scratch arms to 8K. Familiar 1K→4K improvements range **5.5–17.8%** under changing source-to-mixed curricula. Familiar 4K→8K improvements are only **0.43–0.81%** on its own bank. These ranges describe that study's eight arms; they cannot be transferred to another bank or treated as a pure compute effect.
 
@@ -24,7 +24,7 @@ The subsequent fresh-experience study compares identical initialization/schedule
 
 ![Original pretraining](../figures/original-pretraining.svg)
 
-## Latest 4K→8K repair: useful sub-results, broad gate failure
+## Historical 1 November 4K→8K repair: useful sub-results, broad gate failure
 
 Twenty continuations from the two original 4K parents test native replication, dimension correction, Tiny history/feedback and CC data×clipping interventions. Original 8K parameters and historical predictions reproduce exactly in the saved-artifact audit.
 
@@ -32,13 +32,37 @@ Tiny_Global improves familiar final error by 2.34% / 2.06% versus the strongest 
 
 ![Independent final repair curves](../figures/plateau-repair.svg)
 
-Progress from 6K to 8K remains small. CC's nominal selected clipping candidate regresses familiar all-K error by **0.36% / 0.50%**. No candidate passes the complete locked development gates; 10K/12K endpoints are **not run**, rather than zero or missing successes. The original default remains unchanged.
+Progress from 6K to 8K remains small. CC's nominal selected clipping candidate regresses familiar all-K error by **0.36% / 0.50%**. No candidate passes that study's complete locked development gates; its gated 10K/12K endpoints are **not run**, rather than zero or missing successes. This did not prohibit later, separately designed original-architecture continuations. The original default remains unchanged.
 
 CC_D confirms a narrow **single-component Fourier** benefit at D4/K32–64: **15.50% / 13.03%**, with positive unadjusted intervals. Earlier development composition gains do not reliably replicate: final composition effects are **−2.61% / −9.98%**, with wide intervals crossing zero.
 
 ![Success and failure in the CC curriculum subgroups](../figures/curriculum-subgroups.svg)
 
-## Unsuccessful hypotheses and what they leave open
+## Later 8K→32K pretraining: additional progress
+
+The broader-pretraining experiment extended original TinyMind and CC trajectories in seeds 1811/1877 to 32K, comparing original-prior continuation with a 50% original / 50% broader structured-law mixture. Its familiar 8K→32K reductions were **1.68–2.16% / 2.94–3.49%** for original-prior Tiny/CC arms and **1.50–1.88% / 3.12–3.69%** for broader-prior arms, on that study's bank. The broader prior improved some excluded/structure contrasts but did not show a familiar advantage over the original-prior control. This is a changed training-law bundle, not proof that more diversity alone caused improvement.
+
+The later confirmation bank re-evaluates saved 8K through 64K checkpoints on the same functions; [its learning curves](../figures/pretraining-64k-curves.svg) do not splice scores from different banks.
+
+## Current 32K→64K continuation: completed, with mixed transfer
+
+One synthetic-validation-selected 32K parent per architecture continued: TinyMind seed **1877**, CC seed **1811**. Both completed **64,000 cumulative optimizer steps** and **2,304,000 cumulative synthetic task presentations per model**. The original parameter counts and architecture equations were retained; no experimental Tiny_Global promotion occurred.
+
+![Fixed 32K to 64K effects](../figures/pretraining-64k-effects.svg)
+
+Familiar confirmation NMSE fell **2.25%** for TinyMind and **4.77%** for CC. CC's unseen-structure NMSE fell **6.66%**, while TinyMind's rose **0.74%**. Both improved unseen-dimensional performance. Expanded-robustness intervals crossed zero, including a nominal CC regression. The six-track results use fixed 64K endpoints and 2,000 whole-function bootstrap resamples; one selected parent per architecture does not establish training-seed replication.
+
+The continuation changed prior proportions, physical batch size and conditioning. A finite but explosive TinyMind K2 loss triggered a recorded prospective removal of K2; CC had excluded K2 from the outset. The run preserved weights/moments and completed the audited exposure totals. These conditions limit isolated causal attribution. [Protocol and audit](methodology.md#current-32k64k-continuation).
+
+**The historical 4K–8K plateau was not a permanent training ceiling.** Later experiments demonstrated additional progress, without resolving all transfer or retention failures.
+
+## Current real-world evaluation: TabArena-Lite at 64K
+
+Both frozen models evaluated **11/13 regression datasets** using full original features and training supports. D1024 QSAR-TID-11 and D81 superconductivity exceeded the unchanged 32-feature capacity and were recorded as unsupported. TinyMind beat CC on **8/11** datasets; CC beat TinyMind on **3/11**. Neither beat the published TabPFN 3.5, CatBoost or XGBoost configuration on any of the 11 common datasets.
+
+Geometric-mean RMSE gaps versus TabPFN 3.5 were **+69.63% TinyMind / +84.66% CC**. Positive is worse. These are conditional fixed-checkpoint comparisons on one official Lite outer split, not an official TabArena rank. The smaller real-data confirmation suite also remained mixed. Synthetic progress has not produced consistent real-world accuracy or established commercial superiority. [Complete current benchmarks](../benchmarks/results.md#current-tabarena-lite-regression-at-64k).
+
+## Historical unsuccessful hypotheses and what they leave open
 
 | Hypothesis or intervention | Observed outcome | Interpretation |
 | --- | --- | --- |
@@ -57,11 +81,13 @@ Active gradients and parameter changes after 4K contradict a global vanishing-gr
 
 Excluded whole generating programs include order statistics, periodic remainder, signed fractional laws and localized chirps; their primitives can overlap training. A held-out program score is useful evidence but does not establish arbitrary unfamiliar relationship discovery. The target is consistent independent-query improvement, specific causal acquisition tests and transfer beyond supplied primitives.
 
-## Phase 4 — Sustained pretraining: blocked by evidence
+## Phase 4 — Sustained pretraining: progress through 64K, next experiment planned
 
-Scaling is a research goal conditioned on overcoming the observed plateau. The latest gates failed. This evidence does not justify portraying additional training as a proven remedy or retrospectively choosing a favorable checkpoint.
+The next direction is **64K→100K failure-driven regression training**, using **separate development datasets** and **2K-step evaluations**. Failure categories from the completed studies should guide development tasks, while checkpoint selection and stopping rules are declared using development evidence. Track familiar performance, unseen structure/operations/dimensions, robustness and real-data safeguards together.
 
-## Phase 5 — Independent validation: planned
+The TabArena-Lite test scores are already known. Reusing those tests to design or select training would make them development evidence; a later independent confirmation requires newly reserved datasets/splits. No exact future task mixture, success threshold or 100K outcome is claimed here. This direction is planned, not launched by this documentation release.
+
+## Phase 5 — Independent validation: initial comparison completed, replication open
 
 Expand genuinely untouched dataset and environment tests, separate evidence count from recency, assess reliability and latency under deployed workloads, and enable independent replication through a deliberate asset/licensing decision. Agent adaptation and personalization have no validated results in this release. This roadmap initiates no new training or release.
 

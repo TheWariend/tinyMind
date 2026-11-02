@@ -1,8 +1,112 @@
 # Benchmark results and study cards
 
-Evidence cutoff: **1 November 2026**. Every comparison below has a result ID in [public-results.csv](public-results.csv), with full-precision values and an exact source locator. [Provenance](provenance.json) records source hashes and export rules. Tables round displayed errors to six decimals and reductions to two decimals. Positive reduction favors the named candidate; negative is a regression. No cross-study error comparison is treated as matched.
+Evidence cutoff: **2 November 2026**. Every scored comparison below has a result ID in [public-results.csv](public-results.csv), with full-precision values and an exact source locator. [Provenance](provenance.json) records source hashes and export rules. Tables round displayed errors to six decimals and reductions to two decimals. Positive reduction favors the named candidate; negative is a regression. No cross-study error comparison is treated as matched.
 
-## Latest original-lineage plateau repair
+## Current 32K→64K pretraining
+
+**Status:** completed, audited experimental endpoints; no default promotion. Original TinyMind / CC parameter counts are **1,029,764 / 988,689**. Both completed **64,000 cumulative optimizer steps** and **2,304,000 synthetic task presentations per model**: 256,000 through 32K plus 2,048,000 during continuation. These are presentations, not unique mathematical functions.
+
+**Training/selection:** TinyMind seed **1877**, CC seed **1811**; one synthetic-validation-selected 32K parent each, saved AdamW moments, 32K additional physical-batch-64 steps. Prior proportions and conditioning changed together. Synthetic/real confirmation did not select the parents. The table uses **fixed 64K** checkpoints; separately validation-selected Tiny 62K / CC 64K are not substituted. [Complete continuation methodology](../docs/methodology.md#current-32k64k-continuation).
+
+**Evaluation:** a newly locked confirmation bank, 736 functions total; 128 per track except unseen dimensions (96). Main D4/8/16/32, withheld D6/12/24, nested K4/8/16/32/64, independent query rows. Query NMSE is averaged under the declared track weighting; lower is better. The chart's 8K→64K checkpoints are all re-evaluated on this same bank, rather than joined across studies.
+
+**Intervals:** 2,000 paired whole-function resamples stratified by D/family, nested K preserved, bootstrap seed 913867. Exploratory, unadjusted, conditional on one selected pretrained trajectory per architecture.
+
+![Current synthetic endpoint effects](../figures/pretraining-64k-effects.svg)
+
+| ID | Architecture / seed | Track | 32K NMSE | 64K NMSE | Reduction [95% CI] |
+| --- | --- | --- | ---: | ---: | --- |
+| R0432 | TinyMind / 1877 | Familiar | 0.712757 | 0.696700 | +2.25% [+1.77, +2.72] |
+| R0433 | TinyMind / 1877 | Novel relationships | 0.821405 | 0.816576 | +0.59% [+0.11, +1.06] |
+| R0434 | TinyMind / 1877 | Excluded operations | 0.881608 | 0.878752 | +0.32% [-0.12, +0.79] |
+| R0435 | TinyMind / 1877 | Unseen structure | 1.105967 | 1.114185 | -0.74% [-1.21, -0.26] |
+| R0436 | TinyMind / 1877 | Unseen D6/12/24 | 0.708710 | 0.690518 | +2.57% [+1.97, +3.17] |
+| R0437 | TinyMind / 1877 | Expanded robustness | 0.772900 | 0.770497 | +0.31% [-0.91, +1.30] |
+| R0438 | TinyMind-CC / 1811 | Familiar | 0.636150 | 0.605796 | +4.77% [+3.54, +6.05] |
+| R0439 | TinyMind-CC / 1811 | Novel relationships | 0.760040 | 0.745423 | +1.92% [+0.91, +2.97] |
+| R0440 | TinyMind-CC / 1811 | Excluded operations | 0.825335 | 0.813386 | +1.45% [+0.38, +2.48] |
+| R0441 | TinyMind-CC / 1811 | Unseen structure | 1.032302 | 0.963561 | +6.66% [+5.40, +7.89] |
+| R0442 | TinyMind-CC / 1811 | Unseen D6/12/24 | 0.637394 | 0.609576 | +4.36% [+3.11, +5.56] |
+| R0443 | TinyMind-CC / 1811 | Expanded robustness | 0.730498 | 0.756432 | -3.55% [-19.63, +6.55] |
+
+Both improve familiar NMSE; CC improves unseen structure **6.66%**, while Tiny regresses **0.74%**. Tiny excluded-operation and both expanded-robustness intervals cross zero; CC's nominal expanded-robustness regression is retained. Familiar/other synthetic gains do not establish consistent real-world accuracy or arbitrary unfamiliar relationship learning.
+
+![Same-bank later learning curves](../figures/pretraining-64k-curves.svg)
+
+**Historical interpretation:** the separate 8K→32K experiment and this continuation demonstrate that the earlier 4K–8K plateau was not a permanent ceiling. The original failed gates and their unrun gated endpoints remain recorded below. Neither later gains nor current regressions overwrite those historical outcomes.
+
+Public inputs: [endpoint effects](source-data/pretraining-64k-effects.csv), [confirmation curves](source-data/pretraining-64k-curves.csv), [step/exposure audit](source-data/pretraining-64k-exposure.csv). Sources S37–S47 in [provenance](provenance.json) bind the results to the continuation and broader-pretraining reports and audits.
+
+### Current small-support real confirmation
+
+Fixed 32K versus 64K, K4/8/16/32/64, eight support draws on a fixed query set per dataset. Diabetes progression is D10 with disjoint train/validation/test roles; D12 Facebook, D5 Liver and D22 SML2010 are reused guardrails. No real labels trained shared neural weights or selected checkpoints. These are descriptive aggregate NMSE changes, without confidence intervals or independent dataset replication.
+
+| ID | Architecture | Dataset | 32K NMSE | 64K NMSE | Reduction |
+| --- | --- | --- | ---: | ---: | ---: |
+| R0444 | TinyMind | Diabetes progression | 0.773532 | 0.768687 | +0.63% |
+| R0445 | TinyMind | Facebook pre/post | 1.170969 | 1.111410 | +5.09% |
+| R0446 | TinyMind | Liver SGPT | 0.759436 | 0.763974 | -0.60% |
+| R0447 | TinyMind | SML2010 dining | 0.852693 | 0.860438 | -0.91% |
+| R0448 | TinyMind-CC | Diabetes progression | 0.757808 | 0.784917 | -3.58% |
+| R0449 | TinyMind-CC | Facebook pre/post | 1.161949 | 1.231715 | -6.00% |
+| R0450 | TinyMind-CC | Liver SGPT | 0.724023 | 0.805518 | -11.26% |
+| R0451 | TinyMind-CC | SML2010 dining | 1.012805 | 0.778921 | +23.09% |
+
+Tiny gains on Diabetes/Facebook but regresses on Liver/SML2010; CC improves SML2010 but regresses on the other three all-K aggregates. Support-specific gains do not imply all-K gains. [Full point aggregates](source-data/pretraining-64k-real.csv) retain exact values and both checkpoint source identifiers. Real-world accuracy remains inconsistent despite synthetic improvements.
+
+## Current TabArena-Lite regression at 64K
+
+**Status:** fixed original-architecture 64K checkpoints, frozen shared weights; local audited comparison, not an official leaderboard submission or rank. Tiny seed 1877, CC seed 1811. Both are experimental.
+
+**Protocol:** 13 official Lite regression tasks; repeat 0/fold 0/sample 0; 8 inner folds × 1 set and full refit; one fixed neural configuration, no HPO. All original features and official training/test rows are retained. All nine preprocessed support fingerprints, targets and outer/inner splits match between Tiny and CC. Exact native-equation execution extends support handling beyond the original K64 admission guard, with no feature expansion or support subsampling. D>32 is unsupported. [Detailed preprocessing, executor and baseline protocol](../docs/methodology.md#current-tabarena-lite-regression-protocol).
+
+**Baselines:** published TabPFN 3.5, CatBoost and XGBoost fixed-configuration scores on aligned official splits/8×1 scoring. They were not rerun locally and do not have matched pretraining or compute. Source hashes/configuration suites are in [provenance](provenance.json).
+
+All 13 datasets are retained below. RMSE is in each dataset's own target units. Unsupported is a coverage limit, not a missing score to impute. All dataset-level neural comparisons are R0452–R0528 in [public-results.csv](public-results.csv).
+
+| Dataset | Original D | TinyMind RMSE | CC RMSE | TabPFN 3.5 RMSE | CatBoost RMSE | XGBoost RMSE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| QSAR_fish_toxicity | 6 | 0.969251 | 0.980343 | 0.880123 | 0.917583 | 0.945157 |
+| concrete_compressive_strength | 8 | 9.311635 | 10.105118 | 3.803394 | 4.542111 | 5.037817 |
+| healthcare_insurance_expenses | 6 | 5473.665920 | 5390.921025 | 4006.123686 | 4110.344471 | 4264.447087 |
+| airfoil_self_noise | 5 | 4.672184 | 4.398383 | 0.916208 | 1.474840 | 1.427014 |
+| Another-Dataset-on-used-Fiat-500 | 7 | 776.639524 | 740.471208 | 668.790126 | 699.310636 | 728.536301 |
+| QSAR-TID-11 | 1024 | Unsupported | Unsupported | 0.801724 | 0.847913 | 0.857810 |
+| wine_quality | 12 | 0.724940 | 0.753842 | 0.577354 | 0.611791 | 0.613844 |
+| miami_housing | 15 | 127972.802039 | 155468.406258 | 75782.721635 | 81043.445387 | 89666.315826 |
+| houses | 8 | 0.312552 | 0.386535 | 0.180612 | 0.213315 | 0.217459 |
+| superconductivity | 81 | Unsupported | Unsupported | 8.824440 | 9.263817 | 9.416369 |
+| Food_Delivery_Time | 9 | 8.217965 | 8.506157 | 7.253304 | 7.418670 | 7.442621 |
+| physiochemical_protein | 9 | 5.009793 | 5.519985 | 2.852365 | 3.556597 | 3.544370 |
+| diamonds | 9 | 1035.950923 | 1524.832309 | 493.122532 | 529.751017 | 538.641600 |
+
+Both evaluate **11/13** datasets. QSAR-TID-11 (D1024) and superconductivity (D81) exceed the unchanged 32-feature limit. **TinyMind beats CC on 8/11; CC beats TinyMind on 3/11; no ties. Neither beats TabPFN 3.5, CatBoost or XGBoost on any of the 11 common datasets.** CC's three pairwise wins are healthcare insurance, airfoil and used Fiat 500.
+
+Across common datasets, the relative RMSE ratio is `exp(mean(log(candidate RMSE / reference RMSE)))`; gap is `100 × (ratio − 1)`. Each dataset receives equal weight; positive gap is worse. This avoids averaging raw errors across incompatible units.
+
+| ID | Candidate / reference | Common datasets | Candidate wins | Geometric-mean RMSE ratio | Relative RMSE gap |
+| --- | --- | ---: | ---: | ---: | ---: |
+| R0529 | TinyMind-CC / TinyMind | 11 | 3 | 1.088621 | +8.86% |
+| R0530 | TinyMind-CC / TabPFN-3.5 | 11 | 0 | 1.846643 | +84.66% |
+| R0531 | TinyMind-CC / CatBoost | 11 | 0 | 1.630121 | +63.01% |
+| R0532 | TinyMind-CC / XGBoost | 11 | 0 | 1.583657 | +58.37% |
+| R0533 | TinyMind / TabPFN-3.5 | 11 | 0 | 1.696314 | +69.63% |
+
+![Dataset relative RMSE and geometric means](../figures/tabarena-lite-64k.svg)
+
+The TabPFN 3.5 gap is **+69.63% TinyMind / +84.66% CC**. These point estimates have no reported confidence intervals or training-seed replication, and only one official outer split is evaluated. No official or estimated TabArena rank or commercial superiority is established. Current Tiny/CC hardware settings differ, and published baseline timing comes from other compute; no matched speed claim is made.
+
+Public inputs: [all 13 task aggregates](source-data/tabarena-lite-64k.csv), [relative RMSE summaries](source-data/tabarena-lite-64k-summary.csv). The verification recomputed 64,120 saved test predictions per neural model and checked paired supports/splits, full feature/row coverage, preserved weights and zero neural optimization. Sources S48–S55 bind these observations to retained reports and audit artifacts.
+
+## Planned next research direction
+
+**64K→100K failure-driven regression training**, using separate development datasets and **2K-step evaluations**, is planned. Known test failures can motivate development categories but cannot serve as untouched confirmation after influencing training or checkpoint selection. No 100K result, official rank or future improvement is projected. This release performs documentation work only.
+
+## Historical studies — evidence through 1 November 2026
+
+The following tables retain the original result IDs, checkpoints, banks, failed hypotheses and uncertainty. They do not describe the current 64K benchmark.
+
+## Historical original-lineage plateau repair
 
 **Status:** experimental candidates, no promotion; complete development gates failed.
 
@@ -136,7 +240,7 @@ Its final bank uses familiar and excluded programs, structural and unseen-D trac
 | R0386 | 1811 | CC_B_1811_8000 / CC_A_1811_8000 | familiar | 0.653293 | 0.655448 | -0.33% [-1.23, +0.57] |
 | R0392 | 1877 | CC_B_1877_8000 / CC_A_1877_8000 | familiar | 0.656426 | 0.651007 | +0.83% [+0.19, +1.45] |
 
-The fresh treatment combines new functions with new observations; it does not isolate either separately. CC's effects are seed-dependent, and the plateau remains. The complete aggregate learning curves are in [fresh-experience-curves.csv](source-data/fresh-experience-curves.csv). They include early improvement, unsuccessful 8K continuation and real-task negatives.
+The fresh treatment combines new functions with new observations; it does not isolate either separately. CC's effects are seed-dependent, and the plateau remains in that historical 4K–8K schedule. Later continuation studies made additional progress. The complete aggregate learning curves are in [fresh-experience-curves.csv](source-data/fresh-experience-curves.csv). They include early improvement, unsuccessful 8K continuation and real-task negatives.
 
 ## Real-world evaluation
 
@@ -196,7 +300,7 @@ Final Tiny_Global versus strongest matched reader, K4/8/16/32/64, eight support 
 
 CC_G's complete real endpoint results are also retained in the CSV. The task bank preserves within-task support/query disjointness, but development/final queries overlap by **34/128 Facebook, 35/113 Liver, 21/128 SML, 10/128 temperature** rows. In addition, 69 Facebook and 74 Liver final queries appeared as development supports. These are conditional draw confirmations, not untouched dataset-level or fully reserved row-level validation. The final/development banks were preserved rather than changed after seeing results.
 
-No new TabPFN/official TabArena inference was run in the plateau study. Earlier comparisons cannot be substituted into its matched result table. Personalization and agent adaptation have no validated application result in this export.
+No new TabPFN/official TabArena inference was run in the historical plateau study; the separate 2 November Lite comparison is documented above. Earlier comparisons cannot be substituted into its matched result table. Personalization and agent adaptation have no validated application result in this export.
 
 ## Files and reproducibility boundary
 
@@ -206,4 +310,4 @@ No new TabPFN/official TabArena inference was run in the plateau study. Earlier 
 - [Figure sources](../figures/README.md): exact selections and transformations used in each chart.
 - [Reproducibility](../reproducibility/README.md): public arithmetic/figure checks and explicitly withheld replication prerequisites.
 
-Confidence intervals are preserved from audited analyses. Public aggregates cannot regenerate bootstrap samples or independently replay model inference. No raw observations, labels, weights, optimizers, private model implementation or development logs are published.
+Confidence intervals are preserved from audited analyses. New descriptive real/TabArena comparisons have zero bootstrap replicates and blank interval fields, rather than fabricated uncertainty. Public aggregates cannot regenerate bootstrap samples or independently replay model inference. No raw observations, labels, weights, optimizers, private model implementation or development logs are published.
