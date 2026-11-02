@@ -104,9 +104,36 @@
       "baseline_note": "Previously published fixed-configuration scores on aligned official splits, not new local reruns",
       "official_leaderboard_rank": null,
       "estimated_leaderboard_rank": null
+    },
+    "failure_driven_70k": {
+      "evidence_date": "2026-11-02",
+      "end_step": 70000,
+      "start_step": 64000,
+      "continued_steps_per_model": 6000,
+      "cumulative_task_presentations_per_model": 2688000,
+      "datasets_evaluated": 6,
+      "evaluated_feature_range": [
+        4,
+        12
+      ],
+      "selected_steps": {
+        "TinyMind": 64000,
+        "TinyMind-CC": 70000
+      },
+      "metric": "equal-dataset geometric mean of test RMSE ratios",
+      "support_budget": "largest available nested support, up to64",
+      "interval_status": "descriptive point estimates; no intervals or multi-seed replication",
+      "baseline_regimes": [
+        "same support rows as neural models",
+        "all available training rows"
+      ],
+      "baseline_configuration": "fixed 500-tree CatBoost/XGBoost configurations; no test tuning",
+      "scope": "six failure-driven evaluation datasets; not TabArena-Lite; no current official or estimated rank",
+      "TabPFN_3_5_evaluated": false,
+      "official_leaderboard_rank": null
     }
   },
-  "source_note": "Artifact paths below are relative provenance identifiers in the private research archive, not downloadable public files. Hashes bind this export to that evidence. Private code, logs, raw datasets and checkpoints are withheld.",
+  "source_note": "Historical relative identifiers and newer sanitized evidence labels identify retained private sources, not downloadable public files. Source hashes bind aggregate exports to reviewed evidence. Private code, architecture implementations, logs, datasets and checkpoints are withheld.",
   "sources": [
     {
       "id": "S01",
@@ -412,6 +439,46 @@
       "id": "S61",
       "artifact": "runs/regression_64k_20261102/evaluation/real/CC_64000/complete.json",
       "sha256": "32eb6b22c2bbbd3c83514417886f675e96d0243b22a4ad98c35c7d6dcb939bdb"
+    },
+    {
+      "id": "S62",
+      "artifact": "Verified 70K research summary",
+      "sha256": "d9639fc4c18fca449ce5ea35123bd89244b1a9bb59af1e81348ea08be817bc73"
+    },
+    {
+      "id": "S63",
+      "artifact": "Verified six-dataset test RMSE comparison",
+      "sha256": "7a5d67d09efa104f7646ee76e0df1f576ccc29a964d5998db2db3d5f5f8d1ab3"
+    },
+    {
+      "id": "S64",
+      "artifact": "Locked complete-cohort validation selection",
+      "sha256": "4ff21f4ae7196372e768ea60b18fe5450f42438dfa58c4b4fa376bd790b47a16"
+    },
+    {
+      "id": "S65",
+      "artifact": "Independent 70K endpoint and scoring audit",
+      "sha256": "d6968ca02a5d5b51803062b8ed36b7517eaae9df37203eb57f65344dab1ea66f"
+    },
+    {
+      "id": "S66",
+      "artifact": "Independent six-dataset comparison and completion review",
+      "sha256": "bd7fd7628b76cdb4c3d409603784200fc50bc7d12522c16257e18e877be60841"
+    },
+    {
+      "id": "S67",
+      "artifact": "Verified complete-cohort validation aggregates",
+      "sha256": "fd422307e149ad082f33f5c1b04252e6b3075c83a583dbe24e55654b9273a334"
+    },
+    {
+      "id": "S68",
+      "artifact": "Final integrity and evaluation audit",
+      "sha256": "f1d82b67f9d445c71f5d1865c8240b89f63e7e3c071f7cdf589aa3c3001fb204"
+    },
+    {
+      "id": "S69",
+      "artifact": "Verified traditional ML scoring aggregates",
+      "sha256": "70b6b12f25af05028d9ce504b9fdcc3e4a488b995a77201026d9ccb64a44f318"
     }
   ],
   "exports": [
@@ -486,9 +553,19 @@
       "data_rows": 5
     },
     {
+      "file": "benchmarks/source-data/failure-driven-70k.csv",
+      "sha256": "0779971a61147bf5002d8be57ddfb2a02faafe7f17a38d65014e47a213eb1abe",
+      "data_rows": 6
+    },
+    {
+      "file": "benchmarks/source-data/failure-driven-70k-summary.csv",
+      "sha256": "566cccceb9ee2be6a5b4f40dbd50d34fdfbb15bd33bc81cf1ac6755d6981149d",
+      "data_rows": 8
+    },
+    {
       "file": "benchmarks/public-results.csv",
-      "sha256": "da90acefa01366b2ee771f76bc315226612a0ae2e2eb7d5dcee247d8e02135b2",
-      "data_rows": 533
+      "sha256": "8abbd7c9bcadf3e7856051c2518461f969da14b2d062c1e48a9545034a569f6c",
+      "data_rows": 589
     }
   ],
   "audit_summary": {
@@ -565,12 +642,26 @@
       "all_outer_splits_and_inner_folds_matched": true,
       "all9_support_fingerprints_matched": true,
       "native_execution_preflight_passed": true
+    },
+    "failure_driven_70k": {
+      "passed": true,
+      "source_id": "S65",
+      "comparison_review_source_id": "S66",
+      "real_prediction_files_rescored": 216,
+      "baseline_files_rescored": 24,
+      "completed_update_records_verified": 12000,
+      "selection_precedes_test_predictions": true,
+      "paired_support_rows_and_test_targets_verified": true,
+      "all_original_columns_preserved": true,
+      "protected_artifacts_preserved": true,
+      "no_shared_weight_updates_during_evaluation": true
     }
   },
   "extraction": {
-    "public-results.csv": "Both final/development selected effects; all frozen interventions; full D4 controlled-family panel; same-seed Transformer aggregate family panels; all-K fresh-vs-fixed endpoints; all Beijing K64 paired comparisons. Added 32K-to-64K confirmation contrasts, all-K real point contrasts, all 11 common TabArena-Lite RMSE contrasts and five ratio summaries; previous 431 comparisons preserved.",
-    "source-data": "Explicitly whitelisted aggregate tables only. No row-level observations, predictions, raw labels, weights or executable model source.",
-    "intervals": "Intervals are preserved from audited whole-function/station bootstrap analyses. Aggregate-only exports cannot regenerate bootstrap samples. New 64K synthetic intervals use 2000 whole-function resamples. Descriptive real/TabArena rows have bootstrap_replicates=0 and blank CI fields; no intervals invented."
+    "public-results.csv": "Both final/development selected effects; all frozen interventions; full D4 controlled-family panel; same-seed Transformer aggregate family panels; all-K fresh-vs-fixed endpoints; all Beijing K64 paired comparisons. Added 32K-to-64K confirmation contrasts, all-K real point contrasts, all 11 common TabArena-Lite RMSE contrasts and five ratio summaries; previous 431 comparisons preserved. Added 48 six-dataset 70K endpoint/baseline contrasts and eight geometric-ratio summaries. Earlier 533 comparisons preserved unchanged.",
+    "source-data": "Explicitly whitelisted aggregate tables only. No row-level observations, predictions, raw labels, weights or executable model source. Latest additions contain only six-dataset point metrics, coverage counts and aggregate ratios; no private dataset identifiers, architecture designs or executable research code.",
+    "intervals": "Intervals are preserved from audited whole-function/station bootstrap analyses. Aggregate-only exports cannot regenerate bootstrap samples. New 64K synthetic intervals use 2000 whole-function resamples. Descriptive real/TabArena rows have bootstrap_replicates=0 and blank CI fields; no intervals invented. Six-dataset 70K results are descriptive with blank CI fields and zero bootstrap replicates."
   },
-  "historical_evidence_note": "Sources S01-S36 and prior aggregate source tables retain their original 1 November export hashes and evidence scope. Later progress does not overwrite historical failed experiments."
+  "historical_evidence_note": "Sources S01-S36 and prior aggregate source tables retain their original 1 November export hashes and evidence scope. Later progress does not overwrite historical failed experiments.",
+  "latest_evidence": "70K failure-driven regression; six evaluation datasets; separate from historical TabArena-Lite"
 }

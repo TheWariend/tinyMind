@@ -1,5 +1,7 @@
 # Architecture
 
+This page preserves previously published architecture descriptions through 64K. Current private architecture specifications and implementations are withheld. The latest update publishes only [verified six-dataset results](../benchmarks/results.md#latest-70k-failure-driven-regression-six-datasets), not implementation changes.
+
 TinyMind and TinyMind-CC are separate research prototypes. Their common interface is a bounded numerical regression task with observed input/outcome pairs and independent query inputs. Shared neural weights are pretrained across functions and frozen during task adaptation. Synthetic confirmation primarily evaluates D4/8/16/32 features and K4/8/16/32/64 supports, with D6/12/24 held out. Real interfaces accept intermediate dimensions up to 32. The 2 November fixed 64K endpoints use the original architectures; later large-support execution is described separately below.
 
 ![Architecture overview](../figures/architecture.svg)
@@ -32,7 +34,7 @@ Supplied features include x², sinusoidal encodings with learned frequencies, su
 
 CC_D changes the training task-law difficulty/composition bundle; CC_G changes clipping from 1 to 5; CC_DG combines them. These interventions retain the same architecture, parameter count, learning rates and query-MSE objective. They did not restore broad learning.
 
-## Current 64K endpoints and larger-support execution
+## Earlier 64K endpoints and larger-support execution
 
 The fixed 64K TinyMind / CC endpoints contain **1,029,764 / 988,689 parameters**, respectively. TinyMind seed 1877 and CC seed 1811 each have 64,000 cumulative optimizer steps and 2,304,000 cumulative synthetic task presentations. Changing training priors, batch size or conditioning did not add parameters or replace the native adaptation equations. Both architectures remain experimental.
 
@@ -58,8 +60,9 @@ The Transformer reference has **994,945 parameters**, four width-128 axial block
 | Tiny/CC fresh and fixed 8K endpoints, seeds 1811/1877 | Controlled pretraining-study endpoints; unpromoted |
 | Tiny_Basis, Tiny_Global, CC_D, CC_G, CC_DG | Experimental plateau-repair variants; all full development gates failed |
 | Tiny_H2 and CC_R2 | Earlier unsuccessful learned-mechanism hypotheses; no matched mechanism advantage demonstrated |
-| Original TinyMind 64K, seed 1877 / CC 64K, seed 1811 | Current fixed research endpoints; audited, experimental and unpromoted; no public weights |
-| Separate validation-selected Tiny 62K / CC 64K | Selection records retained; current published endpoint comparisons use fixed 64K for both |
+| Original TinyMind 64K, seed 1877 / CC 64K, seed 1811 | Earlier fixed research endpoints; audited, experimental and unpromoted; no public weights |
+| Separate validation-selected Tiny 62K / CC 64K | Earlier selection records retained; the 32K→64K study reports fixed 64K for both |
+| Latest six-dataset 70K experiment | Both 70K endpoints completed; validation selected Tiny64K / CC70K; experimental, closed-source, no checkpoint release |
 | New ongoing or unaudited variants | Excluded from this release's claims |
 
 “Validated finding” describes an audited observation. It does not mean an experimental checkpoint has passed promotion, deployment or independent replication. This repository releases no checkpoints or model runtime.

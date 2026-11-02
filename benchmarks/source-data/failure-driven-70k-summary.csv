@@ -1,0 +1,9 @@
+candidate,reference,regime,dataset_count,candidate_wins,reference_wins,ties,geometric_mean_RMSE_ratio,RMSE_reduction_percent,source_id
+TinyMind_70000_RMSE,TinyMind_64000_RMSE,checkpoint_progress,6,5,1,0,1.000597020983234,-0.05970209832339979,S66
+CC_70000_RMSE,CC_64000_RMSE,checkpoint_progress,6,5,1,0,0.9039173567850166,9.60826432149834,S66
+CC_70000_RMSE,TinyMind_64000_RMSE,validation_selected,6,5,1,0,0.8340142712278978,16.598572877210216,S66
+CC_70000_RMSE,TinyMind_70000_RMSE,fixed_70000,6,5,1,0,0.8335166443013753,16.64833556986247,S66
+CC_70000_RMSE,CatBoost_matched_support_RMSE,matched_support,6,5,1,0,0.8656417712456772,13.43582287543228,S66
+CC_70000_RMSE,XGBoost_matched_support_RMSE,matched_support,6,3,3,0,1.0460827912812671,-4.608279128126713,S66
+CC_70000_RMSE,CatBoost_full_training_RMSE,full_training_baseline,6,3,3,0,1.050089861874301,-5.008986187430109,S66
+CC_70000_RMSE,XGBoost_full_training_RMSE,full_training_baseline,6,2,4,0,1.187665946887176,-18.766594688717596,S66

@@ -2,17 +2,82 @@
 
 Evidence cutoff: **2 November 2026**. Every scored comparison below has a result ID in [public-results.csv](public-results.csv), with full-precision values and an exact source locator. [Provenance](provenance.json) records source hashes and export rules. Tables round displayed errors to six decimals and reductions to two decimals. Positive reduction favors the named candidate; negative is a regression. No cross-study error comparison is treated as matched.
 
-## Current 32K→64K pretraining
+## Latest 70K failure-driven regression: six datasets
+
+**Scope:** six failure-driven evaluation datasets, **not TabArena-Lite**. Both trajectories completed 70K; one seed per architecture. Validation on the complete six-dataset cohort selected TinyMind **64K** and CC **70K** before separate test partitions were scored. These datasets informed development; held-out test rows do not make this untouched dataset-level validation.
+
+**Headline:** CC70K has **9.61% lower geometric-mean test RMSE than CC64K**, improving on 5/6 datasets. Tiny70K has **0.060% higher** geometric-mean RMSE than Tiny64K, despite five small dataset gains. CC70K has **16.60% lower** error than the validation-selected Tiny64K, with 5/6 wins. Comparing the two fixed 70K endpoints gives a separate **16.65%** reduction for CC.
+
+**Metric/support:** per-dataset test RMSE in the target's units, evaluated at the largest available nested support budget, up to 64. Aggregate ratios are `exp(mean(log(candidate RMSE / reference RMSE)))`, weighting each of the six datasets equally. Reduction is `100 × (1 − ratio)`; positive favors the candidate. Raw RMSEs across incompatible target units are not averaged. No intervals or official ranks are inferred.
+
+### All six endpoint results
+
+| Dataset | Original inputs | Neural support rows | Tiny64K RMSE | Tiny70K RMSE | CC64K RMSE | CC70K RMSE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Yacht Hydrodynamics | 6 | 64 | 8.603968 | 8.550249 | 4.765602 | 3.521926 |
+| Daily Demand Forecasting Orders | 12 | 36 | 30.495589 | 30.278793 | 30.568489 | 26.031082 |
+| Metro Interstate Traffic Volume | 8 | 64 | 1956.810112 | 1951.010601 | 2006.322161 | 1973.727577 |
+| carData::Davis | 4 | 64 | 4.985578 | 5.099016 | 5.809854 | 4.911670 |
+| Ecdat::BudgetFood | 5 | 64 | 0.134389 | 0.134322 | 0.134889 | 0.133706 |
+| agridat::gartner.corn | 7 | 64 | 6.161885 | 6.149228 | 5.709660 | 6.003137 |
+
+CC's regression is gartner.corn (**5.709660→6.003137** RMSE). TinyMind's is Davis (**4.985578→5.099016**). Both negative outcomes are preserved alongside improvements.
+
+### Traditional ML: two labeled-data regimes
+
+CatBoost and XGBoost were evaluated with fixed 500-tree configurations and no test tuning. Matched-support baselines use exactly the neural support rows. Full-training baselines use all available training rows, supplying more labels on five datasets and the same 36 rows on Daily Demand. Neural models are pretrained; matching task support does not match total training compute or data exposure.
+
+The following tree scores share the same test rows as the endpoint table:
+
+| Dataset | CatBoost matched RMSE | XGBoost matched RMSE | Full-training rows | CatBoost full RMSE | XGBoost full RMSE |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Yacht Hydrodynamics | 4.568101 | 1.459597 | 184 | 1.987632 | 0.947199 |
+| Daily Demand Forecasting Orders | 38.034466 | 38.233604 | 36 | 38.034466 | 38.233604 |
+| Metro Interstate Traffic Volume | 2215.588727 | 2278.629708 | 28254 | 2209.138751 | 2291.871697 |
+| carData::Davis | 5.146554 | 4.590135 | 120 | 4.194212 | 3.994937 |
+| Ecdat::BudgetFood | 0.145240 | 0.155511 | 14383 | 0.126181 | 0.128371 |
+| agridat::gartner.corn | 5.892286 | 5.997688 | 2969 | 6.019752 | 5.971690 |
+
+| Comparison | Candidate wins | Geometric-mean RMSE ratio | RMSE reduction |
+| --- | ---: | ---: | ---: |
+| Tiny70K / Tiny64K | 5/6 | 1.000597 | -0.06% |
+| CC70K / CC64K | 5/6 | 0.903917 | +9.61% |
+| CC70K / Tiny64K | 5/6 | 0.834014 | +16.60% |
+| CC70K / Tiny70K | 5/6 | 0.833517 | +16.65% |
+| CC70K / CatBoost, matched support | 5/6 | 0.865642 | +13.44% |
+| CC70K / XGBoost, matched support | 3/6 | 1.046083 | -4.61% |
+| CC70K / CatBoost, full training | 3/6 | 1.050090 | -5.01% |
+| CC70K / XGBoost, full training | 2/6 | 1.187666 | -18.77% |
+
+Positive reduction favors the candidate; negative is a regression. CC beats matched-support CatBoost overall, but remains behind matched-support XGBoost and both full-training baselines. A limited-support win does not establish general or commercial ML superiority.
+
+**TabPFN 3.5 was unavailable locally and was not evaluated in this campaign.** Its earlier TabArena-Lite scores cannot be substituted into these six-dataset comparisons. Neither this cohort nor its conditional model ordering establishes an official TabArena rank.
+
+![Six-dataset gains and traditional ML limits](../figures/failure-driven-70k.svg)
+
+### Limitations and verification
+
+Only six datasets and one training seed per architecture are represented, with **4–12 original inputs** and one locked test partition per dataset. There is no matched control isolating diagnostic curriculum adaptation, no multi-seed continuation replication and no reported confidence interval. Test results condition on datasets already used for development; broader untouched transfer, wider real-data accuracy and deployment reliability are unvalidated.
+
+Both completed 6,000 additional optimizer steps to 70K, with **2,688,000 cumulative synthetic task presentations per model**. These are presentations, not unique mathematical functions. The earlier 100K objective was shortened; no 100K result is claimed. This publication performs no additional training, model evaluation or private research changes.
+
+Retained audits verified 12,000 completed update records, validation selection before test prediction files, identical matched support IDs/test targets, preserved original columns and frozen shared weights during scoring. Independent audits rescored 216 real prediction files and 24 baseline files. These are reviewed private audit observations, not public inference replication.
+
+Public inputs: [six-dataset aggregate results](source-data/failure-driven-70k.csv), [eight ratio summaries](source-data/failure-driven-70k-summary.csv). Comparisons R0534–R0589 in [public-results.csv](public-results.csv) retain exact values without invented intervals. Sources S62–S69 use sanitized evidence labels and hashes in [provenance](provenance.json); no source files, private identifiers, implementation details or datasets are published.
+
+Dataset references: [Yacht](https://archive.ics.uci.edu/dataset/243/yacht+hydrodynamics), [Daily Demand](https://archive.ics.uci.edu/dataset/409/daily+demand+forecasting+orders), [Metro Traffic](https://archive.ics.uci.edu/dataset/492/metro+interstate+traffic+volume), [Davis](https://vincentarelbundock.github.io/Rdatasets/doc/carData/Davis.html), [BudgetFood](https://vincentarelbundock.github.io/Rdatasets/doc/Ecdat/BudgetFood.html), [gartner.corn](https://vincentarelbundock.github.io/Rdatasets/doc/agridat/gartner.corn.html). No dataset files are redistributed.
+
+## Earlier 32K→64K pretraining
 
 **Status:** completed, audited experimental endpoints; no default promotion. Original TinyMind / CC parameter counts are **1,029,764 / 988,689**. Both completed **64,000 cumulative optimizer steps** and **2,304,000 synthetic task presentations per model**: 256,000 through 32K plus 2,048,000 during continuation. These are presentations, not unique mathematical functions.
 
-**Training/selection:** TinyMind seed **1877**, CC seed **1811**; one synthetic-validation-selected 32K parent each, saved AdamW moments, 32K additional physical-batch-64 steps. Prior proportions and conditioning changed together. Synthetic/real confirmation did not select the parents. The table uses **fixed 64K** checkpoints; separately validation-selected Tiny 62K / CC 64K are not substituted. [Complete continuation methodology](../docs/methodology.md#current-32k64k-continuation).
+**Training/selection:** TinyMind seed **1877**, CC seed **1811**; one synthetic-validation-selected 32K parent each, saved AdamW moments, 32K additional physical-batch-64 steps. Prior proportions and conditioning changed together. Synthetic/real confirmation did not select the parents. The table uses **fixed 64K** checkpoints; separately validation-selected Tiny 62K / CC 64K are not substituted. [Complete continuation methodology](../docs/methodology.md#earlier-32k64k-continuation).
 
 **Evaluation:** a newly locked confirmation bank, 736 functions total; 128 per track except unseen dimensions (96). Main D4/8/16/32, withheld D6/12/24, nested K4/8/16/32/64, independent query rows. Query NMSE is averaged under the declared track weighting; lower is better. The chart's 8K→64K checkpoints are all re-evaluated on this same bank, rather than joined across studies.
 
 **Intervals:** 2,000 paired whole-function resamples stratified by D/family, nested K preserved, bootstrap seed 913867. Exploratory, unadjusted, conditional on one selected pretrained trajectory per architecture.
 
-![Current synthetic endpoint effects](../figures/pretraining-64k-effects.svg)
+![Earlier 64K synthetic endpoint effects](../figures/pretraining-64k-effects.svg)
 
 | ID | Architecture / seed | Track | 32K NMSE | 64K NMSE | Reduction [95% CI] |
 | --- | --- | --- | ---: | ---: | --- |
@@ -37,7 +102,7 @@ Both improve familiar NMSE; CC improves unseen structure **6.66%**, while Tiny r
 
 Public inputs: [endpoint effects](source-data/pretraining-64k-effects.csv), [confirmation curves](source-data/pretraining-64k-curves.csv), [step/exposure audit](source-data/pretraining-64k-exposure.csv). Sources S37–S47 in [provenance](provenance.json) bind the results to the continuation and broader-pretraining reports and audits.
 
-### Current small-support real confirmation
+### Earlier 64K small-support real confirmation
 
 Fixed 32K versus 64K, K4/8/16/32/64, eight support draws on a fixed query set per dataset. Diabetes progression is D10 with disjoint train/validation/test roles; D12 Facebook, D5 Liver and D22 SML2010 are reused guardrails. No real labels trained shared neural weights or selected checkpoints. These are descriptive aggregate NMSE changes, without confidence intervals or independent dataset replication.
 
@@ -54,11 +119,11 @@ Fixed 32K versus 64K, K4/8/16/32/64, eight support draws on a fixed query set pe
 
 Tiny gains on Diabetes/Facebook but regresses on Liver/SML2010; CC improves SML2010 but regresses on the other three all-K aggregates. Support-specific gains do not imply all-K gains. [Full point aggregates](source-data/pretraining-64k-real.csv) retain exact values and both checkpoint source identifiers. Real-world accuracy remains inconsistent despite synthetic improvements.
 
-## Current TabArena-Lite regression at 64K
+## Earlier TabArena-Lite regression at 64K
 
 **Status:** fixed original-architecture 64K checkpoints, frozen shared weights; local audited comparison, not an official leaderboard submission or rank. Tiny seed 1877, CC seed 1811. Both are experimental.
 
-**Protocol:** 13 official Lite regression tasks; repeat 0/fold 0/sample 0; 8 inner folds × 1 set and full refit; one fixed neural configuration, no HPO. All original features and official training/test rows are retained. All nine preprocessed support fingerprints, targets and outer/inner splits match between Tiny and CC. Exact native-equation execution extends support handling beyond the original K64 admission guard, with no feature expansion or support subsampling. D>32 is unsupported. [Detailed preprocessing, executor and baseline protocol](../docs/methodology.md#current-tabarena-lite-regression-protocol).
+**Protocol:** 13 official Lite regression tasks; repeat 0/fold 0/sample 0; 8 inner folds × 1 set and full refit; one fixed neural configuration, no HPO. All original features and official training/test rows are retained. All nine preprocessed support fingerprints, targets and outer/inner splits match between Tiny and CC. Exact native-equation execution extends support handling beyond the original K64 admission guard, with no feature expansion or support subsampling. D>32 is unsupported. [Detailed preprocessing, executor and baseline protocol](../docs/methodology.md#earlier-tabarena-lite-regression-protocol).
 
 **Baselines:** published TabPFN 3.5, CatBoost and XGBoost fixed-configuration scores on aligned official splits/8×1 scoring. They were not rerun locally and do not have matched pretraining or compute. Source hashes/configuration suites are in [provenance](provenance.json).
 
@@ -94,17 +159,17 @@ Across common datasets, the relative RMSE ratio is `exp(mean(log(candidate RMSE 
 
 ![Dataset relative RMSE and geometric means](../figures/tabarena-lite-64k.svg)
 
-The TabPFN 3.5 gap is **+69.63% TinyMind / +84.66% CC**. These point estimates have no reported confidence intervals or training-seed replication, and only one official outer split is evaluated. No official or estimated TabArena rank or commercial superiority is established. Current Tiny/CC hardware settings differ, and published baseline timing comes from other compute; no matched speed claim is made.
+The TabPFN 3.5 gap is **+69.63% TinyMind / +84.66% CC**. These point estimates have no reported confidence intervals or training-seed replication, and only one official outer split is evaluated. No official or estimated TabArena rank or commercial superiority is established. The earlier 64K Tiny/CC hardware settings differ, and published baseline timing comes from other compute; no matched speed claim is made.
 
 Public inputs: [all 13 task aggregates](source-data/tabarena-lite-64k.csv), [relative RMSE summaries](source-data/tabarena-lite-64k-summary.csv). The verification recomputed 64,120 saved test predictions per neural model and checked paired supports/splits, full feature/row coverage, preserved weights and zero neural optimization. Sources S48–S55 bind these observations to retained reports and audit artifacts.
 
-## Planned next research direction
+## Earlier proposed 64K→100K direction
 
-**64K→100K failure-driven regression training**, using separate development datasets and **2K-step evaluations**, is planned. Known test failures can motivate development categories but cannot serve as untouched confirmation after influencing training or checkpoint selection. No 100K result, official rank or future improvement is projected. This release performs documentation work only.
+Before the latest experiment, 64K→100K failure-driven training with separate development data and 2K-step evaluations was proposed. The actual authorized endpoint became 70K; its six-dataset evidence is reported above. No 100K result, official rank or future improvement is projected. Previously inspected scores cannot serve as untouched confirmation after influencing development.
 
 ## Historical studies — evidence through 1 November 2026
 
-The following tables retain the original result IDs, checkpoints, banks, failed hypotheses and uncertainty. They do not describe the current 64K benchmark.
+The following tables retain the original result IDs, checkpoints, banks, failed hypotheses and uncertainty. They do not describe the later 64K or latest 70K benchmarks.
 
 ## Historical original-lineage plateau repair
 

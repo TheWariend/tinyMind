@@ -214,7 +214,7 @@ def current_effects(preview_dir):
         ax.set_title(title,pad=14);ax.set_xlabel('32K→64K query NMSE reduction (%)')
         ax.grid(axis='x',color='#e5ebf2');ax.set_axisbelow(True);ax.tick_params(length=0)
     finish(fig,'pretraining-64k-effects','64K progress includes gains and regressions',
-           '2 November 2026 • fixed endpoints • one selected parent per model • 2,000-resample 95% intervals • separate x-axis scales',
+           'Earlier 64K study • fixed endpoints • one selected parent per model • 2,000-resample 95% intervals • separate x-axis scales',
            'Source: source-data/pretraining-64k-effects.csv • whole functions, nested K4/8/16/32/64 • exploratory, unadjusted intervals',preview_dir,left=.13)
 
 def current_curves(preview_dir):
@@ -234,7 +234,7 @@ def current_curves(preview_dir):
         ax.set_ylabel('Query NMSE (lower is better)')
         ax.legend(frameon=False,fontsize=9);axes_style(ax)
     finish(fig,'pretraining-64k-curves','The earlier plateau was not a permanent ceiling',
-           'All saved checkpoints scored on one confirmation bank • dashed line: changed 32K→64K continuation bundle • axes zoomed',
+           'Earlier 8K–64K study • one confirmation bank • dashed line: changed 32K→64K continuation bundle • axes zoomed',
            'Source: source-data/pretraining-64k-curves.csv • K4/8/16/32/64 • no cross-bank joins or extrapolation; one trajectory per model',preview_dir)
 
 def tabarena(preview_dir):
@@ -265,8 +265,47 @@ def tabarena(preview_dir):
     axs[1].axhline(1,color=MUTED,lw=1,ls='--');axs[1].grid(axis='y',color='#e5ebf2')
     for ax in axs: ax.set_axisbelow(True);ax.tick_params(length=0)
     finish(fig,'tabarena-lite-64k','Synthetic progress has not closed the real-data gap',
-           'Fixed 64K • official Lite split 0/0/0, 8×1 protocol • 11/13 coverage; D1024 and D81 unsupported • no CI or official rank',
+           'Earlier 64K TabArena-Lite • split 0/0/0, 8×1 protocol • 11/13 coverage; D1024 and D81 unsupported • no CI or rank',
            'Source: source-data/tabarena-lite-64k.csv and summary • published fixed TabPFN 3.5 reference • full features/supports',preview_dir)
+
+def failure_driven(preview_dir):
+    data=read('failure-driven-70k.csv')
+    summaries=read('failure-driven-70k-summary.csv')
+    labels=['Yacht','Daily Demand','Metro Traffic','Davis','BudgetFood','gartner.corn']
+    assert len(data)==6
+    fig,axs=plt.subplots(1,2,figsize=(14.4,7.2))
+    totals={}
+    for model,label,color,shift in [('TinyMind','TinyMind',TEAL,-.18),('CC','CC',PURPLE,.18)]:
+        values=[100*(1-float(r[model+'_70000_RMSE'])/float(r[model+'_64000_RMSE'])) for r in data]
+        axs[0].barh([i+shift for i in range(6)],values,height=.32,color=color,label=label)
+        for i,value in enumerate(values):
+            axs[0].text(value+(.3 if value>=0 else -.3),i+shift,f'{value:+.2f}%',
+                        ha='left' if value>=0 else 'right',va='center',fontsize=8,color=color)
+        row=next(r for r in summaries if r['candidate']==model+'_70000_RMSE' and r['reference']==model+'_64000_RMSE')
+        totals[model]=float(row['RMSE_reduction_percent'])
+    axs[0].set_yticks(range(6),labels);axs[0].invert_yaxis();axs[0].set_xlim(-8,31)
+    axs[0].set_xlabel('70K versus 64K RMSE reduction (%)')
+    axs[0].set_title(f'Geometric mean: CC {totals["CC"]:+.2f}% / Tiny {totals["TinyMind"]:+.3f}%',pad=15)
+    axs[0].legend(frameon=False,loc='lower right',ncol=2,fontsize=9)
+    refs=[('CatBoost_matched_support_RMSE','CatBoost\nidentical support'),
+          ('XGBoost_matched_support_RMSE','XGBoost\nidentical support'),
+          ('CatBoost_full_training_RMSE','CatBoost\nfull training'),
+          ('XGBoost_full_training_RMSE','XGBoost\nfull training')]
+    for i,(reference,label) in enumerate(refs):
+        r=next(r for r in summaries if r['candidate']=='CC_70000_RMSE' and r['reference']==reference)
+        value=float(r['RMSE_reduction_percent'])
+        axs[1].barh(i,value,color=PURPLE if value>0 else RED,height=.55)
+        axs[1].text(value+(.4 if value>=0 else -.4),i,f'{value:+.2f}% • {r["candidate_wins"]}/6 wins',
+                    ha='left' if value>=0 else 'right',va='center',fontsize=9)
+    axs[1].set_yticks(range(4),[x[1] for x in refs]);axs[1].invert_yaxis()
+    axs[1].set_xlim(-37,35);axs[1].set_xlabel('CC70K geometric-mean RMSE reduction (%)')
+    axs[1].set_title('Traditional ML • both data regimes',pad=15)
+    for ax in axs:
+        ax.axvline(0,color=MUTED,lw=1)
+        ax.grid(axis='x',color='#e5ebf2');ax.set_axisbelow(True);ax.tick_params(length=0)
+    finish(fig,'failure-driven-70k','CC improves 9.61%; traditional ML comparison remains mixed',
+           'Six failure-driven evaluation datasets • not TabArena-Lite • fixed test partitions • one seed per model • no confidence intervals',
+           'Source: source-data/failure-driven-70k.csv and summary • positive reduction is better • full-training trees generally use more labels',preview_dir,left=.13)
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -274,9 +313,9 @@ def main():
     args=parser.parse_args()
     if args.preview_dir: args.preview_dir.mkdir(parents=True,exist_ok=True)
     for renderer in [effects,original_training,plateau_training,causal,efficiency,real_world,curriculum,
-                     current_effects,current_curves,tabarena]:
+                     current_effects,current_curves,tabarena,failure_driven]:
         renderer(args.preview_dir)
-    print('Rendered 10 numerical figures from public aggregates.')
+    print('Rendered 11 numerical figures from public aggregates.')
 
 if __name__=='__main__':
     main()

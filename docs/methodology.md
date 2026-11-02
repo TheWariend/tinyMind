@@ -22,9 +22,9 @@ Fresh development/final banks were generated and hash-locked before candidate tr
 
 The primary endpoint is familiar **all K**. K16/32/64 is secondary. A common candidate could advance only if both seeds met all criteria: at least 5% all-K improvement over both strongest matched control and original 8K with positive intervals; at least 1% 6K→8K progress with positive intervals; excluded/structure/real safeguards and every-K familiar nonregression. **No candidate passed.** The nominal development-selected Tiny_Global and CC_G were reported on the independent final bank without final-driven reselection. No 10K/12K extension or promotion occurred.
 
-## Current 32K→64K continuation
+## Earlier 32K→64K continuation
 
-Exactly one 32K broader-prior parent per architecture was selected using a locked synthetic-validation aggregate: TinyMind **seed 1877**, CC **seed 1811**. Confirmation scores and real labels did not select these parents. Both continued from saved weights and AdamW moments to **64,000 cumulative optimizer steps**. The separately validation-selected final checkpoints were Tiny 62K / CC 64K; the current endpoint and TabArena comparisons deliberately report **fixed 64K** for both.
+Exactly one 32K broader-prior parent per architecture was selected using a locked synthetic-validation aggregate: TinyMind **seed 1877**, CC **seed 1811**. Confirmation scores and real labels did not select these parents. Both continued from saved weights and AdamW moments to **64,000 cumulative optimizer steps**. The separately validation-selected final checkpoints were Tiny 62K / CC 64K; the earlier 64K endpoint and TabArena comparisons deliberately report **fixed 64K** for both.
 
 The first 32K steps used physical batch eight (**256,000 presentations**). The next 32K used physical batch 64 without accumulation (**2,048,000 additional presentations**), for **2,304,000 cumulative synthetic task presentations per model**. Dataset fingerprints showed no duplicate generated datasets in the continuation, but this does not prove unique mathematical functions or unique cumulative tasks.
 
@@ -32,13 +32,13 @@ The continuation prior mixed **40% original laws**, **40% preserved broader laws
 
 AdamW is float32, LR3e−5, betas (.9,.999), epsilon 1e−8, weight decay 1e−4 and clip threshold 1. A finite but explosive Tiny K2 loss at step 38,443 motivated a recorded prospective K2 removal, retaining weights and moments. CC excluded K2 from the outset. Tiny moved from CPU to MPS at step 46,140 under a resource change. Prior, batch, conditioning and device changes form a bundle; no isolated cause or matched training-speed benefit is established.
 
-Validation and confirmation banks were locked before training, with roots **6,000,000,000,000 / 7,000,000,000,000** and **368 / 736** functions. Confirmation has 128 functions per track except unseen dimensions (96), nested K4/8/16/32/64 and independent query rows. Main D4/8/16/32 and withheld D6/12/24 are separated. All saved 8K→64K checkpoints shown in the current learning figure are evaluated on this same new confirmation bank. They are not scores spliced from historical banks. Evaluations were recorded at 2K-step intervals.
+Validation and confirmation banks were locked before training, with roots **6,000,000,000,000 / 7,000,000,000,000** and **368 / 736** functions. Confirmation has 128 functions per track except unseen dimensions (96), nested K4/8/16/32/64 and independent query rows. Main D4/8/16/32 and withheld D6/12/24 are separated. All saved 8K→64K checkpoints shown in the earlier 8K–64K learning figure are evaluated on this same new confirmation bank. They are not scores spliced from historical banks. Evaluations were recorded at 2K-step intervals.
 
 The 32K→64K effects use **2,000 paired whole-function bootstrap resamples**, stratified by D/family and retaining nested K, seed **913867**. Intervals are exploratory and unadjusted. They condition on one selected pretrained trajectory per architecture and do not establish multi-seed continuation robustness.
 
 Diabetes progression adds one D10 real dataset with disjoint train/validation/test roles; Facebook, Liver and SML2010 are reused guardrails. Each real task has eight support draws on fixed query rows over K4/8/16/32/64. The public point table is descriptive, without invented intervals. No real labels trained shared weights or selected checkpoints. Different draws of one dataset are not independent dataset-level replication.
 
-## Current TabArena-Lite regression protocol
+## Earlier TabArena-Lite regression protocol
 
 The official [TabArena](https://github.com/autogluon/tabarena) Lite regression task list contains 13 datasets. Each model uses one fixed completed 64K configuration and the official **repeat 0 / fold 0 / sample 0** outer split, with the runner's **8 inner folds × 1 set** and full-training refit. There is no neural HPO or task-time shared-weight optimization. Test labels enter scoring only.
 
@@ -58,9 +58,17 @@ Baselines have different internal preprocessing, implementations, pretraining an
 
 Within each dataset, RMSE is in the target's units. Across the **11 common datasets**, report `exp(mean(log(candidate_RMSE/reference_RMSE)))`; gap is `100 × (ratio − 1)`. Each dataset receives equal weight. Raw RMSEs across incompatible target units are not averaged. No confidence interval, official leaderboard rank or estimated leaderboard rank is inferred from this one-outer-split fixed-checkpoint comparison. CC ran on MPS with four host threads, while Tiny used CPU/one thread during concurrent research work; these timings cannot establish a matched speed comparison.
 
-## Planned 64K→100K failure-driven regression
+## Latest six-dataset failure-driven evaluation at 70K
 
-This is a future research direction, not an executed protocol or result. Use separate development datasets to turn observed failure categories into regression tasks, evaluate every **2K optimizer steps**, and declare checkpoint/stopping criteria before the next run. Already inspected TabArena-Lite tests cannot become an untouched confirmation set. Reserve fresh datasets/splits for subsequent confirmation, and monitor synthetic retention and real transfer jointly. No training or architecture change is performed for this documentation update.
+The later experiment completed **64K→70K**, rather than the earlier proposed 100K endpoint. It evaluated checkpoints every 2K steps. Dataset-level development evidence informed the research direction, while test partitions were reserved for scoring. Checkpoint selection used the same complete six-dataset validation cohort at 64K/66K/68K/70K and was locked before any test prediction file was written. Validation selected TinyMind 64K and CC 70K; fixed 70K-versus-64K results are reported separately from selected-checkpoint comparisons.
+
+The primary endpoint uses each dataset's largest available nested support budget, up to 64 (36 on Daily Demand). All original 4–12 input features were retained. Numerical schemas use training data only; task adaptation uses support outcomes, and test targets enter scoring only. Matched-support comparisons share exact support IDs and test targets. These are held-out rows from development-influenced datasets, not untouched dataset-level generalization.
+
+Traditional ML has two explicit regimes: fixed 500-tree CatBoost/XGBoost trained on identical neural support rows, and the same configurations trained on all available training rows. No test tuning was used. Full-training baselines have more labels on five datasets and the same 36 labels on Daily Demand. Neural synthetic pretraining is additional data/compute exposure; neither regime is a matched total-compute experiment. TabPFN 3.5 was unavailable and not evaluated. The six-dataset results are **not TabArena-Lite**, and the earlier published TabArena baselines are not reused here.
+
+Aggregate RMSE ratios use `exp(mean(log(candidate RMSE / reference RMSE)))` with equal dataset weights. Positive `100 × (1 − ratio)` favors the candidate. Intervals are not reported; one seed per architecture and six fixed test partitions do not establish broad statistical robustness. No control isolates the effect of failure-driven curriculum adaptation. Research code, current architectures, training details, checkpoints, internal experiments and dataset files remain private; only verified aggregate outcomes and evaluation conditions are published.
+
+This documentation update runs no training or model inference and changes no private research. Newly reserved datasets and additional independent training seeds would be needed for broader confirmation.
 
 ## Mechanism attribution
 

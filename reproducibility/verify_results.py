@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def read_csv(name):
     return list(csv.DictReader((ROOT/'benchmarks'/name).open()))
 
-def verify_current_evidence(manifest, results):
+def verify_64k_evidence(manifest, results):
     exposures = read_csv('source-data/pretraining-64k-exposure.csv')
     assert {r['architecture'] for r in exposures} == {'Tiny', 'CC'} and len(exposures)==2
     for r in exposures:
@@ -75,6 +75,54 @@ def verify_current_evidence(manifest, results):
         q=[x for x in results if x['study']=='tabarena_lite_64k_summary' and x['candidate']==r['candidate'] and x['reference']==r['reference']]
         assert len(q)==1 and abs(float(q[0]['candidate_value'])-gm)<1e-12, 'Summary export mismatch'
 
+def verify_70k_evidence(manifest, results):
+    data=read_csv('source-data/failure-driven-70k.csv')
+    summaries=read_csv('source-data/failure-driven-70k-summary.csv')
+    assert len(data)==6 and len({r['dataset'] for r in data})==6 and len(summaries)==8
+    evidence=manifest['evaluation_identifiers']['failure_driven_70k']
+    assert evidence['end_step']==70000 and evidence['datasets_evaluated']==6
+    assert evidence['cumulative_task_presentations_per_model']==2304000+6000*64
+    assert evidence['TabPFN_3_5_evaluated'] is False and evidence['official_leaderboard_rank'] is None
+    selected={'TinyMind':64000,'TinyMind-CC':70000}
+    assert evidence['selected_steps']==selected
+    for r in data:
+        assert 4<=int(r['original_features'])<=12
+        assert 0<int(r['support_rows'])<=64 and int(r['full_training_rows'])>=int(r['support_rows'])
+        assert int(r['test_rows'])>0
+        assert int(r['TinyMind_selected_step'])==64000 and int(r['CC_selected_step'])==70000
+        for key,value in r.items():
+            if key.endswith('_RMSE'):
+                assert math.isfinite(float(value)) and float(value)>0, 'Invalid 70K RMSE'
+    for prefix,regression in [('TinyMind','carData::Davis'),('CC','agridat::gartner.corn')]:
+        failed={r['dataset'] for r in data if float(r[prefix+'_70000_RMSE'])>float(r[prefix+'_64000_RMSE'])}
+        assert failed=={regression}, 'Dataset regression claim changed'
+    assert len([r for r in results if r['study']=='failure_driven_70k'])==48
+    assert len([r for r in results if r['study']=='failure_driven_70k_summary'])==8
+    for summary in summaries:
+        candidate,reference=summary['candidate'],summary['reference']
+        ratios=[float(r[candidate])/float(r[reference]) for r in data]
+        gm=math.exp(sum(math.log(x) for x in ratios)/6)
+        reduction=100*(1-gm)
+        assert abs(gm-float(summary['geometric_mean_RMSE_ratio']))<1e-12
+        assert abs(reduction-float(summary['RMSE_reduction_percent']))<1e-10
+        assert int(summary['candidate_wins'])==sum(x<1 for x in ratios)
+        assert int(summary['reference_wins'])==sum(x>1 for x in ratios)
+        assert int(summary['ties'])==sum(x==1 for x in ratios)
+        assert int(summary['dataset_count'])==6
+        locator=f'{candidate}/{reference};regime={summary["regime"]}'
+        q=[r for r in results if r['study']=='failure_driven_70k_summary' and r['source_locator']==locator]
+        assert len(q)==1 and abs(float(q[0]['candidate_value'])-gm)<1e-12
+        for row in data:
+            locator=f'dataset={row["dataset"]};{candidate};{reference}'
+            q=[r for r in results if r['study']=='failure_driven_70k' and r['source_locator']==locator]
+            assert len(q)==1
+            assert float(q[0]['candidate_value'])==float(row[candidate]) and float(q[0]['reference_value'])==float(row[reference])
+    cc=next(r for r in summaries if r['candidate']=='CC_70000_RMSE' and r['reference']=='CC_64000_RMSE')
+    assert f'{float(cc["RMSE_reduction_percent"]):.2f}'=='9.61' and int(cc['candidate_wins'])==5
+    text=(ROOT/'README.md').read_text()
+    assert '9.61% relative to its 64K reference' in text
+    assert 'six failure-driven evaluation datasets, not TabArena-Lite' in text
+
 def markdown_anchors(path):
     # GitHub heading slugs for the headings used in this documentation.
     anchors=set(); seen={}
@@ -96,7 +144,7 @@ def main():
         assert len(rows)==export['data_rows'], f'Row count mismatch: {export["file"]}'
         for row in rows:
             assert row['source_id'] in sources, 'Unknown source identifier'
-            for key in ('reference_source_id','parameter_source_id'):
+            for key in ('reference_source_id','parameter_source_id','support_source_id'):
                 if key in row: assert row[key] in sources, 'Unknown secondary source identifier'
         checked_rows += len(rows)
 
@@ -115,7 +163,8 @@ def main():
         assert int(r['paired_units'])>0, 'Missing comparison units'
         if int(r['bootstrap_replicates'])==0:
             assert r['status']=='descriptive' and r['study'] in {
-                'pretraining_64k_real','tabarena_lite_64k','tabarena_lite_64k_summary'}, 'Unexplained missing uncertainty'
+                'pretraining_64k_real','tabarena_lite_64k','tabarena_lite_64k_summary',
+                'failure_driven_70k','failure_driven_70k_summary'}, 'Unexplained missing uncertainty'
             assert r['ci95_low_percent']==r['ci95_high_percent']=='', 'Invented descriptive interval'
         else:
             assert int(r['bootstrap_replicates'])>0, 'Invalid bootstrap count'
@@ -123,7 +172,8 @@ def main():
             assert math.isfinite(lo) and math.isfinite(hi) and lo<=hi, 'Invalid interval'
         assert r['source_locator'] and r['comparison'] and r['metric'] and r['split'], 'Missing provenance/conditions'
 
-    verify_current_evidence(manifest,results)
+    verify_64k_evidence(manifest,results)
+    verify_70k_evidence(manifest,results)
     links=0
     for path in ROOT.rglob('*.md'):
         for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)',path.read_text()):
@@ -139,7 +189,8 @@ def main():
     print(f'PASS: {len(manifest["exports"])} CSV hashes, {checked_rows} aggregate rows, '
           f'{len(results)} comparisons, {links} local links; maximum arithmetic difference {maximum_error:.3g}.')
     print('Scope: public aggregate arithmetic/integrity; no model inference, training or bootstrap regeneration.')
-    print('Current evidence: 64K exposure and synthetic endpoints agree; TabArena coverage, wins and geometric means agree.')
+    print('Earlier 64K evidence: exposure, synthetic endpoints and TabArena coverage/ratios agree.')
+    print('Latest 70K evidence: six-dataset endpoint and both ML baseline regimes agree; CC improvement 9.61%, separate from TabArena-Lite.')
 
 if __name__=='__main__':
     try:
