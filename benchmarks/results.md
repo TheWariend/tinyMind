@@ -1,5 +1,13 @@
 # Benchmark results and study cards
 
+## Current forecasting pilot
+
+The active direction is forecasting with persistent experience adaptation. The completed selected GIFT pilot has **7.33% lower geometric RMSE versus our paired frozen forecaster**, with 12/12 configuration wins. Its extra gain over fixed RLS using the same learned features is only 0.20%, with six wins and six losses.
+
+[The complete forecasting study card](../docs/forecasting-research-update.md) includes every selected configuration, all five controls, pinned public player references, independent-query and retention outcomes, causal label rules and limitations. [Full-precision aggregates](forecasting-pilot.csv), [geometric comparisons](forecasting-comparisons.csv) and [separate forecasting provenance](forecasting-provenance.json) support public arithmetic checks.
+
+This is one seed, 12 short-horizon configurations and 13,952 original origins per method; it is not full GIFT, fev or TabArena-Lite. Several public models remain much stronger, and the learned gate's benefit beyond fixed rules is small. The historical tabular study cards below retain their original evidence dates and source identifiers.
+
 Evidence cutoff: **2 November 2026**. Every scored comparison below has a result ID in [public-results.csv](public-results.csv), with full-precision values and an exact source locator. [Provenance](provenance.json) records source hashes and export rules. Tables round displayed errors to six decimals and reductions to two decimals. Positive reduction favors the named candidate; negative is a regression. No cross-study error comparison is treated as matched.
 
 ## Latest 70K failure-driven regression: six datasets
@@ -59,11 +67,11 @@ Positive reduction favors the candidate; negative is a regression. CC beats matc
 
 Only six datasets and one training seed per architecture are represented, with **4–12 original inputs** and one locked test partition per dataset. There is no matched control isolating diagnostic curriculum adaptation, no multi-seed continuation replication and no reported confidence interval. Test results condition on datasets already used for development; broader untouched transfer, wider real-data accuracy and deployment reliability are unvalidated.
 
-Both completed 6,000 additional optimizer steps to 70K, with **2,688,000 cumulative synthetic task presentations per model**. These are presentations, not unique mathematical functions. The earlier 100K objective was shortened; no 100K result is claimed. This publication performs no additional training, model evaluation or private research changes.
+Both completed 6,000 additional optimizer steps to 70K, with **2,688,000 cumulative synthetic task presentations per model**. These are presentations, not unique mathematical functions. The earlier 100K objective was shortened; no 100K result is claimed.
 
-Retained audits verified 12,000 completed update records, validation selection before test prediction files, identical matched support IDs/test targets, preserved original columns and frozen shared weights during scoring. Independent audits rescored 216 real prediction files and 24 baseline files. These are reviewed private audit observations, not public inference replication.
+Retained audits verified 12,000 completed update records, validation selection before test prediction files, identical matched support IDs/test targets, preserved original columns and frozen shared weights during scoring. Independent audits rescored 216 real prediction files and 24 baseline files. These are retained audit observations, not independent external replication.
 
-Public inputs: [six-dataset aggregate results](source-data/failure-driven-70k.csv), [eight ratio summaries](source-data/failure-driven-70k-summary.csv). Comparisons R0534–R0589 in [public-results.csv](public-results.csv) retain exact values without invented intervals. Sources S62–S69 use sanitized evidence labels and hashes in [provenance](provenance.json); no source files, private identifiers, implementation details or datasets are published.
+Inputs: [six-dataset aggregate results](source-data/failure-driven-70k.csv), [eight ratio summaries](source-data/failure-driven-70k-summary.csv). Comparisons R0534–R0589 in [public-results.csv](public-results.csv) retain exact values without invented intervals. Sources S62–S69 use evidence labels and hashes in [provenance](provenance.json).
 
 Dataset references: [Yacht](https://archive.ics.uci.edu/dataset/243/yacht+hydrodynamics), [Daily Demand](https://archive.ics.uci.edu/dataset/409/daily+demand+forecasting+orders), [Metro Traffic](https://archive.ics.uci.edu/dataset/492/metro+interstate+traffic+volume), [Davis](https://vincentarelbundock.github.io/Rdatasets/doc/carData/Davis.html), [BudgetFood](https://vincentarelbundock.github.io/Rdatasets/doc/Ecdat/BudgetFood.html), [gartner.corn](https://vincentarelbundock.github.io/Rdatasets/doc/agridat/gartner.corn.html). No dataset files are redistributed.
 
@@ -371,8 +379,8 @@ No new TabPFN/official TabArena inference was run in the historical plateau stud
 
 - [public-results.csv](public-results.csv): all exported comparisons, including negatives and development results.
 - [source-data](source-data/): exact whitelisted aggregate input tables for figures and independent inspection.
-- [provenance.json](provenance.json): source artifact SHA256 hashes, public export hashes/row counts, private audit summary and extraction rules.
+- [provenance.json](provenance.json): source artifact SHA256 hashes, table hashes/row counts, audit summary and extraction rules.
 - [Figure sources](../figures/README.md): exact selections and transformations used in each chart.
-- [Reproducibility](../reproducibility/README.md): public arithmetic/figure checks and explicitly withheld replication prerequisites.
+- [Reproducibility](../reproducibility/README.md): arithmetic/figure checks and their replication limits.
 
-Confidence intervals are preserved from audited analyses. New descriptive real/TabArena comparisons have zero bootstrap replicates and blank interval fields, rather than fabricated uncertainty. Public aggregates cannot regenerate bootstrap samples or independently replay model inference. No raw observations, labels, weights, optimizers, private model implementation or development logs are published.
+Confidence intervals are preserved from audited analyses. New descriptive real/TabArena comparisons have zero bootstrap replicates and blank interval fields, rather than fabricated uncertainty. Aggregate checks do not regenerate bootstrap samples or independently replay model inference.

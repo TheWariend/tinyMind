@@ -174,6 +174,8 @@ def main():
 
     verify_64k_evidence(manifest,results)
     verify_70k_evidence(manifest,results)
+    from verify_forecasting import main as verify_forecasting
+    verify_forecasting()
     links=0
     for path in ROOT.rglob('*.md'):
         for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)',path.read_text()):

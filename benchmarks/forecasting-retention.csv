@@ -1,0 +1,21 @@
+condition,method,sequence,streams,geometric_old_relationship_RMSE_change_percent,old_query_MSE_after_A,old_query_MSE_after_B,old_query_MSE_after_return_A,source_id
+unseen_instances,Fixed NLMS,AAA,62,11.170871220986612,1.212126299378372,1.3875015266840496,1.35715668396123,forecast-retention-summary
+unseen_instances,Fixed NLMS,ABA,66,9.627066794386764,1.0680875624671127,1.174566738307476,1.0991152234827026,forecast-retention-summary
+unseen_instances,Fixed RLS,AAA,62,1.9462827004312455,0.7254356205343239,0.7403697607017332,0.7435209182721954,forecast-retention-summary
+unseen_instances,Fixed RLS,ABA,66,0.861484878850427,0.5709055652559707,0.5798509699490034,0.5853232626774998,forecast-retention-summary
+unseen_instances,Frozen rolling forecaster,AAA,62,0.0,0.9487793663997324,0.9487793663997324,0.9487793663997324,forecast-retention-summary
+unseen_instances,Frozen rolling forecaster,ABA,66,0.0,0.7483524125859593,0.7483524125859593,0.7483524125859593,forecast-retention-summary
+unseen_instances,Fixed initial policy,AAA,62,0.43870749567433975,0.8509391209771556,0.8567973897762357,0.855943301602477,forecast-retention-summary
+unseen_instances,Fixed initial policy,ABA,66,0.2531566842314481,0.6715198699949365,0.6732696355179404,0.6752683535556901,forecast-retention-summary
+unseen_instances,Experience-adapted forecaster,AAA,62,1.3348640554063484,0.7550330862643257,0.7676046208268211,0.7696568103086564,forecast-retention-summary
+unseen_instances,Experience-adapted forecaster,ABA,66,0.6296217304646134,0.5952430432944587,0.6012467841307322,0.6064731644353631,forecast-retention-summary
+unseen_relationship_variants,Fixed NLMS,AAA,61,6.075038600496452,1.220131035069706,1.265636067165703,1.300485223531723,forecast-retention-summary
+unseen_relationship_variants,Fixed NLMS,ABA,67,14.971268809025862,0.9758723139095662,1.2596504044399333,1.19411616060716,forecast-retention-summary
+unseen_relationship_variants,Fixed RLS,AAA,61,0.08320642963683955,0.7049644765917396,0.7041801948283539,0.7102318481221551,forecast-retention-summary
+unseen_relationship_variants,Fixed RLS,ABA,67,2.207430193483284,0.6049517286357595,0.6262334634675019,0.6208977677873266,forecast-retention-summary
+unseen_relationship_variants,Frozen rolling forecaster,AAA,61,0.0,0.9079363223959188,0.9079363223959188,0.9079363223959188,forecast-retention-summary
+unseen_relationship_variants,Frozen rolling forecaster,ABA,67,0.0,0.7770909078752817,0.7770909078752817,0.7770909078752817,forecast-retention-summary
+unseen_relationship_variants,Fixed initial policy,AAA,61,0.13072413638204328,0.8180052092085119,0.8163599980170609,0.8168903716274949,forecast-retention-summary
+unseen_relationship_variants,Fixed initial policy,ABA,67,0.12062198952063063,0.7013816965271288,0.7062345043714366,0.7048410802189984,forecast-retention-summary
+unseen_relationship_variants,Experience-adapted forecaster,AAA,61,0.20946418612253215,0.7314012881185188,0.7306450943722099,0.7340775631734582,forecast-retention-summary
+unseen_relationship_variants,Experience-adapted forecaster,ABA,67,1.0724493379745903,0.6262885000167498,0.640208028868508,0.6382686040405907,forecast-retention-summary

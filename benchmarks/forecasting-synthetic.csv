@@ -1,0 +1,11 @@
+condition,method,geometric_query_RMSE_gap_to_frozen_percent,wins,losses,mean_query_NMSE,observed_MSE_before,observed_MSE_after,source_id
+unseen_instances,Frozen rolling forecaster,0.0,0,0,1.4983514737038475,0.8861523853953589,0.8861523853953589,forecast-synthetic-summary
+unseen_instances,Fixed RLS,-3.3457851527086135,79,49,1.5872446800989564,0.8427476002773002,0.6974311567698324,forecast-synthetic-summary
+unseen_instances,Fixed initial policy,-2.250752074781237,112,16,1.465477380879955,0.8519057656354342,0.8047474756286565,forecast-synthetic-summary
+unseen_instances,Experience-adapted forecaster,-3.855987397709404,91,37,1.5104072090579264,0.8315547675875044,0.7232534302809543,forecast-synthetic-summary
+unseen_instances,Fixed NLMS,19.268087002175392,4,124,3.387523202808474,1.294454867349211,1.0936914808482856,forecast-synthetic-summary
+unseen_relationship_variants,Frozen rolling forecaster,0.0,0,0,1.3024600068797423,0.9000268533824111,0.9000268533824111,forecast-synthetic-summary
+unseen_relationship_variants,Fixed RLS,-2.8275664651507104,78,50,1.3222258574345946,0.8613293115834522,0.7041843225694416,forecast-synthetic-summary
+unseen_relationship_variants,Fixed initial policy,-2.12816410112181,107,21,1.2532726672403183,0.8657415828554693,0.815407295664596,forecast-synthetic-summary
+unseen_relationship_variants,Experience-adapted forecaster,-3.48813516856995,91,37,1.2597913099910198,0.8476574890532489,0.7313571280718668,forecast-synthetic-summary
+unseen_relationship_variants,Fixed NLMS,18.786081163840883,5,123,1.9905416981192372,1.3017921095870957,1.0964731376619912,forecast-synthetic-summary

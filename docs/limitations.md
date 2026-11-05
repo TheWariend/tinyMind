@@ -1,6 +1,16 @@
 # Limitations and open questions
 
-TinyMind is a numerical-regression research program with useful compact-learning observations. **Arbitrary unfamiliar relationship generalization has not been solved.** Both architectures remain experimental. No model in this release is certified for deployment, general intelligence, language learning or autonomous agent learning. No official TabArena rank or commercial superiority is established.
+TinyMind studies experience-dependent prediction, with historical tabular experiments and current forecasting pilots. **Arbitrary unfamiliar relationship generalization has not been solved.** The systems remain experimental. No official arena rank or commercial superiority is established.
+
+## Current forecasting limits
+
+The completed GIFT pilot covers 12 selected short-horizon configurations, not the full benchmark or fev. It uses one seed and has no confidence intervals. A 7.33% geometric RMSE improvement over our frozen forecaster does not imply leadership over larger players: several remain substantially better, and seasonal naive wins overall.
+
+The learned policy's extra gain versus fixed RLS is only 0.20%, with six wins and six losses. Both controls use learned features; this does not isolate the projection's contribution. Published player scores have unequal pretraining and zero-shot/online information-use protocols.
+
+Independent-query gains coexist with an unseen-instance mean-NMSE regression and old-relationship interference. Save/reload persistence is not forgetting resistance. The benchmark has informed research decisions, so a newly reserved confirmation suite and repeated seeds are needed for broader claims.
+
+[Complete forecasting outcomes](forecasting-research-update.md) retain these limitations. Historical tabular limitations follow.
 
 ## Experimental coverage
 
@@ -47,7 +57,7 @@ The six datasets informed development. Separate test partitions and selection be
 
 CC beats matched-support CatBoost overall (**13.44% lower RMSE**, 5/6 wins), but is behind matched-support XGBoost (**4.61% higher**, 3/6 wins). Full-training baselines generally have more labels; CC is behind CatBoost (**5.01% higher**, 3/6 wins) and XGBoost (**18.77% higher**, 2/6 wins). A limited-support win does not establish general or commercial ML superiority. Pretrained neural models and task-fitted trees have different total training histories and budgets.
 
-TabPFN 3.5 was unavailable in this campaign. No current result against it, official TabArena rank or 100K training outcome is supported. Earlier 64K TabArena-Lite scores remain separate historical evidence. Current architectures, implementations, training details, checkpoints, private datasets and internal experiments are withheld.
+TabPFN 3.5 was unavailable in this campaign. No current result against it, official TabArena rank or 100K training outcome is supported. Earlier 64K TabArena-Lite scores remain separate historical evidence.
 
 ## Comparisons and efficiency
 
@@ -57,6 +67,6 @@ CPU timings are observations on Apple M4 under stated thread/batch settings, not
 
 ## Reproducibility limits
 
-Public aggregates permit arithmetic checks and figure regeneration. They cannot regenerate per-function bootstrap samples, replay neural inference or reproduce pretraining without private source, weights and task banks. Provenance hashes bind the export to retained artifacts, but withheld sources cannot be independently downloaded from this repository.
+Aggregate verification permits arithmetic checks and figure regeneration. It does not regenerate per-function bootstrap samples, replay neural inference or reproduce pretraining. Provenance hashes bind the tables to retained evidence.
 
-External replication, calibration, uncertainty reliability, distribution-shift robustness, broader applications and deployment testing remain open. Any later public implementation or model release requires an explicit licensing and asset decision.
+External replication, calibration, uncertainty reliability, distribution-shift robustness, broader applications and deployment testing remain open.

@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-11-05",
+  "study_id": "forecast-experience-pilot-2026-11-05",
+  "sources": [
+    {
+      "id": "forecast-paired-aggregates",
+      "retained_artifact": "forecast-paired-aggregates",
+      "sha256": "e374fd3863ad02182ed3b594c664f38136e1dd7b481d76d8e310c1f20d780292"
+    },
+    {
+      "id": "forecast-historical-reference",
+      "retained_artifact": "forecast-historical-reference",
+      "sha256": "1cbf3bf32a2cf452901f9ac81dd99277e8c0055abf79fcd5bd46350ceff457c7"
+    },
+    {
+      "id": "forecast-published-reference",
+      "retained_artifact": "forecast-published-reference",
+      "sha256": "2f227e8c3d3387afb83a7c0fb71bd16eb46db6ed94f0a0068f23af5c757315bc"
+    },
+    {
+      "id": "forecast-comparison-summary",
+      "retained_artifact": "forecast-comparison-summary",
+      "sha256": "ab2ecad82393eb883b94eed1e3744f62b6decbcf48751032586e324b66d7ef90"
+    },
+    {
+      "id": "forecast-synthetic-summary",
+      "retained_artifact": "forecast-synthetic-summary",
+      "sha256": "5db7a046789094c86fc030f8d3e478c2490c9bd8c5e2ab9c71adb344a5fe2c51"
+    },
+    {
+      "id": "forecast-retention-summary",
+      "retained_artifact": "forecast-retention-summary",
+      "sha256": "d538b05428a88503088a68be039988d78120edcdb39a492d41d048f0f2ed00d6"
+    },
+    {
+      "id": "forecast-timing-summary",
+      "retained_artifact": "forecast-timing-summary",
+      "sha256": "ab2ecad82393eb883b94eed1e3744f62b6decbcf48751032586e324b66d7ef90"
+    }
+  ],
+  "exports": [
+    {
+      "file": "benchmarks/forecasting-pilot.csv",
+      "sha256": "02d297136fab6a75590f1ddd75ab1ca99e612f571763713b6153b580d2fa97e7",
+      "data_rows": 60
+    },
+    {
+      "file": "benchmarks/forecasting-reference-rmse.csv",
+      "sha256": "43bda6691a313e5384c200295155b3e89c07f1014129af68cc0365588c6be5d9",
+      "data_rows": 84
+    },
+    {
+      "file": "benchmarks/forecasting-comparisons.csv",
+      "sha256": "38a647a8f9cb6505df9f8e206a9353e2cff545106c564e2b6db0fc5fd9a1020c",
+      "data_rows": 11
+    },
+    {
+      "file": "benchmarks/forecasting-synthetic.csv",
+      "sha256": "d363ae207ad7ade1855bbdbb303499166966164085b148b5b749d5e0ae767dc9",
+      "data_rows": 10
+    },
+    {
+      "file": "benchmarks/forecasting-retention.csv",
+      "sha256": "0a21fbf07b2189188aecfb3da18c7f84a7774b1ab7714fc070bada7ea489543e",
+      "data_rows": 20
+    },
+    {
+      "file": "benchmarks/forecasting-timing.csv",
+      "sha256": "7653e3848392c874fb0dcc48fb3e05f3bef0745cbb44a2e39ce9604fc24bad9a",
+      "data_rows": 1
+    }
+  ],
+  "retained_audit_sha256": "96084062e03869fd0437d01abacef8c38af47a2618e22e9ef296914e6b0b88c0",
+  "evaluation": {
+    "benchmark": "selected short-horizon GIFT pilot",
+    "configurations": 12,
+    "origins_per_method": 13952,
+    "methods": 5,
+    "training_seeds": 1,
+    "bootstrap_confidence_intervals": false,
+    "official_leaderboard_rank": null,
+    "outer_training_data": "synthetic only; benchmark examples/labels/feedback excluded",
+    "inner_adaptation": "elapsed observations only; future query labels score only",
+    "published_players_rerun": false,
+    "reference_pretraining_and_online_protocol_matched": false
+  },
+  "audit": {
+    "retained_audit_passed": true,
+    "benchmark_rows_rescored": 60,
+    "independent_synthetic_query_rows_rescored": 22400,
+    "retention_prediction_rows_rescored": 3840,
+    "benchmark_state_reload_checks": 9140,
+    "historical_artifacts_preserved": true,
+    "benchmark_truths_matched_preserved_reference": true,
+    "shared_weights_unchanged_during_evaluation": true
+  }
+}

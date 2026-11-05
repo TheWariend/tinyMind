@@ -2,13 +2,38 @@
 
 ### Learning and adapting from experience
 
-TinyMind is a research project studying how a compact neural system can use observed examples to change its predictions. We investigate two routes: **learned updates to task-specific neural weights** and **compressed, example-conditioned attention**.
+TinyMind studies how a compact neural system can use observed experience to improve predictions. Our current research focuses on **time-series forecasting with persistent experience adaptation**. Earlier work studied task-specific neural weight updates and compressed contextual learning for tabular regression.
 
-**Current validated experiments predominantly concern numerical function learning and scalar regression.** The wider aim is learning from experience; language, agent learning, arbitrary relationship discovery and general intelligence are outside the demonstrated scope.
+**Active tabular development is parked.** Its local and synthetic gains did not provide the consistent, competitive real-world improvement we sought. We preserve that evidence and have pivoted toward forecasting, where observations arrive naturally over time. The wider aim remains learning from experience; arbitrary relationship discovery and general intelligence are outside the demonstrated scope.
 
-This public repository shares verified aggregate results and appropriate research documentation. Current architectures, research and training code, checkpoints, datasets and internal experiments remain closed-source; implementation details and private assets are withheld. Evidence cutoff: **2 November 2026**.
+Evidence cutoff: **5 November 2026**.
 
 [Historical architecture overview](docs/architecture.md) · [Research progress](docs/research-progress.md) · [Benchmarks](benchmarks/results.md) · [Methodology](docs/methodology.md) · [Limitations](docs/limitations.md) · [Reproducibility](reproducibility/README.md)
+
+## Current progress — persistent forecasting experience
+
+The completed forecasting pilot combines a compact shared forecasting core, learned feature representations and per-stream residual memory with confidence-controlled corrections. Shared neural weights stay frozen during online evaluation; elapsed observations update stream state, which survives save/reload. [Conceptual mechanism and complete study](docs/forecasting-research-update.md).
+
+Across **12 selected short-horizon GIFT configurations and 13,952 original forecast origins per method**, the experience-adapted model achieved **7.33% lower geometric RMSE than its paired frozen forecaster**, with **12 wins and no losses**.
+
+| Completed pilot comparison | Geometric RMSE gap | Wins / losses |
+|---|---:|---:|
+| Our paired frozen forecaster | **−7.33%** | **12 / 0** |
+| Fixed RLS using the same learned features | **−0.20%** | **6 / 6** |
+| Seasonal naive | +13.31% | 5 / 7 |
+| Published Toto Open Base 1.0 | −3.61% | **3 / 9** |
+| Published Moirai-2 | +64.46% | 2 / 10 |
+| Published Chronos-2 | +79.99% | 2 / 10 |
+| Published TimesFM-3 | +88.18% | 1 / 11 |
+| Published TiRex-2 | +89.59% | 2 / 10 |
+
+Negative gap means lower error. **The learned policy adds only a small benefit beyond fixed RLS; the full 7.33% gain cannot be attributed solely to the updater.** The Toto aggregate includes losses on nine configurations and does not establish general superiority. Several larger players remain substantially stronger.
+
+Training used synthetic streams with benchmark examples, labels and feedback excluded from outer optimization. Online state uses only observations that have already arrived. Published competitors were not rerun under matched pretraining, hardware or online-adaptation conditions.
+
+Independent synthetic-query tests showed **3.86% / 3.49% geometric RMSE reductions** on unseen instances / unfamiliar variants, while some aggregate NMSE and retention outcomes regressed. State persistence passed; forgetting resistance remains open.
+
+This is a **one-seed, 12-configuration GIFT pilot**, not full GIFT, fev, TabArena-Lite or an official rank. A bounded scaling experiment is ongoing; no unfinished scores are reported. [All configuration results and limitations](docs/forecasting-research-update.md).
 
 ## The research question
 
@@ -18,7 +43,7 @@ We separate **within-task adaptation** as observations arrive from **pretraining
 
 ## Previously reported architectures and task memory
 
-The following overview and parameter counts describe previously published models through 64K. They are historical context, not a specification of the current private architectures.
+The following overview and parameter counts describe previously published models through 64K.
 
 ![Historical 64K architecture overview](figures/architecture.svg)
 
@@ -34,7 +59,7 @@ Both exist because they test different ways of storing experience and spending c
 
 **Tiny_Global** is a historical experimental TinyMind variant with **1,032,973 parameters**. It adds learned historical retrieval and scalar ensemble-error feedback. It has demonstrated familiar-task benefits; it has **not** been promoted to the validated default. CC_D, CC_G and CC_DG are experimental training interventions on the unchanged ColumnContext architecture. See [checkpoint status](docs/architecture.md#checkpoint-status).
 
-## Latest verified progress — 70K on six failure-driven datasets
+## Historical tabular milestone — 70K on six failure-driven datasets
 
 **TinyMind-CC at 70K reduced geometric-mean test RMSE by 9.61% relative to its 64K reference**, improving on **5/6 datasets**. These results come from **six failure-driven evaluation datasets, not TabArena-Lite**. They are conditional test-partition results on datasets that informed development, rather than untouched dataset-level validation or an official leaderboard result.
 
@@ -149,7 +174,9 @@ On a chronological, 24-hour-ahead PM2.5 test across twelve Beijing stations, CC'
 
 Our evidence does not identify a unique capacity, optimization or credit-assignment cause. Lower support fitting error alone is insufficient: some diagnostic interventions improve interpolation while worsening independent predictions. See [limitations](docs/limitations.md).
 
-## Research roadmap
+## Historical tabular roadmap
+
+The milestones below retain the earlier tabular program. Active work has pivoted to forecasting: confirm the experience-memory benefit against fixed controls, repeat independent seeds, expand held-out temporal conditions and complete a full benchmark protocol.
 
 | Phase | Status | Milestone |
 | --- | --- | --- |
@@ -159,10 +186,8 @@ Our evidence does not identify a unique capacity, optimization or credit-assignm
 | **4. Sustained pretraining** | Completed through 70K; mixed evidence | Six-dataset CC improvement, TinyMind non-improvement; broader confirmation and replication remain needed |
 | **5. Independent validation** | Earlier Lite comparison and separate six-dataset test completed; external replication open | Wider untouched benchmarks, reliability and deployment evaluation |
 
-The earlier 64K→100K proposal led to a separately authorized experiment ending at **70K**, evaluated every 2K steps. Only that completed endpoint is supported by the current evidence. Newly reserved datasets and repeated training seeds are needed to test broader transfer. The inspected six-dataset and TabArena-Lite scores cannot become untouched confirmation after influencing development. This publication performs no training or private research changes.
+The earlier 64K→100K proposal led to an experiment ending at **70K**, evaluated every 2K steps. Only that completed endpoint is supported by the current evidence. Newly reserved datasets and repeated training seeds are needed to test broader transfer. The inspected six-dataset and TabArena-Lite scores cannot become untouched confirmation after influencing development.
 
 ## Inspect the evidence
 
-Every numerical chart is generated from public aggregate tables. [Provenance](benchmarks/provenance.json) records private source identifiers and SHA256 hashes; [figure sources](figures/README.md) map each chart to its public inputs. Public scripts verify the exported arithmetic and regenerate numerical figures. Full training or inference reproduction requires assets withheld from this showcase.
-
-No model weights, private model source, raw datasets, development logs or software reuse license are distributed here. Licensing for any future implementation or model release requires a separate decision.
+Every numerical chart is generated from aggregate tables. [Provenance](benchmarks/provenance.json) records evidence identifiers and SHA256 hashes; [figure sources](figures/README.md) map each chart to its inputs. The verification scripts check arithmetic and regenerate numerical figures; they do not replay neural inference or pretraining.

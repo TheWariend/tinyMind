@@ -1,0 +1,85 @@
+task,reference,RMSE,source_id,published_source_url
+ett1/H/short,Historical frozen reference,17.684954847374573,forecast-historical-reference,
+ett1/H/short,Seasonal naive,11.883451390936072,forecast-historical-reference,
+ett2/H/short,Historical frozen reference,13.994894337439815,forecast-historical-reference,
+ett2/H/short,Seasonal naive,12.319912826529087,forecast-historical-reference,
+ett1/15T/short,Historical frozen reference,4.324061101922056,forecast-historical-reference,
+ett1/15T/short,Seasonal naive,2.962465432212584,forecast-historical-reference,
+ett2/15T/short,Historical frozen reference,3.6635168183151205,forecast-historical-reference,
+ett2/15T/short,Seasonal naive,3.8233129495325704,forecast-historical-reference,
+jena_weather/H/short,Historical frozen reference,52.70648588172775,forecast-historical-reference,
+jena_weather/H/short,Seasonal naive,44.06762746768556,forecast-historical-reference,
+jena_weather/10T/short,Historical frozen reference,40.86540444977061,forecast-historical-reference,
+jena_weather/10T/short,Seasonal naive,44.566842044179744,forecast-historical-reference,
+solar/H/short,Historical frozen reference,49.0759551831615,forecast-historical-reference,
+solar/H/short,Seasonal naive,31.77661340977726,forecast-historical-reference,
+electricity/H/short,Historical frozen reference,3771.002976621615,forecast-historical-reference,
+electricity/H/short,Seasonal naive,1699.3287884026308,forecast-historical-reference,
+bizitobs_service/10S/short,Historical frozen reference,266.4790641163568,forecast-historical-reference,
+bizitobs_service/10S/short,Seasonal naive,271.17383827562037,forecast-historical-reference,
+bizitobs_application/10S/short,Historical frozen reference,4334.893320771457,forecast-historical-reference,
+bizitobs_application/10S/short,Seasonal naive,1984.482655947373,forecast-historical-reference,
+bitbrains_fast_storage/H/short,Historical frozen reference,1734.2385292881595,forecast-historical-reference,
+bitbrains_fast_storage/H/short,Seasonal naive,2049.0600309191664,forecast-historical-reference,
+bitbrains_rnd/H/short,Historical frozen reference,1331.4049701267895,forecast-historical-reference,
+bitbrains_rnd/H/short,Seasonal naive,1926.1664700885526,forecast-historical-reference,
+ett1/H/short,TiRex-2,9.767937940381422,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+ett2/H/short,TiRex-2,10.540959209509712,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+ett1/15T/short,TiRex-2,2.185754977339304,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+ett2/15T/short,TiRex-2,2.795880854674288,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+jena_weather/H/short,TiRex-2,32.437361718469084,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+jena_weather/10T/short,TiRex-2,28.58289254137422,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+solar/H/short,TiRex-2,13.752106964381491,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+electricity/H/short,TiRex-2,1237.9233445318562,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+bizitobs_service/10S/short,TiRex-2,49.2544715022196,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+bizitobs_application/10S/short,TiRex-2,653.6091390629928,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+bitbrains_fast_storage/H/short,TiRex-2,1746.6964029037072,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+bitbrains_rnd/H/short,TiRex-2,1388.665810088448,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TiRex-2-Zeroshot/all_results.csv
+ett1/H/short,Chronos-2,9.42598290078193,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+ett2/H/short,Chronos-2,10.39042796537137,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+ett1/15T/short,Chronos-2,2.354479532715814,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+ett2/15T/short,Chronos-2,2.6423667737539183,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+jena_weather/H/short,Chronos-2,32.86945394292801,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+jena_weather/10T/short,Chronos-2,30.41294008482532,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+solar/H/short,Chronos-2,27.795015887436836,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+electricity/H/short,Chronos-2,1357.795516288831,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+bizitobs_service/10S/short,Chronos-2,42.85061537592241,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+bizitobs_application/10S/short,Chronos-2,589.5736463279583,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+bitbrains_fast_storage/H/short,Chronos-2,1733.6187708033528,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+bitbrains_rnd/H/short,Chronos-2,1436.9646596565078,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Chronos-2/all_results.csv
+ett1/H/short,Moirai-2,10.511313438415527,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+ett2/H/short,Moirai-2,10.552640914916992,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+ett1/15T/short,Moirai-2,2.24076771736145,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+ett2/15T/short,Moirai-2,2.837294101715088,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+jena_weather/H/short,Moirai-2,33.408329010009766,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+jena_weather/10T/short,Moirai-2,35.53970718383789,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+solar/H/short,Moirai-2,28.32734680175781,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+electricity/H/short,Moirai-2,1285.851806640625,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+bizitobs_service/10S/short,Moirai-2,69.26752471923828,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+bizitobs_application/10S/short,Moirai-2,788.57568359375,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+bitbrains_fast_storage/H/short,Moirai-2,1715.41552734375,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+bitbrains_rnd/H/short,Moirai-2,1495.1832275390625,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv
+ett1/H/short,TimesFM-3,9.7418760630615,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+ett2/H/short,TimesFM-3,10.19611669538568,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+ett1/15T/short,TimesFM-3,2.145592906813958,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+ett2/15T/short,TimesFM-3,2.596824615690992,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+jena_weather/H/short,TimesFM-3,32.71270543708311,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+jena_weather/10T/short,TimesFM-3,28.30938205526907,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+solar/H/short,TimesFM-3,26.51579832339969,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+electricity/H/short,TimesFM-3,1121.4271245949078,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+bizitobs_service/10S/short,TimesFM-3,45.15512922782066,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+bizitobs_application/10S/short,TimesFM-3,552.3522225697818,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+bitbrains_fast_storage/H/short,TimesFM-3,1654.148675464046,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+bitbrains_rnd/H/short,TimesFM-3,1348.7279177800565,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv
+ett1/H/short,Toto Open Base 1.0,12.30860616,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+ett2/H/short,Toto Open Base 1.0,12.37053829,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+ett1/15T/short,Toto Open Base 1.0,3.11526693,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+ett2/15T/short,Toto Open Base 1.0,3.080621835,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+jena_weather/H/short,Toto Open Base 1.0,45.27747692,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+jena_weather/10T/short,Toto Open Base 1.0,56.78871311,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+solar/H/short,Toto Open Base 1.0,29.87287938,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+electricity/H/short,Toto Open Base 1.0,2924.024286,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+bizitobs_service/10S/short,Toto Open Base 1.0,132.0617588,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+bizitobs_application/10S/short,Toto Open Base 1.0,3456.418411,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+bitbrains_fast_storage/H/short,Toto Open Base 1.0,4899.94062,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv
+bitbrains_rnd/H/short,Toto Open Base 1.0,3543.538341,forecast-published-reference,https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Toto_Open_Base_1.0/all_results.csv

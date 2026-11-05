@@ -1,0 +1,12 @@
+candidate,reference,geometric_RMSE_gap_percent,wins,losses,ties,configurations,status,source_id
+Experience-adapted forecaster,Frozen rolling forecaster,-7.3287061762308925,12,0,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,Fixed RLS,-0.19937072947572299,6,6,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,Fixed initial policy,-3.3179586630524893,12,0,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,Fixed NLMS,-9.852101293517935,10,2,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,Historical frozen reference,-7.328717194799084,12,0,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,Seasonal naive,13.305419139359476,5,7,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,TiRex-2,89.58744542223032,2,10,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,Chronos-2,79.9877920237158,2,10,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,Moirai-2,64.45579375922475,2,10,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,TimesFM-3,88.18065315788913,1,11,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary
+Experience-adapted forecaster,Toto Open Base 1.0,-3.6143803015789233,3,9,0,12,descriptive_one_seed_no_CI,forecast-comparison-summary

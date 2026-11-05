@@ -1,6 +1,8 @@
 # Architecture
 
-This page preserves previously published architecture descriptions through 64K. Current private architecture specifications and implementations are withheld. The latest update publishes only [verified six-dataset results](../benchmarks/results.md#latest-70k-failure-driven-regression-six-datasets), not implementation changes.
+This page preserves previously published tabular architecture descriptions through 64K. That direction is now parked.
+
+The active forecasting direction combines a shared recurrent forecasting core, learned features, persistent stream-local residual memory and confidence-controlled correction. Shared weights stay frozen during online evaluation; already arrived observations update memory. See the [conceptual mechanism and audited pilot](forecasting-research-update.md#mechanism-at-a-conceptual-level).
 
 TinyMind and TinyMind-CC are separate research prototypes. Their common interface is a bounded numerical regression task with observed input/outcome pairs and independent query inputs. Shared neural weights are pretrained across functions and frozen during task adaptation. Synthetic confirmation primarily evaluates D4/8/16/32 features and K4/8/16/32/64 supports, with D6/12/24 held out. Real interfaces accept intermediate dimensions up to 32. The 2 November fixed 64K endpoints use the original architectures; later large-support execution is described separately below.
 
@@ -62,9 +64,9 @@ The Transformer reference has **994,945 parameters**, four width-128 axial block
 | Tiny_H2 and CC_R2 | Earlier unsuccessful learned-mechanism hypotheses; no matched mechanism advantage demonstrated |
 | Original TinyMind 64K, seed 1877 / CC 64K, seed 1811 | Earlier fixed research endpoints; audited, experimental and unpromoted; no public weights |
 | Separate validation-selected Tiny 62K / CC 64K | Earlier selection records retained; the 32K→64K study reports fixed 64K for both |
-| Latest six-dataset 70K experiment | Both 70K endpoints completed; validation selected Tiny64K / CC70K; experimental, closed-source, no checkpoint release |
+| Latest six-dataset 70K experiment | Both 70K endpoints completed; validation selected Tiny64K / CC70K; experimental |
 | New ongoing or unaudited variants | Excluded from this release's claims |
 
-“Validated finding” describes an audited observation. It does not mean an experimental checkpoint has passed promotion, deployment or independent replication. This repository releases no checkpoints or model runtime.
+“Validated finding” describes an audited observation. It does not mean an experimental checkpoint has passed promotion, deployment or independent replication.
 
-Provenance: architecture sources, parameter audits and historical reports are identified and hashed in [provenance.json](../benchmarks/provenance.json). The source code remains private.
+Provenance: architecture sources, parameter audits and historical reports are identified and hashed in [provenance.json](../benchmarks/provenance.json).

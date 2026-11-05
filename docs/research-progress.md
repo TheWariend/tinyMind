@@ -1,6 +1,16 @@
 # Research progress
 
-Evidence cutoff: **2 November 2026**. These milestones preserve both positive observations and rejected hypotheses. A failed gate does not erase a small gain; a small gain does not establish the wider goal.
+Evidence cutoff: **5 November 2026**. These milestones preserve both positive observations and rejected hypotheses. A failed gate does not erase a small gain; a small gain does not establish the wider goal.
+
+## Current direction — forecasting with persistent experience
+
+Active tabular development is parked because its limited gains did not establish the consistent competitive real-world improvements sought. We have pivoted to time-series forecasting while retaining the original experience-learning question.
+
+The completed selected GIFT pilot achieved **7.33% lower geometric RMSE versus our paired frozen forecaster**, with **12/12 configuration wins**. The incremental gain over fixed RLS on the same learned features was only **0.20%, with six wins and six losses**. Independent-query and save/reload tests support a bounded adaptation/persistence result; several larger reference models remain much more accurate, and forgetting persists.
+
+This is a one-seed, 12-configuration short-horizon pilot with 13,952 original origins per method, not a full arena result. Real benchmark data and feedback did not enter outer optimization; causal online state uses elapsed observations only. An ongoing scaling experiment has no published outcome.
+
+[Full forecasting research update](forecasting-research-update.md) describes the conceptual mechanism, every selected configuration, controls and negative results. The chronology below preserves earlier tabular research.
 
 ## Phase 1 — Architecture research: prototypes completed
 
@@ -70,7 +80,7 @@ Both trajectories reached the shortened 70K endpoint, adding 6,000 steps and end
 
 Against traditional ML on identical up-to-64 support rows, CC had 13.44% lower geometric-mean RMSE than CatBoost (5/6 wins) but 4.61% higher than XGBoost (3/6 wins). With full-training tree baselines it was 5.01% behind CatBoost (3/6 wins) and 18.77% behind XGBoost (2/6 wins). Both data regimes are retained. TabPFN 3.5 was unavailable in this experiment, so no comparison to it is supported.
 
-These are six-dataset, one-seed point estimates, conditional on datasets that informed development. No causal control isolates failure-driven adaptation, and test inputs cover only 4–12 features. Broader real-world accuracy, official TabArena standing and commercial superiority remain unestablished. Current architecture/training details, internal experiments and assets remain private. [Complete current evidence](../benchmarks/results.md#latest-70k-failure-driven-regression-six-datasets).
+These are six-dataset, one-seed point estimates, conditional on datasets that informed development. No causal control isolates failure-driven adaptation, and test inputs cover only 4–12 features. Broader real-world accuracy, official TabArena standing and commercial superiority remain unestablished. [Complete current evidence](../benchmarks/results.md#latest-70k-failure-driven-regression-six-datasets).
 
 ## Historical unsuccessful hypotheses and what they leave open
 
@@ -95,10 +105,10 @@ Excluded whole generating programs include order statistics, periodic remainder,
 
 The earlier 64K→100K direction became an authorized experiment ending at 70K, using separate development data and evaluations every 2K steps. CC improved on the six-dataset test aggregate; TinyMind did not. Learning through 100K has not been demonstrated. Further progress needs broader separately reserved confirmation and training-seed replication; it is not guaranteed by this result.
 
-Known six-dataset and TabArena-Lite outcomes cannot become untouched confirmation after influencing development. This publication launches no training and changes no private research.
+Known six-dataset and TabArena-Lite outcomes cannot become untouched confirmation after influencing development.
 
 ## Phase 5 — Independent validation: initial comparison completed, replication open
 
-Expand genuinely untouched dataset and environment tests, separate evidence count from recency, assess reliability and latency under deployed workloads, and enable independent replication through a deliberate asset/licensing decision. Agent adaptation and personalization have no validated results in this release. This roadmap initiates no new training or release.
+Expand genuinely untouched dataset and environment tests, separate evidence count from recency, assess reliability and latency under deployed workloads, and enable independent replication. Agent adaptation and personalization have no validated results.
 
 Source reports and hashes: [provenance.json](../benchmarks/provenance.json). Full benchmark conditions: [results.md](../benchmarks/results.md).

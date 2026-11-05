@@ -1,0 +1,61 @@
+task,method,origins,horizon,RMSE,diagnostic_NMSE,source_id
+ett1/H/short,Frozen rolling forecaster,20,48,17.684954847374573,1.6416304929768581,forecast-paired-aggregates
+ett1/H/short,Fixed RLS,20,48,17.5236425953722,1.3789939907231599,forecast-paired-aggregates
+ett1/H/short,Fixed initial policy,20,48,17.39517489116546,1.4617983842957625,forecast-paired-aggregates
+ett1/H/short,Experience-adapted forecaster,20,48,17.322262457965984,1.3576551825881085,forecast-paired-aggregates
+ett1/H/short,Fixed NLMS,20,48,19.286447595611463,2.1607199539798225,forecast-paired-aggregates
+ett2/H/short,Frozen rolling forecaster,20,48,13.994894337439815,1.7719512699862479,forecast-paired-aggregates
+ett2/H/short,Fixed RLS,20,48,13.203515323895365,1.5570832280029063,forecast-paired-aggregates
+ett2/H/short,Fixed initial policy,20,48,13.54519994939565,1.6396097284907094,forecast-paired-aggregates
+ett2/H/short,Experience-adapted forecaster,20,48,13.224677939257871,1.5547055996897174,forecast-paired-aggregates
+ett2/H/short,Fixed NLMS,20,48,14.437192356863141,1.8828141445364193,forecast-paired-aggregates
+ett1/15T/short,Frozen rolling forecaster,20,48,4.324061101922056,4.181389716952326,forecast-paired-aggregates
+ett1/15T/short,Fixed RLS,20,48,3.5475377223869486,2.5223713895772018,forecast-paired-aggregates
+ett1/15T/short,Fixed initial policy,20,48,3.9461576197300396,3.3379397896841874,forecast-paired-aggregates
+ett1/15T/short,Experience-adapted forecaster,20,48,3.6370186539951344,2.673733534557387,forecast-paired-aggregates
+ett1/15T/short,Fixed NLMS,20,48,4.734794593221116,3.588227568463329,forecast-paired-aggregates
+ett2/15T/short,Frozen rolling forecaster,20,48,3.6635168183151205,2987192283.691126,forecast-paired-aggregates
+ett2/15T/short,Fixed RLS,20,48,3.5898505193133237,4101818027.185745,forecast-paired-aggregates
+ett2/15T/short,Fixed initial policy,20,48,3.613258739590538,3153446189.4678783,forecast-paired-aggregates
+ett2/15T/short,Experience-adapted forecaster,20,48,3.5470169689101954,3269375571.0627027,forecast-paired-aggregates
+ett2/15T/short,Fixed NLMS,20,48,3.9210819668181753,4912338521.969767,forecast-paired-aggregates
+jena_weather/H/short,Frozen rolling forecaster,19,48,52.70648588172775,2568626464815.106,forecast-paired-aggregates
+jena_weather/H/short,Fixed RLS,19,48,44.81849703804058,4777764080681.527,forecast-paired-aggregates
+jena_weather/H/short,Fixed initial policy,19,48,48.91228669829024,2749219233435.2686,forecast-paired-aggregates
+jena_weather/H/short,Experience-adapted forecaster,19,48,45.79514735973328,3603150465337.06,forecast-paired-aggregates
+jena_weather/H/short,Fixed NLMS,19,48,48.997491541669355,9886079146537.742,forecast-paired-aggregates
+jena_weather/10T/short,Frozen rolling forecaster,20,48,40.86540444977061,22897628450065.516,forecast-paired-aggregates
+jena_weather/10T/short,Fixed RLS,20,48,38.06706234140776,61171456860736.96,forecast-paired-aggregates
+jena_weather/10T/short,Fixed initial policy,20,48,39.46517057727749,21970988818704.535,forecast-paired-aggregates
+jena_weather/10T/short,Experience-adapted forecaster,20,48,38.17027525816506,38047087576426.85,forecast-paired-aggregates
+jena_weather/10T/short,Fixed NLMS,20,48,41.055957320127405,12821560749537.768,forecast-paired-aggregates
+solar/H/short,Frozen rolling forecaster,2603,48,49.075931520268185,1.185620815067865,forecast-paired-aggregates
+solar/H/short,Fixed RLS,2603,48,48.339680786017254,1.2958583712868845,forecast-paired-aggregates
+solar/H/short,Fixed initial policy,2603,48,48.68875437258485,1.201100363093796,forecast-paired-aggregates
+solar/H/short,Experience-adapted forecaster,2603,48,48.29800861644454,1.251151490067863,forecast-paired-aggregates
+solar/H/short,Fixed NLMS,2603,48,54.25275069417256,1.3992176402621226,forecast-paired-aggregates
+electricity/H/short,Frozen rolling forecaster,7400,48,3771.00269576232,9661993592791.568,forecast-paired-aggregates
+electricity/H/short,Fixed RLS,7400,48,3631.1197743705775,6685048399647.029,forecast-paired-aggregates
+electricity/H/short,Fixed initial policy,7400,48,3709.056041453968,8439172206828.756,forecast-paired-aggregates
+electricity/H/short,Experience-adapted forecaster,7400,48,3640.5651102693882,8356197326142.698,forecast-paired-aggregates
+electricity/H/short,Fixed NLMS,7400,48,4502.031863454894,14958990813196.08,forecast-paired-aggregates
+bizitobs_service/10S/short,Frozen rolling forecaster,315,60,266.4790641163568,2035099439143813.8,forecast-paired-aggregates
+bizitobs_service/10S/short,Fixed RLS,315,60,235.6185717862838,455353001692613.06,forecast-paired-aggregates
+bizitobs_service/10S/short,Fixed initial policy,315,60,245.59804730159973,1341299064545302.0,forecast-paired-aggregates
+bizitobs_service/10S/short,Experience-adapted forecaster,315,60,230.93495391182609,696267177205962.0,forecast-paired-aggregates
+bizitobs_service/10S/short,Fixed NLMS,315,60,216.09752361707703,391813687511837.5,forecast-paired-aggregates
+bizitobs_application/10S/short,Frozen rolling forecaster,15,60,4334.893320771457,214.84955830925108,forecast-paired-aggregates
+bizitobs_application/10S/short,Fixed RLS,15,60,3781.2825456163646,47.06359992283491,forecast-paired-aggregates
+bizitobs_application/10S/short,Fixed initial policy,15,60,3940.9606397129814,133.24554510753677,forecast-paired-aggregates
+bizitobs_application/10S/short,Experience-adapted forecaster,15,60,3662.9537896610364,68.85988569942222,forecast-paired-aggregates
+bizitobs_application/10S/short,Fixed NLMS,15,60,3135.3500259183465,164.26258812062952,forecast-paired-aggregates
+bitbrains_fast_storage/H/short,Frozen rolling forecaster,2500,48,1734.2418811120892,7.402599297139299e+17,forecast-paired-aggregates
+bitbrains_fast_storage/H/short,Fixed RLS,2500,48,1644.6268185632493,4.902493103710891e+17,forecast-paired-aggregates
+bitbrains_fast_storage/H/short,Fixed initial policy,2500,48,1683.3126847529952,5.963418493495867e+17,forecast-paired-aggregates
+bitbrains_fast_storage/H/short,Experience-adapted forecaster,2500,48,1662.0037715480366,5.1895559787567066e+17,forecast-paired-aggregates
+bitbrains_fast_storage/H/short,Fixed NLMS,2500,48,1685.7604578071528,5.604217072999844e+17,forecast-paired-aggregates
+bitbrains_rnd/H/short,Frozen rolling forecaster,1000,48,1331.4012383641978,1062769615555688.9,forecast-paired-aggregates
+bitbrains_rnd/H/short,Fixed RLS,1000,48,1324.7318422765702,601789858443413.1,forecast-paired-aggregates
+bitbrains_rnd/H/short,Fixed initial policy,1000,48,1313.8882834919393,845027975809849.0,forecast-paired-aggregates
+bitbrains_rnd/H/short,Experience-adapted forecaster,1000,48,1309.535543625597,692181735851536.6,forecast-paired-aggregates
+bitbrains_rnd/H/short,Fixed NLMS,1000,48,2001.1991737725411,614525080241532.1,forecast-paired-aggregates

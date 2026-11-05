@@ -2,6 +2,14 @@
 
 The experiments ask whether examples improve predictions on independent queries. Within-task adaptation, pretraining progress, mechanism attribution and real-world transfer are separate questions with separate controls.
 
+## Current forecasting evidence
+
+The active study uses the same original splits, horizons and all forecast origins of 12 selected short-horizon GIFT configurations. Five paired methods share rolling inputs; elapsed window labels become experience only at later origins, never before the query they score. Shared neural weights freeze during evaluation. Benchmark examples and feedback are excluded from synthetic outer training.
+
+Across configurations we report geometric RMSE ratios, wins/losses and diagnostic NMSE. One seed and no confidence intervals are disclosed. Public player rows have unequal pretraining and a different online protocol; they are pinned published references, not controlled reruns. Separate synthetic streams measure independent-query prediction, observed-example fitting, retention and serialized-state persistence.
+
+[The forecasting study card](forecasting-research-update.md) documents the evaluation conditions and conceptual mechanism. The sections below preserve historical tabular methodology.
+
 ## Common numerical-regression protocol
 
 Each task provides ordinary input/outcome pairs. Query labels are withheld from adaptation. Shared weights stay frozen during evaluation; only task-local weights or context change. K curves use nested support prefixes, generally K4/8/16/32/64, disjoint from query rows. D4/8/16/32 is the main synthetic coverage; D6/12/24 is a withheld-dimensional track in later pilots.
@@ -66,9 +74,9 @@ The primary endpoint uses each dataset's largest available nested support budget
 
 Traditional ML has two explicit regimes: fixed 500-tree CatBoost/XGBoost trained on identical neural support rows, and the same configurations trained on all available training rows. No test tuning was used. Full-training baselines have more labels on five datasets and the same 36 labels on Daily Demand. Neural synthetic pretraining is additional data/compute exposure; neither regime is a matched total-compute experiment. TabPFN 3.5 was unavailable and not evaluated. The six-dataset results are **not TabArena-Lite**, and the earlier published TabArena baselines are not reused here.
 
-Aggregate RMSE ratios use `exp(mean(log(candidate RMSE / reference RMSE)))` with equal dataset weights. Positive `100 × (1 − ratio)` favors the candidate. Intervals are not reported; one seed per architecture and six fixed test partitions do not establish broad statistical robustness. No control isolates the effect of failure-driven curriculum adaptation. Research code, current architectures, training details, checkpoints, internal experiments and dataset files remain private; only verified aggregate outcomes and evaluation conditions are published.
+Aggregate RMSE ratios use `exp(mean(log(candidate RMSE / reference RMSE)))` with equal dataset weights. Positive `100 × (1 − ratio)` favors the candidate. Intervals are not reported; one seed per architecture and six fixed test partitions do not establish broad statistical robustness. No control isolates the effect of failure-driven curriculum adaptation.
 
-This documentation update runs no training or model inference and changes no private research. Newly reserved datasets and additional independent training seeds would be needed for broader confirmation.
+Newly reserved datasets and additional independent training seeds would be needed for broader confirmation.
 
 ## Mechanism attribution
 
