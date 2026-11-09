@@ -4,11 +4,17 @@ The experiments ask whether examples improve predictions on independent queries.
 
 ## Current forecasting evidence
 
-The active study uses the same original splits, horizons and all forecast origins of 12 selected short-horizon GIFT configurations. Five paired methods share rolling inputs; elapsed window labels become experience only at later origins, never before the query they score. Shared neural weights freeze during evaluation. Benchmark examples and feedback are excluded from synthetic outer training.
+The [9 November study card](current-research-2026-11-09.md) separates the selected 12-configuration GIFT pilot from a five-source, 1,720-window real validation pool. Core training combines real and synthetic experience. Two data seeds share one initialization; the selected pilot and absence of independent replication limit generalization claims.
+
+Checkpoint selection uses the real validation pool before pilot reporting. Shared weights freeze during evaluation, and stream-local memory receives only already arrived forecast outcomes. Published competitors are pinned references with different pretraining and hardware; matching configuration keys do not establish exact forecast-origin equivalence. All new results are descriptive, without confidence intervals.
+
+The original 5 November study uses the same original splits, horizons and all forecast origins of 12 selected short-horizon GIFT configurations. Five paired methods share rolling inputs; elapsed window labels become experience only at later origins, never before the query they score. Shared neural weights freeze during evaluation. Benchmark examples and feedback were excluded from that study's synthetic outer training.
 
 Across configurations we report geometric RMSE ratios, wins/losses and diagnostic NMSE. One seed and no confidence intervals are disclosed. Public player rows have unequal pretraining and a different online protocol; they are pinned published references, not controlled reruns. Separate synthetic streams measure independent-query prediction, observed-example fitting, retention and serialized-state persistence.
 
 [The forecasting study card](forecasting-research-update.md) documents the evaluation conditions and conceptual mechanism. The sections below preserve historical tabular methodology.
+
+The later CC continuation through 150K uses all thirteen official regression tasks, the fixed r0f0s0 outer split, eight inner folds and full-training refit, retaining every original support row and column. One original neural seed and previously inspected datasets do not establish independent dataset-level confirmation. Published baseline defaults were not rerun. This study is separate from the earlier 64K and six-dataset 70K protocols below.
 
 ## Common numerical-regression protocol
 

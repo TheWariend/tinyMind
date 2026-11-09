@@ -1,0 +1,17 @@
+suite,candidate,reference,configurations,geometric_RMSE_ratio,RMSE_change_percent,wins,losses,ties,status,source_id,macro_NMSE
+tabarena-lite-regression,CC-133594,CC-133594,13,1.0,0.0,0,0,13,descriptive_no_CI,cc-tabular-milestone-aggregates,0.42404252540096077
+tabarena-lite-regression,CC-135000,CC-133594,13,1.00142765614912,0.14276561491199935,9,4,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4251508718439356
+tabarena-lite-regression,CC-137000,CC-133594,13,1.0194012352185056,1.9401235218505564,4,9,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.43216112902142434
+tabarena-lite-regression,CC-139000,CC-133594,13,1.0075203967840225,0.7520396784022498,5,8,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.42581218700585693
+tabarena-lite-regression,CC-141000,CC-133594,13,1.0097498728897234,0.9749872889723399,6,7,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.42956545307594457
+tabarena-lite-regression,CC-143000,CC-133594,13,1.0126417391057203,1.2641739105720307,4,9,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.43301202074983347
+tabarena-lite-regression,CC-145000,CC-133594,13,1.0002802491595009,0.028024915950086715,8,5,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4230277160296879
+tabarena-lite-regression,CC-147000,CC-133594,13,0.994760493254563,-0.523950674543705,8,5,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4211208083265584
+tabarena-lite-regression,CC-149000,CC-133594,13,1.006947971853259,0.6947971853259016,4,9,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.43156245382639447
+tabarena-lite-regression,CC-150000,CC-133594,13,1.007140762741231,0.7140762741230988,6,7,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4308100355299391
+tabarena-lite-regression,CC-150000,TabPFN-2.5,13,1.678573983840155,67.8573983840155,0,13,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4308100355299391
+tabarena-lite-regression,CC-150000,TabPFN-3.0,13,1.7300079879418944,73.00079879418944,0,13,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4308100355299391
+tabarena-lite-regression,CC-150000,TabPFN-3.5,13,1.7570948851713037,75.70948851713038,0,13,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4308100355299391
+tabarena-lite-regression,CC-150000,XGBoost,13,1.527250806117438,52.72508061174379,0,13,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4308100355299391
+tabarena-lite-regression,CC-150000,CatBoost,13,1.5684489435159077,56.84489435159077,0,13,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4308100355299391
+tabarena-lite-regression,CC-150000,RandomForest,13,1.453363454845585,45.33634548455849,0,13,0,descriptive_no_CI,cc-tabular-milestone-aggregates,0.4308100355299391

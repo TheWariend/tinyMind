@@ -1,0 +1,215 @@
+{
+  "as_of": "2026-11-09",
+  "study_id": "forecasting-research-2026-11-09",
+  "sources": [
+    {
+      "id": "forecast-initial-pilot",
+      "sha256": "e95b3cf9335c902a4e3ddbc632e6eaa0e7826cb5ccfcf094c470018220b191a3",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-seed-replication-pilot",
+      "sha256": "fc1f1c99c7cc3048d9b413267a2c7c24eb5a1f08027072b8d3f44bb2f21fe3db",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-seed-paired-pilot",
+      "sha256": "e155e29b2d28623c6ffed2710a6e1960009a4f8902f5e1b2a88eed92c26404db",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-body-2000-pilot",
+      "sha256": "074d25f55e0e0b8a1f66e5c1a56d76110f00c5610a6e5dea5e3c2b368fc14011",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-body-3000-pilot",
+      "sha256": "902f01a2851fe42ea03ed2377886727163916843a20ece3be72ee83951c4dbc7",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-body-4000-pilot",
+      "sha256": "847dd11a555e3388b8098b54b6954a976bea093124c32be34d766cfa3b03a398",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-body-4000-adapted-pilot",
+      "sha256": "9578e85b932aaa5bfb602604d00c16afd1a682269afa591b864eceb17051bb29",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-published-reference-pilot",
+      "sha256": "8f3db7ebb071104cda8309666c466a7a69ed33300776670bdae7889d5a53bf7e",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-seed-real-validation",
+      "sha256": "ba72fc8e136c31162097268445a82825473fbad0ebebf4c6d80a9a859b650d78",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-seed-paired-real-validation",
+      "sha256": "c7ab09277f0367472f2343d88680b8aa4a7d38bc1d74134def415a0a76941c51",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-real_body1500",
+      "sha256": "968596cdc1c5e631c6326f4b08e0bbca18c9b8809539cf581aeb7a4260199764",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-real_body2000",
+      "sha256": "d00e91e8d5b4d3ce6c2d57b32cb80fa9d9b13012a6c10aca9898e58be26a069d",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-real_three_states",
+      "sha256": "a1b7174145b6580af25184e45792099d1bb3f9192e2bdcbf2d7ec44071326fab",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-body-3000-real-validation",
+      "sha256": "a21ddd363921bdc68f19a7f134cd369e3e67b5b6c8583cc254a110e1a1247a0e",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-body-4000-real-validation",
+      "sha256": "e027019ef49b7cceeb4e35eb86f95ec66e29df935302ab24fa9e75e7610899e9",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-body-4000-adapted-real-validation",
+      "sha256": "baa041931b471a1f7334e3e908478d52d616750e2f9122904d54a23c76c4b7f2",
+      "kind": "configuration aggregate"
+    },
+    {
+      "id": "forecast-synthetic-paired-panel",
+      "sha256": "dda0c62c0bd2199a04afba4d33fd679b822f37120732f16532b10115b8589af1",
+      "kind": "synthetic condition aggregate evidence"
+    },
+    {
+      "id": "forecast-synthetic-body-continuation",
+      "sha256": "c73f60515ce1ee68cc5c524b438d761f9faa25f73167576e1900083f09bf5869",
+      "kind": "synthetic panel aggregate"
+    },
+    {
+      "id": "cc-tabular-milestone-aggregates",
+      "sha256": "259b58b841ae8d82e891772c114c29999fe5405ea2419544c06f3a5cd1949195",
+      "kind": "configuration aggregate"
+    }
+  ],
+  "exports": [
+    {
+      "file": "benchmarks/current-forecasting-pilot.csv",
+      "sha256": "b0461543c2e5238d9ca5d5f60369256a34cc0b16f2084b3866682ea8fa6e6a75",
+      "data_rows": 156
+    },
+    {
+      "file": "benchmarks/current-forecasting-real-validation.csv",
+      "sha256": "2f778b226fdaeafa0a138684443a84be05778f54d64f77ff6520d2c4dffd771a",
+      "data_rows": 55
+    },
+    {
+      "file": "benchmarks/current-forecasting-comparisons.csv",
+      "sha256": "adb185b9cea8059014385aabebd267d4d15f25bddbf44d78991082bdd6221704",
+      "data_rows": 38
+    },
+    {
+      "file": "benchmarks/current-synthetic-summary.csv",
+      "sha256": "b18e00faef06ea69f86314326fbcd5a7ab52b6acbefa3d25630a4427de66fb72",
+      "data_rows": 12
+    },
+    {
+      "file": "benchmarks/current-tabarena-results.csv",
+      "sha256": "8c62271fe7c81fcc8cc9ba4444381823234fa0f0f486872b006c4239681f6850",
+      "data_rows": 208
+    },
+    {
+      "file": "benchmarks/current-tabarena-summary.csv",
+      "sha256": "adc94394dc2a7e5c84b566f484ed109dce7527947530eaf960e5ecbfb483cd15",
+      "data_rows": 16
+    }
+  ],
+  "forecasting": {
+    "pilot_configurations": 12,
+    "origins_per_measured_method": 13952,
+    "validation_configurations": 5,
+    "validation_windows": 1720,
+    "data_seeds": [
+      1811,
+      1812
+    ],
+    "initializations": 1,
+    "confidence_intervals": false,
+    "shared_optimizer_updates_during_evaluation": 0,
+    "real_training_sources": [
+      "Azure blob access",
+      "EIA electricity demand",
+      "NDBC weather",
+      "Online Retail II",
+      "WebTRIS traffic"
+    ],
+    "selected_state": "mixed-1812-4000",
+    "selected_on": "five-source-validation",
+    "pilot_used_for_selection": false,
+    "published_reference_origin_hash_equivalence_verified": false,
+    "published_references": [
+      {
+        "name": "Moirai2",
+        "url": "https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/Moirai2/all_results.csv",
+        "sha256": "9f20c894fe8e9788fb11334568afeb51e3e549e3f5eeb27e2412aaec639bd376"
+      },
+      {
+        "name": "TimesFM-3",
+        "url": "https://raw.githubusercontent.com/SalesforceAIResearch/gift-eval/82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18/results/TimesFM-3/all_results.csv",
+        "sha256": "66a48e19a7e81c21f28b13f584dab29e03f178451347f1d9bd42d0db9c3319c9"
+      }
+    ],
+    "gift_revision": "82f89c3a2de1e7cd98e35dbcb6917cb4ebb6fd18",
+    "data_revision": "30841734ac5cfddbd0c3bad6d09d2b6b32becbb0"
+  },
+  "verification_scope": "Aggregate hashes, coverage and arithmetic; no neural inference or bootstrap regeneration.",
+  "archived_tabular": {
+    "checkpoints": [
+      133594,
+      135000,
+      137000,
+      139000,
+      141000,
+      143000,
+      145000,
+      147000,
+      149000,
+      150000
+    ],
+    "datasets": 13,
+    "training_seeds": 1,
+    "outer_splits": 1,
+    "inner_folds": 8,
+    "split": "r0f0s0",
+    "original_rows_and_columns_retained": true,
+    "published_baselines_rerun": false,
+    "confidence_intervals": false,
+    "official_leaderboard_rank": null,
+    "status": "stopped",
+    "outcome": "failed_to_deliver_competitive_performance"
+  },
+  "figures": [
+    {
+      "file": "figures/forecasting-current-results.svg",
+      "sha256": "c6ebc0c55f205eded7d5b66a97b66df4986be85eaa7443ad67cb088778576845",
+      "source_files": [
+        "benchmarks/current-forecasting-pilot.csv"
+      ],
+      "description": "Current experience-enabled 4K forecasting model; all 12 configuration RMSE reductions versus seasonal naive."
+    },
+    {
+      "file": "figures/forecasting-learning-curves.svg",
+      "sha256": "a67f1276fdb9d6ccb68cccb7570dd8064179938a545201d8d4ed17ac0ca29389",
+      "source_files": [
+        "benchmarks/current-forecasting-comparisons.csv"
+      ],
+      "description": "Current data-seed-1812 core curve at measured checkpoints; separate experience-enabled points at 2K and 4K."
+    }
+  ]
+}

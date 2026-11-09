@@ -4,7 +4,13 @@ TinyMind studies experience-dependent prediction, with historical tabular experi
 
 ## Current forecasting limits
 
-The completed GIFT pilot covers 12 selected short-horizon configurations, not the full benchmark or fev. It uses one seed and has no confidence intervals. A 7.33% geometric RMSE improvement over our frozen forecaster does not imply leadership over larger players: several remain substantially better, and seasonal naive wins overall.
+The current model is evaluated on a selected 12-configuration pilot. Two data seeds share one initialization and have different pilot outcomes. The 4K experience mode improves pilot RMSE but worsens the separate five-source validation pool; the frozen core remains validation-selected. Mixed-data training also regresses on synthetic controls. These results do not establish broader-horizon or independent external performance.
+
+[The current forecasting study](current-research-2026-11-09.md) reports the complete comparisons and statistical scope.
+
+## Original 5 November forecasting limits
+
+The original GIFT pilot covers 12 selected short-horizon configurations, not the full benchmark or fev. It uses one seed and has no confidence intervals. Its 7.33% geometric RMSE improvement over our frozen forecaster does not imply leadership over larger players: several remain substantially better, and seasonal naive wins overall in that study.
 
 The learned policy's extra gain versus fixed RLS is only 0.20%, with six wins and six losses. Both controls use learned features; this does not isolate the projection's contribution. Published player scores have unequal pretraining and zero-shot/online information-use protocols.
 
@@ -27,7 +33,7 @@ Tiny_Global's familiar gains are reproducible against matched readers; its stron
 
 No gated 10K/12K extension was run in the historical plateau-repair study. Missing endpoints cannot be interpreted as zero error or projected improvements. Later, separately designed original-architecture runs reached 32K and 64K with additional improvements. The 4K–8K plateau was therefore not a permanent ceiling. No experimental checkpoint was promoted.
 
-The earlier 32K→64K familiar NMSE gains of 2.25% / 4.77% coexist with a Tiny unseen-structure regression of 0.74%, versus a CC improvement of 6.66%. Tiny excluded-operation and both expanded-robustness intervals cross zero; CC expanded robustness nominally worsens 3.55%. Continued training is not uniformly beneficial. The later experiment ended at 70K; no 100K result exists.
+The earlier 32K→64K familiar NMSE gains of 2.25% / 4.77% coexist with a Tiny unseen-structure regression of 0.74%, versus a CC improvement of 6.66%. Tiny excluded-operation and both expanded-robustness intervals cross zero; CC expanded robustness nominally worsens 3.55%. Continued training is not uniformly beneficial. The subsequent six-dataset campaign ended at 70K; its results remain separate from the later CC continuation.
 
 More observations can improve query prediction while earlier support predictions drift. The evidence does not separate all sample-specific fitting from knowledge damage or establish loss-free retention. Historical retrieval is bounded; persistent reusable concepts across tasks remain untested.
 
@@ -57,7 +63,11 @@ The six datasets informed development. Separate test partitions and selection be
 
 CC beats matched-support CatBoost overall (**13.44% lower RMSE**, 5/6 wins), but is behind matched-support XGBoost (**4.61% higher**, 3/6 wins). Full-training baselines generally have more labels; CC is behind CatBoost (**5.01% higher**, 3/6 wins) and XGBoost (**18.77% higher**, 2/6 wins). A limited-support win does not establish general or commercial ML superiority. Pretrained neural models and task-fitted trees have different total training histories and budgets.
 
-TabPFN 3.5 was unavailable in this campaign. No current result against it, official TabArena rank or 100K training outcome is supported. Earlier 64K TabArena-Lite scores remain separate historical evidence.
+TabPFN 3.5 was unavailable in that six-dataset campaign, so it has no comparison score there. Earlier 64K TabArena-Lite scores remain separate historical evidence.
+
+## Later CC 150K limits
+
+Complete 13/13 coverage coexists with large accuracy gaps: CC150K loses on every dataset to published TabPFN 3.5, CatBoost, XGBoost and Random Forest. Its final geometric RMSE is 0.714% worse than the 133,594-step reference. One original neural seed, one outer split and already evaluated datasets do not establish untouched replication. The strongest inspected milestone is not evidence of sustained improvement. Published baselines differ in software and hardware; no official rank or commercial superiority follows.
 
 ## Comparisons and efficiency
 

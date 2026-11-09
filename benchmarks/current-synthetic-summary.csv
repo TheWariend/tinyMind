@@ -1,0 +1,13 @@
+suite,candidate,reference,configurations,geometric_RMSE_ratio,RMSE_change_percent,wins,losses,ties,status,source_id
+synthetic-pure,mixed-1811-1000,synthetic-period-1811,280,1.5839105732112848,58.39105732112848,36,244,0,descriptive_no_CI,forecast-synthetic-paired-panel
+synthetic-pure,mixed-1812-1000,synthetic-period-1812,280,1.3867982650478659,38.67982650478658,60,220,0,descriptive_no_CI,forecast-synthetic-paired-panel
+synthetic-generator,mixed-1811-1000,synthetic-period-1811,240,1.180421914697251,18.0421914697251,55,185,0,descriptive_no_CI,forecast-synthetic-paired-panel
+synthetic-generator,mixed-1812-1000,synthetic-period-1812,240,1.1882840324512456,18.82840324512456,58,182,0,descriptive_no_CI,forecast-synthetic-paired-panel
+synthetic-families,mixed-1811-1000,synthetic-period-1811,144,1.084153505226036,8.415350522603603,23,121,0,descriptive_no_CI,forecast-synthetic-paired-panel
+synthetic-families,mixed-1812-1000,synthetic-period-1812,144,1.0706749303797785,7.067493037977846,25,119,0,descriptive_no_CI,forecast-synthetic-paired-panel
+synthetic-pure,mixed-1812-2000,mixed-1812-1000,280,0.9910412409005778,-0.8958759099422231,,,,descriptive_no_CI,forecast-synthetic-body-continuation
+synthetic-pure,mixed-1812-2000-adapted,mixed-1812-1000,280,0.9910412409005778,-0.8958759099422231,,,,descriptive_no_CI,forecast-synthetic-body-continuation
+synthetic-generator,mixed-1812-2000,mixed-1812-1000,240,0.9775556765930037,-2.2444323406996314,,,,descriptive_no_CI,forecast-synthetic-body-continuation
+synthetic-generator,mixed-1812-2000-adapted,mixed-1812-1000,240,0.9775556765930037,-2.2444323406996314,,,,descriptive_no_CI,forecast-synthetic-body-continuation
+synthetic-families,mixed-1812-2000,mixed-1812-1000,144,0.979490127786076,-2.0509872213923974,,,,descriptive_no_CI,forecast-synthetic-body-continuation
+synthetic-families,mixed-1812-2000-adapted,mixed-1812-1000,144,0.979490127786076,-2.0509872213923974,,,,descriptive_no_CI,forecast-synthetic-body-continuation

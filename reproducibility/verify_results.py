@@ -119,7 +119,7 @@ def verify_70k_evidence(manifest, results):
             assert float(q[0]['candidate_value'])==float(row[candidate]) and float(q[0]['reference_value'])==float(row[reference])
     cc=next(r for r in summaries if r['candidate']=='CC_70000_RMSE' and r['reference']=='CC_64000_RMSE')
     assert f'{float(cc["RMSE_reduction_percent"]):.2f}'=='9.61' and int(cc['candidate_wins'])==5
-    text=(ROOT/'README.md').read_text()
+    text=(ROOT/'docs/archive/tinymind-through-2026-11-05.md').read_text()
     assert '9.61% relative to its 64K reference' in text
     assert 'six failure-driven evaluation datasets, not TabArena-Lite' in text
 
@@ -176,6 +176,8 @@ def main():
     verify_70k_evidence(manifest,results)
     from verify_forecasting import main as verify_forecasting
     verify_forecasting()
+    from verify_current_research import main as verify_current_research
+    verify_current_research()
     links=0
     for path in ROOT.rglob('*.md'):
         for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)',path.read_text()):

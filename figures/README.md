@@ -1,3 +1,11 @@
+# Current forecasting figures
+
+The [current model performance graph](forecasting-current-results.svg) shows every selected pilot configuration for the 4K core with learned experience, compared with seasonal naive. The [learning curves](forecasting-learning-curves.svg) show the current core lineage on the pilot and the separate real validation pool. Experience-enabled scores are separate points.
+
+Source tables: [pilot aggregates](../benchmarks/current-forecasting-pilot.csv) and [geometric comparisons](../benchmarks/current-forecasting-comparisons.csv). Renderer: [render_forecasting_figures.py](../reproducibility/render_forecasting_figures.py). All points are measured; the current curves contain no tabular model results.
+
+## Historical tabular figures
+
 # Figure sources
 
 All numerical figures read public aggregate CSVs. Run `python3 reproducibility/render_figures.py` from the repository root. Points are saved measurements; curves join measured points without extrapolation. Error bars preserve audited paired 95% intervals where supplied; TabArena bars and small-support real point tables have no invented intervals. Historical seeds are separate observations, not ensemble predictions; each later continuation has one parent per architecture.

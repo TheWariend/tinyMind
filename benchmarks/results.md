@@ -1,6 +1,14 @@
 # Benchmark results and study cards
 
-## Current forecasting pilot
+## Latest completed evidence — 9 November
+
+The [current study cards](../docs/current-research-2026-11-09.md) cover the current forecasting model, its experience-memory improvement, two data-seed comparisons, completed learning curve, real validation and synthetic retention results. Earlier tabular research is stopped and its latest results are in the [archive](../docs/research-archive.md).
+
+[Forecasting pilot rows](current-forecasting-pilot.csv) · [Real validation rows](current-forecasting-real-validation.csv) · [Forecasting comparisons](current-forecasting-comparisons.csv) · [Synthetic panels](current-synthetic-summary.csv) · [CC datasets and baselines](current-tabarena-results.csv) · [CC milestones](current-tabarena-summary.csv) · [Current provenance](current-research-provenance.json)
+
+The new tables have 485 aggregate rows. The historical tables and their original result identifiers below retain their prior scopes.
+
+## Original 5 November forecasting pilot
 
 The active direction is forecasting with persistent experience adaptation. The completed selected GIFT pilot has **7.33% lower geometric RMSE versus our paired frozen forecaster**, with 12/12 configuration wins. Its extra gain over fixed RLS using the same learned features is only 0.20%, with six wins and six losses.
 
@@ -8,7 +16,7 @@ The active direction is forecasting with persistent experience adaptation. The c
 
 This is one seed, 12 short-horizon configurations and 13,952 original origins per method; it is not full GIFT, fev or TabArena-Lite. Several public models remain much stronger, and the learned gate's benefit beyond fixed rules is small. The historical tabular study cards below retain their original evidence dates and source identifiers.
 
-Evidence cutoff: **2 November 2026**. Every scored comparison below has a result ID in [public-results.csv](public-results.csv), with full-precision values and an exact source locator. [Provenance](provenance.json) records source hashes and export rules. Tables round displayed errors to six decimals and reductions to two decimals. Positive reduction favors the named candidate; negative is a regression. No cross-study error comparison is treated as matched.
+Historical tabular evidence cutoff: **2 November 2026**. Every scored comparison below has a result ID in [public-results.csv](public-results.csv), with full-precision values and an exact source locator. [Provenance](provenance.json) records source hashes and export rules. Tables round displayed errors to six decimals and reductions to two decimals. Positive reduction favors the named candidate; negative is a regression. No cross-study error comparison is treated as matched.
 
 ## Latest 70K failure-driven regression: six datasets
 
@@ -67,7 +75,7 @@ Positive reduction favors the candidate; negative is a regression. CC beats matc
 
 Only six datasets and one training seed per architecture are represented, with **4–12 original inputs** and one locked test partition per dataset. There is no matched control isolating diagnostic curriculum adaptation, no multi-seed continuation replication and no reported confidence interval. Test results condition on datasets already used for development; broader untouched transfer, wider real-data accuracy and deployment reliability are unvalidated.
 
-Both completed 6,000 additional optimizer steps to 70K, with **2,688,000 cumulative synthetic task presentations per model**. These are presentations, not unique mathematical functions. The earlier 100K objective was shortened; no 100K result is claimed.
+Both completed 6,000 additional optimizer steps to 70K, with **2,688,000 cumulative synthetic task presentations per model**. These are presentations, not unique mathematical functions. The earlier 100K objective was shortened in that campaign.
 
 Retained audits verified 12,000 completed update records, validation selection before test prediction files, identical matched support IDs/test targets, preserved original columns and frozen shared weights during scoring. Independent audits rescored 216 real prediction files and 24 baseline files. These are retained audit observations, not independent external replication.
 
@@ -173,7 +181,7 @@ Public inputs: [all 13 task aggregates](source-data/tabarena-lite-64k.csv), [rel
 
 ## Earlier proposed 64K→100K direction
 
-Before the latest experiment, 64K→100K failure-driven training with separate development data and 2K-step evaluations was proposed. The actual authorized endpoint became 70K; its six-dataset evidence is reported above. No 100K result, official rank or future improvement is projected. Previously inspected scores cannot serve as untouched confirmation after influencing development.
+Before the six-dataset experiment, 64K→100K failure-driven training with separate development data and 2K-step evaluations was proposed. That campaign's endpoint became 70K; its evidence is reported above. The later CC continuation through 150K is separate. Previously inspected scores cannot serve as untouched confirmation after influencing development.
 
 ## Historical studies — evidence through 1 November 2026
 

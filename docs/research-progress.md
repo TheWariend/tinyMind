@@ -1,14 +1,22 @@
 # Research progress
 
-Evidence cutoff: **5 November 2026**. These milestones preserve both positive observations and rejected hypotheses. A failed gate does not erase a small gain; a small gain does not establish the wider goal.
+Evidence cutoff: **9 November 2026**. These milestones preserve both positive observations and rejected hypotheses. A failed gate does not erase a small gain; a small gain does not establish the wider goal.
 
-## Current direction — forecasting with persistent experience
+## Latest completed studies
+
+The current forecasting model improves pilot RMSE by 5.35% through experience adaptation while its shared weights remain frozen, and beats seasonal naive by 8.21% overall. Its core reaches 34.19% lower RMSE than naive on the separate five-source validation pool. Two data seeds show differing pilot outcomes; the full study retains the validation and synthetic retention results.
+
+Earlier tabular research is stopped. Its completed results are in the [research archive](research-archive.md).
+
+[Complete dated study cards and aggregates](current-research-2026-11-09.md). The chronology below retains the earlier studies.
+
+## 5 November pivot — forecasting with persistent experience
 
 Active tabular development is parked because its limited gains did not establish the consistent competitive real-world improvements sought. We have pivoted to time-series forecasting while retaining the original experience-learning question.
 
 The completed selected GIFT pilot achieved **7.33% lower geometric RMSE versus our paired frozen forecaster**, with **12/12 configuration wins**. The incremental gain over fixed RLS on the same learned features was only **0.20%, with six wins and six losses**. Independent-query and save/reload tests support a bounded adaptation/persistence result; several larger reference models remain much more accurate, and forgetting persists.
 
-This is a one-seed, 12-configuration short-horizon pilot with 13,952 original origins per method, not a full arena result. Real benchmark data and feedback did not enter outer optimization; causal online state uses elapsed observations only. An ongoing scaling experiment has no published outcome.
+This was a one-seed, 12-configuration short-horizon pilot with 13,952 original origins per method, not a full arena result. Real benchmark data and feedback did not enter its outer optimization; causal online state uses elapsed observations only.
 
 [Full forecasting research update](forecasting-research-update.md) describes the conceptual mechanism, every selected configuration, controls and negative results. The chronology below preserves earlier tabular research.
 
@@ -103,7 +111,7 @@ Excluded whole generating programs include order statistics, periodic remainder,
 
 ## Phase 4 — Sustained pretraining: completed through 70K, mixed results
 
-The earlier 64K→100K direction became an authorized experiment ending at 70K, using separate development data and evaluations every 2K steps. CC improved on the six-dataset test aggregate; TinyMind did not. Learning through 100K has not been demonstrated. Further progress needs broader separately reserved confirmation and training-seed replication; it is not guaranteed by this result.
+The earlier 64K→100K direction became an experiment ending at 70K, using separate development data and evaluations every 2K steps. CC improved on the six-dataset test aggregate; TinyMind did not. That campaign's endpoint remains separate from the later CC 150K study. Further progress needs broader separately reserved confirmation and training-seed replication; it is not guaranteed by this result.
 
 Known six-dataset and TabArena-Lite outcomes cannot become untouched confirmation after influencing development.
 

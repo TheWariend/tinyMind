@@ -2,6 +2,8 @@
 
 Evidence date: **5 November 2026**.
 
+This study card retains the original pilot. [The 9 November update](current-research-2026-11-09.md) covers the current forecasting model and its latest measured results.
+
 ## Why we parked tabular development
 
 We have **parked active tabular-model development and pivoted our current research toward time-series forecasting with persistent experience adaptation**. Tabular experiments produced some local and synthetic gains, but did not deliver the consistent, competitive real-world improvement we were seeking. The earlier TabArena-Lite comparison retained large accuracy gaps and unsupported high-dimensional cases. The later six-dataset improvement was narrower and did not establish general TabArena competitiveness.
@@ -113,6 +115,6 @@ This pilot justifies further controlled research on persistent residual adaptati
 
 Priorities are repeatable benefit beyond fixed rules, a newly reserved confirmation suite after development, repeated seeds, broader temporal/dependency coverage, long-horizon and covariate validation, and a complete benchmark protocol with transparent online-adaptation classification.
 
-A bounded scaling experiment is in progress. Its scores are excluded until completion and audit; no improvement is projected from unfinished training.
+Later completed forecasting experiments are documented in the dated update above, with their own controls and limitations.
 
 [Forecasting provenance](../benchmarks/forecasting-provenance.json) · [Verification](../reproducibility/README.md) · [Historical tabular evidence](../benchmarks/results.md)
